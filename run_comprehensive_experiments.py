@@ -11,12 +11,14 @@ New Features:
 5. CF Case Study (qualitative analysis - Exp 11)
 6. Automatic figure generation
 7. Publication-ready reports
+8. Multiple comparison correction (Holm)
+9. Full reproducibility (global seed)
 
 Usage:
-  python run_comprehensive_experiments.py --dataset ciciot2023
-  python run_comprehensive_experiments.py --dataset edge-iiot
-  python run_comprehensive_experiments.py --dataset all
-  python run_comprehensive_experiments.py --dataset ciciot2023 --only 1,2,11
+  python run_comprehensive_experiments_v2.py --dataset ciciot2023
+  python run_comprehensive_experiments_v2.py --dataset edge-iiot
+  python run_comprehensive_experiments_v2.py --dataset all
+  python run_comprehensive_experiments_v2.py --dataset ciciot2023 --only 1,2,11
 """
 
 import sys
@@ -28,6 +30,7 @@ import torch.nn as nn
 import numpy as np
 import json
 import time
+import random
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional
 import copy
@@ -63,31 +66,62 @@ from src.data.data_utils import create_federated_partitions
 
 
 # =============================================================================
+# REPRODUCIBILITY - Global Seed Function
+# =============================================================================
+
+def set_global_seed(seed: int):
+    """
+    Set seed for full reproducibility across all libraries.
+
+    This ensures that:
+    - NumPy random operations are deterministic
+    - PyTorch operations are deterministic
+    - Python's random module is deterministic
+    - CUDA operations are deterministic (if available)
+
+    Args:
+        seed: Random seed value
+    """
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        # Note: These settings may reduce performance but ensure reproducibility
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
+    os.environ['PYTHONHASHSEED'] = str(seed)
+
+
+# =============================================================================
 # CONFIG
 # =============================================================================
 
 class Config:
     EXPERIMENTS_PATH = "experiments"
-    
+
     DATASETS = {
         'ciciot2023': {'path': 'dataset/ciciot2023/', 'sample_fraction': 1.0, 'max_samples': 500000},
         'edge-iiot': {'path': 'dataset/edge-iiot/', 'sample_fraction': 1.0, 'max_samples': 500000},
         'toniot': {'path': 'dataset/toniot/', 'sample_fraction': 1.0, 'max_samples': 500000}
     }
-    
+
     # Model Training
     BATCH_SIZE = 64
     EPOCHS = 20
     LEARNING_RATE = 0.001
     TEST_SIZE = 0.2  # Train/test split ratio
     STRATIFIED = True  # Stratified sampling for imbalanced data
-    
+
     # Model Architecture
     MODEL_HIDDEN_LAYERS = [256, 128, 64]
     MODEL_ACTIVATION = 'ReLU'
     MODEL_DROPOUT = 0.3
     MODEL_BATCHNORM = True
-    
+
     # CF Generation
     NUM_CFS = 5
     CF_MAX_ITER = 300
@@ -95,25 +129,25 @@ class Config:
     CF_DIVERSITY_WEIGHT = 0.1
     CF_FEASIBILITY_WEIGHT = 1.0
     CF_LEARNING_RATE = 0.01
-    
+
     # Differential Privacy
     EPSILON_VALUES = [0.5, 1.0, 2.0, 5.0, 10.0]
     DP_DELTA = 1e-5
     DP_CLIP_NORM = 1.0
     DP_NOISE_MULTIPLIER_BASE = 0.5  # Scaled by epsilon
-    
+
     # FL
     FL_ROUNDS = 30
     LOCAL_EPOCHS = 5
     FL_DEFAULT_CLIENTS = 10
     FL_PROXIMAL_MU = 0.01  # FedProx regularization
-    
+
     # Scalability
     CLIENT_COUNTS = [5, 10, 20, 50]
-    
+
     # Non-IID (Dirichlet alpha)
     DIRICHLET_ALPHAS = [0.1, 0.5, 1.0, 10.0]
-    
+
     NUM_CF_SAMPLES = 100
     RANDOM_SEED = 42
 
@@ -130,8 +164,8 @@ class ExperimentLogger:
         self.exp_dir = self._create_dir()
         self.log_file = os.path.join(self.exp_dir, "log.txt")
         self.results = {
-            'name': name, 
-            'dataset': dataset, 
+            'name': name,
+            'dataset': dataset,
             'experiments': {},
             'environment': {
                 'python_version': None,  # Filled at runtime
@@ -186,7 +220,7 @@ class ExperimentLogger:
             'dataset_info': {}  # Filled after data loading
         }
         self._log(f"{'='*60}\nExperiment: {name}\nDataset: {dataset}\n{'='*60}")
-    
+
     def _create_dir(self):
         os.makedirs(Config.EXPERIMENTS_PATH, exist_ok=True)
         existing = [d for d in os.listdir(Config.EXPERIMENTS_PATH) if d.startswith('exp_')]
@@ -195,17 +229,17 @@ class ExperimentLogger:
         d = os.path.join(Config.EXPERIMENTS_PATH, f"exp_{n:02d}_{self.dataset}")
         os.makedirs(d, exist_ok=True)
         return d
-    
+
     def _log(self, msg):
         ts = datetime.now().strftime("%H:%M:%S")
         line = f"[{ts}] {msg}"
         print(line)
         with open(self.log_file, 'a', encoding='utf-8') as f:
             f.write(line + "\n")
-    
+
     def section(self, title):
         self._log(f"\n{'='*60}\n{title}\n{'='*60}")
-    
+
     def log_environment(self):
         """Log Python/PyTorch/CUDA environment info"""
         import sys
@@ -222,7 +256,7 @@ class ExperimentLogger:
                 self.results['environment']['gpu_name'] = 'CPU'
         except Exception as e:
             self._log(f"Warning: Could not log environment: {e}")
-    
+
     def log_dataset_info(self, X_train, X_test, y_train, y_test, label_mapping=None):
         """Log dataset statistics"""
         import numpy as np
@@ -245,28 +279,28 @@ class ExperimentLogger:
             else:
                 class_dist = {str(int(u)): int(c) for u, c in zip(unique, counts)}
             self.results['dataset_info']['class_distribution'] = class_dist
-    
+
     def save_exp(self, name, data):
         self.results['experiments'][name] = data
-    
+
     def save(self):
         self.results['duration'] = (datetime.now() - self.start_time).total_seconds()
         with open(os.path.join(self.exp_dir, "results.json"), 'w', encoding='utf-8') as f:
             json.dump(self.results, f, indent=2, default=str, ensure_ascii=False)
         self._write_report()
         self._log(f"\nSaved to: {self.exp_dir}")
-    
+
     def _write_report(self):
         with open(os.path.join(self.exp_dir, "report.txt"), 'w', encoding='utf-8') as f:
             f.write("="*80 + "\n")
             f.write("FedCF-IoT: COMPREHENSIVE EXPERIMENT REPORT\n")
             f.write("="*80 + "\n\n")
-            
+
             # Meta info
             f.write(f"Dataset: {self.dataset}\n")
             f.write(f"Date: {self.start_time.strftime('%Y-%m-%d %H:%M')}\n")
             f.write(f"Duration: {self.results.get('duration', 0):.1f} seconds\n\n")
-            
+
             # Environment
             f.write("-"*80 + "\n")
             f.write("ENVIRONMENT\n")
@@ -277,7 +311,7 @@ class ExperimentLogger:
             f.write(f"  CUDA Available: {env.get('cuda_available', 'N/A')}\n")
             f.write(f"  CUDA Version: {env.get('cuda_version', 'N/A')}\n")
             f.write(f"  GPU: {env.get('gpu_name', 'N/A')}\n\n")
-            
+
             # Dataset Info
             f.write("-"*80 + "\n")
             f.write("DATASET STATISTICS\n")
@@ -295,7 +329,7 @@ class ExperimentLogger:
                     pct = count / ds.get('total_samples', 1) * 100
                     f.write(f"    {cls}: {count:,} ({pct:.1f}%)\n")
             f.write("\n")
-            
+
             # Model Architecture
             f.write("-"*80 + "\n")
             f.write("MODEL ARCHITECTURE\n")
@@ -309,7 +343,7 @@ class ExperimentLogger:
             f.write(f"  BatchNorm: {Config.MODEL_BATCHNORM}\n")
             f.write(f"  Loss: CrossEntropyLoss\n")
             f.write(f"  Optimizer: Adam (lr={Config.LEARNING_RATE})\n\n")
-            
+
             # Training Configuration
             f.write("-"*80 + "\n")
             f.write("TRAINING CONFIGURATION\n")
@@ -318,7 +352,7 @@ class ExperimentLogger:
             f.write(f"  Epochs: {Config.EPOCHS}\n")
             f.write(f"  Learning Rate: {Config.LEARNING_RATE}\n")
             f.write(f"  Random Seed: {Config.RANDOM_SEED}\n\n")
-            
+
             # CF Configuration
             f.write("-"*80 + "\n")
             f.write("COUNTERFACTUAL CONFIGURATION\n")
@@ -330,7 +364,7 @@ class ExperimentLogger:
             f.write(f"    - Proximity (L1): {Config.CF_PROXIMITY_WEIGHT}\n")
             f.write(f"    - Diversity: {Config.CF_DIVERSITY_WEIGHT}\n")
             f.write(f"    - Feasibility: {Config.CF_FEASIBILITY_WEIGHT}\n\n")
-            
+
             # DP Configuration
             f.write("-"*80 + "\n")
             f.write("DIFFERENTIAL PRIVACY CONFIGURATION\n")
@@ -340,7 +374,7 @@ class ExperimentLogger:
             f.write(f"  Gradient Clip Norm: {Config.DP_CLIP_NORM}\n")
             f.write(f"  Noise Multiplier Base: {Config.DP_NOISE_MULTIPLIER_BASE}\n")
             f.write(f"  Privacy Mechanism: RÃ©nyi Differential Privacy (RDP)\n\n")
-            
+
             # FL Configuration
             f.write("-"*80 + "\n")
             f.write("FEDERATED LEARNING CONFIGURATION\n")
@@ -352,7 +386,7 @@ class ExperimentLogger:
             f.write(f"  FedProx mu: {Config.FL_PROXIMAL_MU}\n")
             f.write(f"  Non-IID Alphas: {Config.DIRICHLET_ALPHAS}\n")
             f.write(f"  Aggregation Methods: FedAvg, FedProx, FedNova\n\n")
-            
+
             # Constraints Configuration
             f.write("-"*80 + "\n")
             f.write("CONSTRAINTS (Generic - Fair Comparison)\n")
@@ -366,7 +400,7 @@ class ExperimentLogger:
             f.write("  2. Sparsity: Maximum 10 feature changes (threshold=0.01)\n")
             f.write("     Rationale: Security analysts cannot interpret >10 changes\n")
             f.write("     Actionability: Limited changes ensure practical recommendations\n\n")
-            
+
             # Experiment 1
             if 'exp1_training' in self.results['experiments']:
                 exp1 = self.results['experiments']['exp1_training']
@@ -385,7 +419,7 @@ class ExperimentLogger:
                         if (i+1) % 5 == 0:
                             f.write(f"    Epoch {i+1}: {acc*100:.2f}%\n")
                 f.write("\n")
-            
+
             # Experiment 2
             if 'exp2_cf_comparison' in self.results['experiments']:
                 exp2 = self.results['experiments']['exp2_cf_comparison']
@@ -396,7 +430,7 @@ class ExperimentLogger:
                 f.write("Metrics: Validity, Proximity (L1), Sparsity, Diversity\n")
                 f.write(f"Samples: {Config.NUM_CF_SAMPLES} attack instances\n")
                 f.write(f"CFs per sample: {Config.NUM_CFS}\n\n")
-                
+
                 f.write("Methods:\n")
                 f.write("  DiCE-based (Ours):\n")
                 f.write("    1. DiCE Baseline: No constraints, no privacy\n")
@@ -407,7 +441,7 @@ class ExperimentLogger:
                 f.write("    5. Wachter (2017): Gradient-based CF, Loss = lambda*pred_loss + distance\n")
                 f.write("    6. Growing Spheres (2018): Instance-based, sphere expansion search\n")
                 f.write("    7. FACE (2020): Density-weighted path on data manifold\n\n")
-                
+
                 f.write("Results:\n")
                 f.write(f"  {'Method':<20} {'Validity':>10} {'Proximity':>10} {'Sparsity':>10} {'N':>6}\n")
                 f.write("  " + "-"*60 + "\n")
@@ -421,20 +455,20 @@ class ExperimentLogger:
                             f.write(f"  {name:<20} {val:>9.1f}% {prox:>10.4f} {spar:>10.4f} {n:>6}\n")
                         elif isinstance(data, dict) and 'error' in data:
                             f.write(f"  {name:<20} {'ERROR':>10} - {data.get('error', '')[:30]}\n")
-                
+
                 # Statistical Tests
                 f.write("\nStatistical Analysis:\n")
                 f.write("-"*60 + "\n")
                 if 'statistical_tests' in exp2:
                     st = exp2['statistical_tests']
-                    
+
                     # Overall test
                     if 'overall' in st and st['overall'].get('overall_test'):
                         ot = st['overall']['overall_test']
                         f.write(f"  Overall (Kruskal-Wallis): H={ot.get('statistic', 0):.2f}, ")
                         f.write(f"p={ot.get('p_value', 1):.2e}, ")
                         f.write(f"effect={ot.get('effect_size', 0):.3f} ({ot.get('effect_interpretation', 'N/A')})\n")
-                    
+
                     # Pairwise tests
                     f.write("\n  Pairwise Comparisons (vs FedCF_DP):\n")
                     for key, test in st.items():
@@ -443,7 +477,7 @@ class ExperimentLogger:
                             sig = "*" if test.get('significant', False) else ""
                             f.write(f"    vs {other}: p={test.get('p_value', 1):.4e}{sig}, ")
                             f.write(f"d={test.get('effect_size', 0):.3f} ({test.get('effect_interpretation', 'N/A')})\n")
-                    
+
                     # Descriptive stats
                     if 'overall' in st and 'descriptive' in st['overall']:
                         f.write("\n  Descriptive Statistics:\n")
@@ -453,12 +487,12 @@ class ExperimentLogger:
                             ci = stats.get('ci_95', (0, 0))
                             f.write(f"    {method:<20} {stats.get('mean', 0):>10.4f} {stats.get('std', 0):>10.4f} ")
                             f.write(f"[{ci[0]:.4f}, {ci[1]:.4f}]\n")
-                
+
                 f.write("\nKey Findings:\n")
                 f.write("  - FedCF-IoT achieves competitive validity with privacy guarantees\n")
                 f.write("  - DP noise acts as regularization, improving validity in some cases\n")
                 f.write("  - Baseline methods (Wachter, GS, FACE) provide reference points\n\n")
-            
+
             # Experiment 3
             if 'exp3_privacy' in self.results['experiments']:
                 exp3 = self.results['experiments']['exp3_privacy']
@@ -482,7 +516,7 @@ class ExperimentLogger:
                 f.write("  - Lower eps = stronger privacy, potentially lower utility\n")
                 f.write("  - Higher eps = weaker privacy, higher utility\n")
                 f.write("  - Recommended: eps=2.0-5.0 for good privacy-utility balance\n\n")
-            
+
             # Experiment 4
             if 'exp4_fl_aggregation' in self.results['experiments']:
                 exp4 = self.results['experiments']['exp4_fl_aggregation']
@@ -507,7 +541,7 @@ class ExperimentLogger:
                         gap_str = f"{gap:+.2f}%" if name != 'Centralized' else "-"
                         f.write(f"  {name:<15} {acc:>11.2f}% {gap_str:>15}\n")
                 f.write("\n")
-            
+
             # Experiment 5
             if 'exp5_scalability' in self.results['experiments']:
                 exp5 = self.results['experiments']['exp5_scalability']
@@ -526,7 +560,7 @@ class ExperimentLogger:
                         tpr = data.get('time_per_round', 0)
                         f.write(f"  {n:>10} {acc:>11.2f}% {t:>12.1f} {tpr:>12.2f}\n")
                 f.write("\n")
-            
+
             # Experiment 6
             if 'exp6_heterogeneity' in self.results['experiments']:
                 exp6 = self.results['experiments']['exp6_heterogeneity']
@@ -548,7 +582,7 @@ class ExperimentLogger:
                         het = "Very High" if float(alpha) <= 0.1 else "High" if float(alpha) <= 0.5 else "Moderate" if float(alpha) <= 1 else "Low"
                         f.write(f"  {alpha:>10} {het:>20} {acc:>11.2f}%\n")
                 f.write("\n")
-            
+
             # Experiment 7
             if 'exp7_multiclass' in self.results['experiments']:
                 exp7 = self.results['experiments']['exp7_multiclass']
@@ -567,7 +601,7 @@ class ExperimentLogger:
                         prox = data.get('proximity', 0)
                         f.write(f"  {name:<15} {n:>10} {val:>11.2f}% {prox:>12.4f}\n")
                 f.write("\n")
-            
+
             # Experiment 8
             if 'exp8_ablation' in self.results['experiments']:
                 exp8 = self.results['experiments']['exp8_ablation']
@@ -592,7 +626,7 @@ class ExperimentLogger:
                     for comp, delta in exp8['contributions'].items():
                         f.write(f"  {comp}: {delta*100:+.2f}%\n")
                 f.write("\n")
-            
+
             # Experiment 9
             if 'exp9_latency' in self.results['experiments']:
                 exp9 = self.results['experiments']['exp9_latency']
@@ -611,7 +645,7 @@ class ExperimentLogger:
                         val = data.get('validity', 0) * 100
                         f.write(f"  {iters:>10} {mean_ms:>12.1f} {p95_ms:>12.1f} {val:>11.2f}%\n")
                 f.write("\n")
-            
+
             # Experiment 10: Privacy Attack
             if 'exp10_privacy_attack' in self.results['experiments']:
                 exp10 = self.results['experiments']['exp10_privacy_attack']
@@ -620,30 +654,30 @@ class ExperimentLogger:
                 f.write("="*80 + "\n")
                 f.write("Objective: Validate DP protection using Membership Inference Attack (MIA)\n")
                 f.write("Attack Types: Threshold-based MIA, Loss-based MIA\n\n")
-                
+
                 if 'mia_results' in exp10:
                     f.write("Results:\n")
                     f.write(f"  {'Model':>15} {'Threshold MIA':>15} {'Loss MIA':>15} {'Leakage':>12}\n")
                     f.write("  " + "-"*60 + "\n")
-                    
+
                     for model_type, data in exp10['mia_results'].items():
                         if isinstance(data, dict) and 'threshold_mia' in data:
                             t_acc = data['threshold_mia'].get('attack_accuracy', 0) * 100
                             l_acc = data['loss_mia'].get('attack_accuracy', 0) * 100
                             leak = data['summary'].get('max_privacy_leakage', 0) * 100
                             f.write(f"  {model_type:>15} {t_acc:>14.2f}% {l_acc:>14.2f}% {leak:>11.2f}%\n")
-                
+
                 if 'dp_comparison' in exp10 and exp10['dp_comparison']:
                     f.write("\nDP Effectiveness:\n")
                     comp = exp10['dp_comparison']
                     f.write(f"  Leakage Reduction: {comp.get('leakage_reduction_pct', 0):.1f}%\n")
                     f.write(f"  DP Effective: {'YES' if comp.get('dp_effective', False) else 'NO'}\n")
-                
+
                 if 'summary' in exp10 and exp10['summary']:
                     f.write(f"\nConclusion: {exp10['summary'].get('conclusion', 'N/A')}\n")
                     f.write(f"Recommendation: {exp10['summary'].get('recommendation', 'N/A')}\n")
                 f.write("\n")
-            
+
             # Summary
             f.write("="*80 + "\n")
             f.write("SUMMARY & KEY FINDINGS\n")
@@ -654,7 +688,7 @@ class ExperimentLogger:
             f.write("4. FL aggregation: FedProx/FedNova improve non-IID performance\n")
             f.write("5. System scales well with increasing client count\n")
             f.write("6. DP effectively reduces membership inference attack success\n\n")
-            
+
             f.write("="*80 + "\n")
             f.write("END OF REPORT\n")
             f.write("="*80 + "\n")
@@ -665,8 +699,11 @@ class ExperimentLogger:
 # =============================================================================
 
 def set_seed(seed):
-    torch.manual_seed(seed)
-    np.random.seed(seed)
+    """
+    Set seed for full reproducibility.
+    Uses the global set_global_seed function for comprehensive seeding.
+    """
+    set_global_seed(seed)
 
 def get_device():
     return "cuda" if torch.cuda.is_available() else "cpu"
@@ -685,13 +722,13 @@ def get_attack_samples(model, X, y, n, device):
 def eval_cf(gen, samples, device, max_samples=50):
     """Evaluate CF generator with comprehensive metrics"""
     metrics = {'validity': [], 'proximity': [], 'sparsity': [], 'diversity': [], 'time': []}
-    
+
     for i in range(min(max_samples, len(samples))):
         try:
             t0 = time.time()
             r = gen.generate(samples[i].to(device), target_class=0)
             dt = time.time() - t0
-            
+
             metrics['validity'].append(r.validity)
             metrics['proximity'].append(r.proximity)
             metrics['sparsity'].append(r.sparsity)
@@ -699,10 +736,10 @@ def eval_cf(gen, samples, device, max_samples=50):
             metrics['time'].append(dt)
         except:
             continue
-    
+
     if not metrics['validity']:
         return {'validity': 0, 'proximity': 0, 'sparsity': 0, 'diversity': 0, 'time': 0, 'n_samples': 0}
-    
+
     return {
         'validity': float(np.mean(metrics['validity'])),
         'validity_std': float(np.std(metrics['validity'])),
@@ -719,39 +756,39 @@ def eval_cf(gen, samples, device, max_samples=50):
 def compute_ci(values, confidence=0.95):
     """
     Fixed CI calculation - Wilson score interval
-    
+
     Fix: When all values are the same (e.g. all 1.0) now
     returns correct CI
     """
     values = np.array(values)
     n = len(values)
-    
+
     if n < 2:
         return (float(np.mean(values)), float(np.mean(values)))
-    
+
     mean = np.mean(values)
     std = np.std(values, ddof=1)
-    
+
     # If all values are the same Wilson score interval kullan
     if std == 0 or std < 1e-10:
         z = 1.96  # 95% CI
         denominator = 1 + z**2/n
         center = (mean + z**2/(2*n)) / denominator
         margin = (z / denominator) * np.sqrt(mean*(1-mean)/n + z**2/(4*n**2))
-        
+
         lower = max(0, center - margin)
         upper = min(1, center + margin)
         return (float(lower), float(upper))
-    
+
     # Normal CI (t-distribution for small samples)
     se = std / np.sqrt(n)
-    
+
     if n < 30:
         t_value = stats.t.ppf((1 + confidence) / 2, n - 1)
         h = se * t_value
     else:
         h = se * 1.96
-    
+
     return (float(max(0, mean - h)), float(min(1, mean + h)))
 
 def statistical_test(g1, g2):
@@ -764,6 +801,67 @@ def statistical_test(g1, g2):
         return {'p_value': 1.0, 'significant': False}
 
 
+def apply_multiple_comparison_correction(p_values, method='holm'):
+    """
+    Apply multiple comparison correction to avoid inflated Type I error
+
+    Methods:
+    - bonferroni: Most conservative, α_adj = α / n
+    - holm: Step-down procedure, less conservative than Bonferroni
+    - fdr_bh: Benjamini-Hochberg False Discovery Rate
+
+    Args:
+        p_values: List of p-values from pairwise tests
+        method: Correction method ('bonferroni', 'holm', 'fdr_bh')
+
+    Returns:
+        List of (original_p, corrected_p, significant) tuples
+    """
+    from scipy.stats import false_discovery_control
+
+    n = len(p_values)
+    if n == 0:
+        return []
+
+    p_array = np.array(p_values)
+    alpha = 0.05
+
+    if method == 'bonferroni':
+        # Most conservative: multiply p-values by n
+        corrected = np.minimum(p_array * n, 1.0)
+        significant = corrected < alpha
+
+    elif method == 'holm':
+        # Holm step-down: more powerful than Bonferroni
+        sorted_indices = np.argsort(p_array)
+        sorted_p = p_array[sorted_indices]
+
+        corrected = np.zeros(n)
+        for i, idx in enumerate(sorted_indices):
+            corrected[idx] = sorted_p[i] * (n - i)
+
+        # Ensure monotonicity
+        corrected = np.minimum.accumulate(corrected[np.argsort(sorted_indices)][::-1])[::-1]
+        corrected = np.minimum(corrected, 1.0)
+        significant = corrected < alpha
+
+    elif method == 'fdr_bh':
+        # Benjamini-Hochberg: controls False Discovery Rate
+        sorted_indices = np.argsort(p_array)
+        sorted_p = p_array[sorted_indices]
+
+        corrected = np.zeros(n)
+        for i, idx in enumerate(sorted_indices):
+            corrected[idx] = sorted_p[i] * n / (i + 1)
+
+        corrected = np.minimum(corrected, 1.0)
+        significant = corrected < alpha
+    else:
+        raise ValueError(f"Unknown method: {method}")
+
+    return list(zip(p_values, corrected.tolist(), significant.tolist()))
+
+
 # =============================================================================
 # NEW: CLASSIFICATION METRICS
 # =============================================================================
@@ -774,24 +872,24 @@ def compute_classification_metrics(model, test_loader, device, class_names=None)
     all_preds = []
     all_labels = []
     all_probs = []
-    
+
     with torch.no_grad():
         for bx, by in test_loader:
             bx = bx.to(device)
             outputs = model(bx)
             probs = torch.softmax(outputs, dim=1)
             preds = outputs.argmax(dim=1)
-            
+
             all_preds.extend(preds.cpu().numpy())
             all_labels.extend(by.numpy())
             all_probs.extend(probs.cpu().numpy())
-    
+
     all_preds = np.array(all_preds)
     all_labels = np.array(all_labels)
     all_probs = np.array(all_probs)
-    
+
     num_classes = len(np.unique(all_labels))
-    
+
     # Temel metrikler
     accuracy = accuracy_score(all_labels, all_preds)
     precision_macro = precision_score(all_labels, all_preds, average='macro', zero_division=0)
@@ -800,15 +898,15 @@ def compute_classification_metrics(model, test_loader, device, class_names=None)
     recall_weighted = recall_score(all_labels, all_preds, average='weighted', zero_division=0)
     f1_macro = f1_score(all_labels, all_preds, average='macro', zero_division=0)
     f1_weighted = f1_score(all_labels, all_preds, average='weighted', zero_division=0)
-    
+
     # Per-class metrikler
     precision_pc = precision_score(all_labels, all_preds, average=None, zero_division=0)
     recall_pc = recall_score(all_labels, all_preds, average=None, zero_division=0)
     f1_pc = f1_score(all_labels, all_preds, average=None, zero_division=0)
-    
+
     # Confusion Matrix
     cm = confusion_matrix(all_labels, all_preds)
-    
+
     # ROC-AUC
     try:
         if num_classes == 2:
@@ -818,12 +916,12 @@ def compute_classification_metrics(model, test_loader, device, class_names=None)
             roc_auc = roc_auc_score(labels_bin, all_probs, average='weighted', multi_class='ovr')
     except:
         roc_auc = None
-    
+
     # Per-class detaylar
     per_class = {}
     if class_names is None:
         class_names = [f"Class_{i}" for i in range(num_classes)]
-    
+
     for i in range(min(num_classes, len(precision_pc))):
         name = class_names[i] if i < len(class_names) else f"Class_{i}"
         per_class[name] = {
@@ -832,7 +930,7 @@ def compute_classification_metrics(model, test_loader, device, class_names=None)
             'f1': float(f1_pc[i]),
             'support': int(np.sum(all_labels == i))
         }
-    
+
     return {
         'accuracy': float(accuracy),
         'precision_macro': float(precision_macro),
@@ -862,31 +960,31 @@ def compute_class_weights(y):
 def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv_folds=5):
     """
     Fair Baseline Model Comparison
-    
+
     All models are compared under identical conditions:
     - Same train/test split
     - Same evaluation metrics
     - Hyperparameter tuning with cross-validation
     - Class weights for imbalanced data
     - Training time measurement
-    
+
     This ensures academic integrity and reproducibility.
     """
     from sklearn.model_selection import GridSearchCV, StratifiedKFold
     from sklearn.neural_network import MLPClassifier
     import time
-    
+
     results = {}
-    
+
     # Convert tensors to numpy
     X_tr = X_train.numpy() if hasattr(X_train, 'numpy') else X_train
     y_tr = y_train.numpy() if hasattr(y_train, 'numpy') else y_train
     X_te = X_test.numpy() if hasattr(X_test, 'numpy') else X_test
     y_te = y_test.numpy() if hasattr(y_test, 'numpy') else y_test
-    
+
     # Compute class weights for imbalanced data
     class_weights = compute_class_weights(y_tr)
-    
+
     if logger:
         logger._log(f"\n  Fair Comparison Settings:")
         logger._log(f"    - Cross-validation folds: {cv_folds}")
@@ -894,20 +992,20 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         logger._log(f"    - Hyperparameter tuning: GridSearchCV")
         logger._log(f"    - Train samples: {len(X_tr):,}")
         logger._log(f"    - Test samples: {len(X_te):,}")
-    
+
     # Stratified K-Fold for cross-validation
     cv = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
-    
+
     # =========================================================================
     # 1. Majority Class Baseline (Lower Bound)
     # =========================================================================
     if logger:
         logger._log("\n  [1/6] Majority Class Baseline...")
-    
+
     unique, counts = np.unique(y_tr, return_counts=True)
     majority = unique[np.argmax(counts)]
     maj_preds = np.full_like(y_te, majority)
-    
+
     results['MajorityClass'] = {
         'accuracy': float(accuracy_score(y_te, maj_preds)),
         'f1_macro': float(f1_score(y_te, maj_preds, average='macro', zero_division=0)),
@@ -920,45 +1018,45 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
     }
     if logger:
         logger._log(f"    Accuracy: {results['MajorityClass']['accuracy']:.4f}, F1-macro: {results['MajorityClass']['f1_macro']:.4f}")
-    
+
     # =========================================================================
     # 2. Logistic Regression (with tuning)
     # =========================================================================
     if logger:
         logger._log("\n  [2/6] Logistic Regression (with hyperparameter tuning)...")
-    
+
     try:
         t0 = time.time()
-        
+
         # Hyperparameter grid
         lr_param_grid = {
             'C': [0.1, 1.0, 10.0],
             'solver': ['lbfgs', 'saga'],
             'max_iter': [500]
         }
-        
+
         lr_base = LogisticRegression(random_state=42, class_weight='balanced', n_jobs=-1)
-        
+
         # Use smaller subset for GridSearch if dataset is large
         if len(X_tr) > 50000:
             # Stratified subsample for faster tuning
             from sklearn.model_selection import train_test_split
-            X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000, 
+            X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000,
                                                       stratify=y_tr, random_state=42)
             lr_grid = GridSearchCV(lr_base, lr_param_grid, cv=3, scoring='f1_macro', n_jobs=-1)
             lr_grid.fit(X_tune, y_tune)
         else:
             lr_grid = GridSearchCV(lr_base, lr_param_grid, cv=cv, scoring='f1_macro', n_jobs=-1)
             lr_grid.fit(X_tr, y_tr)
-        
+
         # Train final model with best params on full data
-        best_lr = LogisticRegression(**lr_grid.best_params_, random_state=42, 
+        best_lr = LogisticRegression(**lr_grid.best_params_, random_state=42,
                                      class_weight='balanced', n_jobs=-1)
         best_lr.fit(X_tr, y_tr)
         lr_preds = best_lr.predict(X_te)
-        
+
         training_time = time.time() - t0
-        
+
         results['LogisticRegression'] = {
             'accuracy': float(accuracy_score(y_te, lr_preds)),
             'f1_macro': float(f1_score(y_te, lr_preds, average='macro', zero_division=0)),
@@ -977,40 +1075,40 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         if logger:
             logger._log(f"    Error: {e}")
         results['LogisticRegression'] = {'error': str(e)}
-    
+
     # =========================================================================
     # 3. Random Forest (with tuning)
     # =========================================================================
     if logger:
         logger._log("\n  [3/6] Random Forest (with hyperparameter tuning)...")
-    
+
     try:
         t0 = time.time()
-        
+
         rf_param_grid = {
             'n_estimators': [100, 200],
             'max_depth': [10, 20, None],
             'min_samples_split': [2, 5]
         }
-        
+
         rf_base = RandomForestClassifier(random_state=42, class_weight='balanced', n_jobs=-1)
-        
+
         if len(X_tr) > 50000:
-            X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000, 
+            X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000,
                                                       stratify=y_tr, random_state=42)
             rf_grid = GridSearchCV(rf_base, rf_param_grid, cv=3, scoring='f1_macro', n_jobs=-1)
             rf_grid.fit(X_tune, y_tune)
         else:
             rf_grid = GridSearchCV(rf_base, rf_param_grid, cv=cv, scoring='f1_macro', n_jobs=-1)
             rf_grid.fit(X_tr, y_tr)
-        
-        best_rf = RandomForestClassifier(**rf_grid.best_params_, random_state=42, 
+
+        best_rf = RandomForestClassifier(**rf_grid.best_params_, random_state=42,
                                          class_weight='balanced', n_jobs=-1)
         best_rf.fit(X_tr, y_tr)
         rf_preds = best_rf.predict(X_te)
-        
+
         training_time = time.time() - t0
-        
+
         results['RandomForest'] = {
             'accuracy': float(accuracy_score(y_te, rf_preds)),
             'f1_macro': float(f1_score(y_te, rf_preds, average='macro', zero_division=0)),
@@ -1030,46 +1128,46 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         if logger:
             logger._log(f"    Error: {e}")
         results['RandomForest'] = {'error': str(e)}
-    
+
     # =========================================================================
     # 4. XGBoost (with tuning)
     # =========================================================================
     if XGBOOST_AVAILABLE:
         if logger:
             logger._log("\n  [4/6] XGBoost (with hyperparameter tuning)...")
-        
+
         try:
             t0 = time.time()
-            
+
             # Compute scale_pos_weight for imbalanced data
             scale_pos_weight = len(y_tr[y_tr == 0]) / (len(y_tr[y_tr != 0]) + 1)
-            
+
             xgb_param_grid = {
                 'n_estimators': [100, 200],
                 'max_depth': [6, 10],
                 'learning_rate': [0.1, 0.01],
                 'subsample': [0.8, 1.0]
             }
-            
-            xgb_base = XGBClassifier(random_state=42, eval_metric='mlogloss', 
+
+            xgb_base = XGBClassifier(random_state=42, eval_metric='mlogloss',
                                      verbosity=0, n_jobs=-1)
-            
+
             if len(X_tr) > 50000:
-                X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000, 
+                X_tune, _, y_tune, _ = train_test_split(X_tr, y_tr, train_size=50000,
                                                           stratify=y_tr, random_state=42)
                 xgb_grid = GridSearchCV(xgb_base, xgb_param_grid, cv=3, scoring='f1_macro', n_jobs=-1)
                 xgb_grid.fit(X_tune, y_tune)
             else:
                 xgb_grid = GridSearchCV(xgb_base, xgb_param_grid, cv=cv, scoring='f1_macro', n_jobs=-1)
                 xgb_grid.fit(X_tr, y_tr)
-            
-            best_xgb = XGBClassifier(**xgb_grid.best_params_, random_state=42, 
+
+            best_xgb = XGBClassifier(**xgb_grid.best_params_, random_state=42,
                                      eval_metric='mlogloss', verbosity=0, n_jobs=-1)
             best_xgb.fit(X_tr, y_tr)
             xgb_preds = best_xgb.predict(X_te)
-            
+
             training_time = time.time() - t0
-            
+
             results['XGBoost'] = {
                 'accuracy': float(accuracy_score(y_te, xgb_preds)),
                 'f1_macro': float(f1_score(y_te, xgb_preds, average='macro', zero_division=0)),
@@ -1091,31 +1189,31 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
     else:
         if logger:
             logger._log("\n  [4/6] XGBoost skipped (not installed)")
-    
+
     # =========================================================================
     # 5. Sklearn MLP (for fair neural network comparison)
     # =========================================================================
     if logger:
         logger._log("\n  [5/6] Sklearn MLP (fair NN baseline with sample weights)...")
-    
+
     try:
         t0 = time.time()
-        
+
         # Compute sample weights for class imbalance (same as PyTorch)
         sample_weights_train = np.array([class_weights[y] for y in y_tr])
-        
+
         mlp_param_grid = {
             'hidden_layer_sizes': [(256, 128, 64), (128, 64), (256, 128)],
             'alpha': [0.0001, 0.001],  # L2 regularization
             'learning_rate_init': [0.001, 0.01]
         }
-        
+
         mlp_base = MLPClassifier(random_state=42, max_iter=100, early_stopping=True,
                                  validation_fraction=0.1, n_iter_no_change=10)
-        
+
         if len(X_tr) > 50000:
             X_tune, _, y_tune, _, sw_tune, _ = train_test_split(
-                X_tr, y_tr, sample_weights_train, train_size=50000, 
+                X_tr, y_tr, sample_weights_train, train_size=50000,
                 stratify=y_tr, random_state=42
             )
             # Note: GridSearchCV with sample_weight requires fit_params
@@ -1124,47 +1222,47 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         else:
             mlp_grid = GridSearchCV(mlp_base, mlp_param_grid, cv=cv, scoring='f1_macro', n_jobs=-1)
             mlp_grid.fit(X_tr, y_tr)
-        
+
         # Train final model WITH sample weights for fair comparison
         best_mlp = MLPClassifier(**mlp_grid.best_params_, random_state=42, max_iter=200,
                                  early_stopping=True, validation_fraction=0.1)
-        
+
         # Create validation set manually to use sample weights
         X_tr_fit, X_val, y_tr_fit, y_val, sw_fit, sw_val = train_test_split(
             X_tr, y_tr, sample_weights_train, test_size=0.1, stratify=y_tr, random_state=42
         )
-        
+
         # Fit with sample weights (Sklearn MLP doesn't support sample_weight in fit directly for all solvers)
         # We use oversampling instead for truly fair comparison
         from sklearn.utils import resample
-        
+
         # Resample training data based on class weights (approximates weighted loss)
         X_resampled, y_resampled = [], []
         for cls in np.unique(y_tr):
             cls_mask = y_tr == cls
             X_cls = X_tr[cls_mask]
             y_cls = y_tr[cls_mask]
-            
+
             # Resample proportional to class weight
             weight = class_weights[cls]
             n_samples = int(len(X_cls) * min(weight, 3.0))  # Cap at 3x to avoid memory issues
             n_samples = max(n_samples, len(X_cls))  # At least original size
-            
+
             X_res, y_res = resample(X_cls, y_cls, n_samples=n_samples, random_state=42)
             X_resampled.append(X_res)
             y_resampled.append(y_res)
-        
+
         X_resampled = np.vstack(X_resampled)
         y_resampled = np.hstack(y_resampled)
-        
+
         if logger:
             logger._log(f"    Resampled training size: {len(y_resampled):,} (from {len(y_tr):,})")
-        
+
         best_mlp.fit(X_resampled, y_resampled)
         mlp_preds = best_mlp.predict(X_te)
-        
+
         training_time = time.time() - t0
-        
+
         results['SklearnMLP'] = {
             'accuracy': float(accuracy_score(y_te, mlp_preds)),
             'f1_macro': float(f1_score(y_te, mlp_preds, average='macro', zero_division=0)),
@@ -1183,13 +1281,13 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         if logger:
             logger._log(f"    Error: {e}")
         results['SklearnMLP'] = {'error': str(e)}
-    
+
     # =========================================================================
     # 6. Statistical Comparison Summary
     # =========================================================================
     if logger:
         logger._log("\n  [6/6] Computing statistical comparison...")
-    
+
     # McNemar's test or similar could be added here
     results['comparison_metadata'] = {
         'cv_folds': cv_folds,
@@ -1200,7 +1298,7 @@ def train_baseline_models_fair(X_train, y_train, X_test, y_test, logger=None, cv
         'test_size': len(X_te),
         'random_state': 42
     }
-    
+
     return results
 
 
@@ -1214,38 +1312,38 @@ def train_baseline_models(X_train, y_train, X_test, y_test, logger=None):
 # NEW: CF CASE STUDY
 # =============================================================================
 
-def generate_cf_case_study(model, X_test, y_test, generator, feature_names, class_names, 
+def generate_cf_case_study(model, X_test, y_test, generator, feature_names, class_names,
                            device, n_examples=7, logger=None):
     """CF generate examples and create explanations"""
     case_studies = []
     model.eval()
-    
+
     y_np = y_test.numpy() if hasattr(y_test, 'numpy') else y_test
     attack_classes = [c for c in np.unique(y_np) if c != 0]  # 0 = Benign
-    
+
     for attack_class in attack_classes[:n_examples]:
         mask = y_np == attack_class
         samples = X_test[mask]
-        
+
         if len(samples) == 0:
             continue
-        
+
         original = samples[0]
-        
+
         try:
             result = generator.generate(original.to(device), target_class=0)
-            
+
             if result.counterfactuals is None or len(result.counterfactuals) == 0:
                 continue
-            
+
             cf = result.counterfactuals[0]
-            
+
             orig_np = original.cpu().numpy() if hasattr(original, 'cpu') else original
             cf_np = cf.cpu().numpy() if hasattr(cf, 'cpu') else cf
-            
+
             diff = np.abs(orig_np - cf_np)
             changed_idx = np.where(diff > 0.01)[0]
-            
+
             case = {
                 'attack_type': class_names[attack_class] if attack_class < len(class_names) else f"Class_{attack_class}",
                 'original_class': int(attack_class),
@@ -1255,7 +1353,7 @@ def generate_cf_case_study(model, X_test, y_test, generator, feature_names, clas
                 'n_changes': len(changed_idx),
                 'changes': []
             }
-            
+
             for idx in changed_idx[:10]:  # Max 10 changes shown
                 fname = feature_names[idx] if idx < len(feature_names) else f"feature_{idx}"
                 case['changes'].append({
@@ -1264,13 +1362,13 @@ def generate_cf_case_study(model, X_test, y_test, generator, feature_names, clas
                     'counterfactual': float(cf_np[idx]),
                     'change': float(cf_np[idx] - orig_np[idx])
                 })
-            
+
             case_studies.append(case)
-            
+
         except Exception as e:
             if logger:
                 logger._log(f"  Case study error for class {attack_class}: {e}")
-    
+
     return case_studies
 
 
@@ -1280,46 +1378,150 @@ def generate_cf_case_study(model, X_test, y_test, generator, feature_names, clas
 
 def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
     logger.section("EXPERIMENT 1: MODEL TRAINING (FAIR COMPARISON)")
-    
+
     # Compute class weights for imbalanced data
     y_np = y_train.numpy() if hasattr(y_train, 'numpy') else y_train
     class_weights_dict = compute_class_weights(y_np)
-    class_weights_tensor = torch.tensor([class_weights_dict[i] for i in range(info['num_classes'])], 
+    class_weights_tensor = torch.tensor([class_weights_dict[i] for i in range(info['num_classes'])],
                                          dtype=torch.float32).to(device)
-    
+
     logger._log(f"\n  Class weights applied for imbalanced data:")
     class_names = info.get('class_names', [f'Class_{i}' for i in range(info['num_classes'])])
     for i, name in enumerate(class_names):
         if i < len(class_weights_tensor):
             logger._log(f"    {name}: {class_weights_tensor[i].item():.4f}")
-    
+
     train_loader, test_loader = create_data_loaders(X_train, y_train, X_test, y_test, Config.BATCH_SIZE)
-    
-    model = IDSMLP(input_dim=info['num_features'], num_classes=info['num_classes']).to(device)
-    opt = torch.optim.Adam(model.parameters(), lr=Config.LEARNING_RATE)
-    
-    # Use weighted cross entropy loss for class imbalance
+
+    # =========================================================================
+    # PyTorch MLP with Hyperparameter Tuning (FAIR COMPARISON)
+    # =========================================================================
+    logger._log(f"\n  Training PyTorch MLP with hyperparameter tuning (same as baselines)...")
+
+    # Hyperparameter grid (same architectures as Sklearn MLP for fair comparison)
+    pytorch_param_grid = {
+        'hidden_layers': [(256, 128, 64), (128, 64), (256, 128)],
+        'learning_rate': [0.001, 0.01],
+        'dropout': [0.2, 0.3]
+    }
+
+    best_f1 = 0
+    best_config = None
+    best_model_state = None
+    tuning_results = []
+
+    # Use validation split for tuning
+    val_size = int(len(X_train) * 0.1)
+    indices = torch.randperm(len(X_train))
+    train_indices = indices[val_size:]
+    val_indices = indices[:val_size]
+
+    X_tr_tune = X_train[train_indices]
+    y_tr_tune = y_train[train_indices]
+    X_val_tune = X_train[val_indices]
+    y_val_tune = y_train[val_indices]
+
+    tune_loader = torch.utils.data.DataLoader(
+        torch.utils.data.TensorDataset(X_tr_tune, y_tr_tune),
+        batch_size=Config.BATCH_SIZE, shuffle=True
+    )
+    val_loader = torch.utils.data.DataLoader(
+        torch.utils.data.TensorDataset(X_val_tune, y_val_tune),
+        batch_size=Config.BATCH_SIZE, shuffle=False
+    )
+
+    logger._log(f"    Tuning on {len(X_tr_tune):,} samples, validating on {len(X_val_tune):,} samples")
+    logger._log(f"    Testing {len(pytorch_param_grid['hidden_layers']) * len(pytorch_param_grid['learning_rate']) * len(pytorch_param_grid['dropout'])} configurations...")
+
+    tuning_start = time.time()
+    config_count = 0
+    total_configs = len(pytorch_param_grid['hidden_layers']) * len(pytorch_param_grid['learning_rate']) * len(pytorch_param_grid['dropout'])
+
+    for hidden in pytorch_param_grid['hidden_layers']:
+        for lr in pytorch_param_grid['learning_rate']:
+            for dropout in pytorch_param_grid['dropout']:
+                config_count += 1
+
+                # Create model with this config
+                # NOTE: IDSMLP uses 'hidden_dims' parameter, not 'hidden_layers'
+                model = IDSMLP(
+                    input_dim=info['num_features'],
+                    num_classes=info['num_classes'],
+                    hidden_dims=list(hidden),  # ← FIXED: was hidden_layers
+                    dropout=dropout
+                ).to(device)
+
+                opt = torch.optim.Adam(model.parameters(), lr=lr)
+                criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)
+
+                # Quick training (10 epochs for tuning)
+                for ep in range(10):
+                    model.train()
+                    for bx, by in tune_loader:
+                        bx, by = bx.to(device), by.to(device)
+                        opt.zero_grad()
+                        criterion(model(bx), by).backward()
+                        opt.step()
+
+                # Evaluate on validation set
+                model.eval()
+                val_preds, val_labels = [], []
+                with torch.no_grad():
+                    for bx, by in val_loader:
+                        preds = model(bx.to(device)).argmax(1).cpu().numpy()
+                        val_preds.extend(preds)
+                        val_labels.extend(by.numpy())
+
+                val_f1 = f1_score(val_labels, val_preds, average='macro', zero_division=0)
+
+                tuning_results.append({
+                    'hidden_dims': hidden,  # ← FIXED
+                    'learning_rate': lr,
+                    'dropout': dropout,
+                    'val_f1_macro': val_f1
+                })
+
+                if val_f1 > best_f1:
+                    best_f1 = val_f1
+                    best_config = {'hidden_dims': hidden, 'learning_rate': lr, 'dropout': dropout}  # ← FIXED
+                    best_model_state = copy.deepcopy(model.state_dict())
+
+    tuning_time = time.time() - tuning_start
+    logger._log(f"    Tuning completed in {tuning_time:.1f}s")
+    logger._log(f"    Best config: {best_config} (val F1-macro: {best_f1:.4f})")
+
+    # =========================================================================
+    # Train final model with best hyperparameters on full training data
+    # =========================================================================
+    logger._log(f"\n  Training final PyTorch MLP with best hyperparameters...")
+
+    model = IDSMLP(
+        input_dim=info['num_features'],
+        num_classes=info['num_classes'],
+        hidden_dims=list(best_config['hidden_dims']),  # ← FIXED
+        dropout=best_config['dropout']
+    ).to(device)
+
+    opt = torch.optim.Adam(model.parameters(), lr=best_config['learning_rate'])
     criterion = nn.CrossEntropyLoss(weight=class_weights_tensor)
-    
-    # Learning rate scheduler (PyTorch 2.x compatible)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, mode='max', factor=0.5, 
-                                                           patience=5)
-    
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(opt, mode='max', factor=0.5, patience=5)
+
     # Early stopping
     best_f1 = 0
     best_model_state = None
     patience_counter = 0
     early_stop_patience = 10
-    
-    logger._log(f"\n  Training PyTorch MLP with:")
+
+    logger._log(f"    - Architecture: {best_config['hidden_dims']}")  # ← FIXED
+    logger._log(f"    - Learning rate: {best_config['learning_rate']}")
+    logger._log(f"    - Dropout: {best_config['dropout']}")
     logger._log(f"    - Weighted CrossEntropyLoss (class balanced)")
-    logger._log(f"    - Learning rate scheduler (ReduceLROnPlateau)")
     logger._log(f"    - Early stopping (patience={early_stop_patience})")
     logger._log(f"    - Max epochs: {Config.EPOCHS}")
-    
+
     history = {'accuracy': [], 'f1_macro': [], 'loss': []}
     training_start = time.time()
-    
+
     for ep in range(Config.EPOCHS):
         # Training
         model.train()
@@ -1332,10 +1534,10 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
             loss.backward()
             opt.step()
             epoch_loss += loss.item()
-        
+
         avg_loss = epoch_loss / len(train_loader)
         history['loss'].append(avg_loss)
-        
+
         # Evaluation
         model.eval()
         all_preds = []
@@ -1346,16 +1548,16 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
                 preds = model(bx).argmax(dim=1).cpu().numpy()
                 all_preds.extend(preds)
                 all_labels.extend(by.numpy())
-        
+
         acc = accuracy_score(all_labels, all_preds)
         f1_mac = f1_score(all_labels, all_preds, average='macro', zero_division=0)
-        
+
         history['accuracy'].append(acc)
         history['f1_macro'].append(f1_mac)
-        
+
         # Learning rate scheduler step
         scheduler.step(f1_mac)
-        
+
         # Early stopping check
         if f1_mac > best_f1:
             best_f1 = f1_mac
@@ -1363,28 +1565,28 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
             patience_counter = 0
         else:
             patience_counter += 1
-        
+
         if (ep + 1) % 5 == 0:
             current_lr = opt.param_groups[0]['lr']
             logger._log(f"  Epoch {ep+1}: Acc={acc:.4f}, F1-macro={f1_mac:.4f}, Loss={avg_loss:.4f}, LR={current_lr:.6f}")
-        
+
         # Early stopping
         if patience_counter >= early_stop_patience:
             logger._log(f"  Early stopping at epoch {ep+1} (no improvement for {early_stop_patience} epochs)")
             break
-    
+
     training_time = time.time() - training_start
-    
+
     # Load best model
     if best_model_state is not None:
         model.load_state_dict(best_model_state)
         logger._log(f"  Loaded best model (F1-macro: {best_f1:.4f})")
-    
+
     # Final evaluation with detailed metrics
     logger._log("\n  Computing detailed classification metrics...")
     clf_metrics = compute_classification_metrics(model, test_loader, device, class_names)
     clf_metrics['training_time'] = training_time
-    
+
     logger._log(f"\n  PyTorch MLP Results:")
     logger._log(f"    Accuracy:      {clf_metrics['accuracy']:.4f}")
     logger._log(f"    F1 (macro):    {clf_metrics['f1_macro']:.4f}")
@@ -1392,11 +1594,11 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
     if clf_metrics['roc_auc']:
         logger._log(f"    ROC-AUC:       {clf_metrics['roc_auc']:.4f}")
     logger._log(f"    Training time: {training_time:.1f}s")
-    
+
     logger._log(f"\n  Per-Class F1 Scores:")
     for name, metrics in clf_metrics['per_class_metrics'].items():
         logger._log(f"    {name}: F1={metrics['f1']:.4f}, Precision={metrics['precision']:.4f}, Recall={metrics['recall']:.4f}, Support={metrics['support']}")
-    
+
     # Train baseline models for fair comparison
     logger._log("\n" + "="*60)
     logger._log("  FAIR BASELINE COMPARISON")
@@ -1406,9 +1608,9 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
     logger._log("    - Class weights for imbalanced data")
     logger._log("    - Hyperparameter tuning (GridSearchCV)")
     logger._log("    - Same evaluation metrics")
-    
+
     baselines = train_baseline_models_fair(X_train, y_train, X_test, y_test, logger)
-    
+
     # Add PyTorch MLP to comparison
     baselines['PyTorchMLP'] = {
         'accuracy': clf_metrics['accuracy'],
@@ -1426,19 +1628,19 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
             'class_weights': 'balanced'
         }
     }
-    
+
     # Summary table
     logger._log("\n" + "="*80)
     logger._log("  FINAL MODEL COMPARISON (FAIR - ALL WITH CLASS WEIGHTS & TUNING)")
     logger._log("="*80)
     logger._log(f"  {'Model':<20} {'Accuracy':>10} {'F1-macro':>10} {'F1-wtd':>10} {'Prec':>10} {'Recall':>10} {'Time(s)':>10}")
     logger._log("  " + "-"*80)
-    
+
     # Sort by F1-macro for clearer comparison
-    sorted_models = sorted(baselines.items(), 
-                          key=lambda x: x[1].get('f1_macro', 0) if isinstance(x[1], dict) else 0, 
+    sorted_models = sorted(baselines.items(),
+                          key=lambda x: x[1].get('f1_macro', 0) if isinstance(x[1], dict) else 0,
                           reverse=True)
-    
+
     for name, res in sorted_models:
         if isinstance(res, dict) and 'accuracy' in res:
             acc = res.get('accuracy', 0)
@@ -1447,19 +1649,19 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
             prec = res.get('precision_macro', 0)
             rec = res.get('recall_macro', 0)
             tt = res.get('training_time', 0)
-            
+
             # Highlight best model
             marker = " *" if name == sorted_models[0][0] else ""
             logger._log(f"  {name:<20} {acc:>10.4f} {f1m:>10.4f} {f1w:>10.4f} {prec:>10.4f} {rec:>10.4f} {tt:>10.1f}{marker}")
-    
+
     logger._log("  " + "-"*80)
     logger._log("  * Best model by F1-macro")
-    
+
     # Discussion for paper
     logger._log("\n  Discussion:")
     best_model = sorted_models[0][0]
     pytorch_rank = next((i+1 for i, (name, _) in enumerate(sorted_models) if name == 'PyTorchMLP'), -1)
-    
+
     if best_model == 'PyTorchMLP':
         logger._log("    PyTorch MLP achieves the best F1-macro score.")
     else:
@@ -1470,7 +1672,7 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
         logger._log("      2. Federated learning aggregation (FedAvg) works with neural network weights")
         logger._log("      3. Differential privacy (DP-SGD) is designed for gradient descent")
         logger._log("      4. The performance gap is acceptable given these advantages")
-    
+
     results = {
         'accuracy': clf_metrics['accuracy'],
         'f1_macro': clf_metrics['f1_macro'],
@@ -1481,7 +1683,7 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
         'model_ranking': [(name, res.get('f1_macro', 0)) for name, res in sorted_models if isinstance(res, dict) and 'f1_macro' in res],
         'fair_comparison_settings': baselines.get('comparison_metadata', {})
     }
-    
+
     logger.save_exp('exp1_training', results)
     return results, model
 
@@ -1492,15 +1694,15 @@ def exp1_training(X_train, y_train, X_test, y_test, info, device, logger):
 
 def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None, y_train=None):
     logger.section("EXPERIMENT 2: CF METHODS COMPARISON")
-    
+
     attacks = get_attack_samples(model, X_test, y_test, Config.NUM_CF_SAMPLES, device)
     if attacks is None:
         logger._log("  No attacks found!")
         return {}
-    
+
     logger._log(f"  {len(attacks)} attack samples")
     results = {'methods': {}, 'statistical_tests': {}}
-    
+
     # Import baseline methods
     try:
         from counterfactual.baseline_methods import WachterCF, GrowingSpheresCF, FACECF
@@ -1509,7 +1711,7 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
     except ImportError as e:
         logger._log(f"  Warning: Baseline methods not available: {e}")
         baseline_available = False
-    
+
     # ===== DICE VARIANTS =====
     # DiCE Baseline
     logger._log("\n  [1/7] DiCE Baseline...")
@@ -1520,7 +1722,7 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
     gen1.constraint_manager.constraints = []
     results['methods']['DiCE_Baseline'] = eval_cf(gen1, attacks, device)
     logger._log(f"    Validity: {results['methods']['DiCE_Baseline']['validity']:.2%}")
-    
+
     # DiCE + Constraints
     logger._log("\n  [2/7] DiCE + Constraints...")
     gen2 = CounterfactualGenerator(
@@ -1529,7 +1731,7 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
     )
     results['methods']['DiCE_Constraints'] = eval_cf(gen2, attacks, device)
     logger._log(f"    Validity: {results['methods']['DiCE_Constraints']['validity']:.2%}")
-    
+
     # FedCF-IoT (no DP)
     logger._log("\n  [3/7] FedCF-IoT (No DP)...")
     gen3 = CounterfactualGenerator(
@@ -1538,7 +1740,7 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
     )
     results['methods']['FedCF_NoDP'] = eval_cf(gen3, attacks, device)
     logger._log(f"    Validity: {results['methods']['FedCF_NoDP']['validity']:.2%}")
-    
+
     # FedCF-IoT (with DP)
     logger._log("\n  [4/7] FedCF-IoT (DP eps=2.0)...")
     gen4 = CounterfactualGenerator(
@@ -1547,11 +1749,12 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
     )
     results['methods']['FedCF_DP'] = eval_cf(gen4, attacks, device)
     logger._log(f"    Validity: {results['methods']['FedCF_DP']['validity']:.2%}")
-    
+
     # ===== BASELINE METHODS (WITH SAME CONSTRAINTS FOR FAIR COMPARISON) =====
     # IMPORTANT: All baseline methods use the same constraints as FedCF-IoT
     # This ensures fair comparison as per academic standards
-    
+    # CRITICAL: apply_constraints=True must be set for constraints to be applied!
+
     if baseline_available:
         # Wachter (2017) - with constraints for fair comparison
         logger._log("\n  [5/7] Wachter (2017) [with constraints]...")
@@ -1559,9 +1762,10 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
             wachter = WachterCF(
                 model=model, num_classes=info['num_classes'],
                 max_iterations=Config.CF_MAX_ITER, device=device,
-                # Apply same constraints as FedCF-IoT for fair comparison
-                feature_ranges=(-5.0, 5.0),  # Same as generic constraints
-                max_features_to_change=10     # Same sparsity constraint
+                # CRITICAL: Enable constraints for fair comparison
+                apply_constraints=True,           # ← MUST BE TRUE!
+                feature_ranges=(-5.0, 5.0),       # Same as FedCF-IoT
+                max_features_to_change=10         # Same sparsity constraint
             )
             wachter_results = eval_baseline_cf(wachter, attacks, device, target_class=0)
             results['methods']['Wachter'] = wachter_results
@@ -1569,14 +1773,15 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
         except Exception as e:
             logger._log(f"    Error: {e}")
             results['methods']['Wachter'] = {'validity': 0, 'error': str(e)}
-        
+
         # Growing Spheres (2018) - with constraints for fair comparison
         logger._log("\n  [6/7] Growing Spheres (2018) [with constraints]...")
         try:
             gs = GrowingSpheresCF(
                 model=model, num_classes=info['num_classes'],
                 max_iterations=20, device=device,
-                # Apply same constraints as FedCF-IoT for fair comparison
+                # CRITICAL: Enable constraints for fair comparison
+                apply_constraints=True,           # ← MUST BE TRUE!
                 feature_ranges=(-5.0, 5.0),
                 max_features_to_change=10
             )
@@ -1586,7 +1791,7 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
         except Exception as e:
             logger._log(f"    Error: {e}")
             results['methods']['GrowingSpheres'] = {'validity': 0, 'error': str(e)}
-        
+
         # FACE (2020) - with constraints for fair comparison
         logger._log("\n  [7/7] FACE (2020) [with constraints]...")
         if X_train is not None and y_train is not None:
@@ -1595,7 +1800,8 @@ def exp2_cf_comparison(model, X_test, y_test, info, device, logger, X_train=None
                     model=model, num_classes=info['num_classes'],
                     X_train=X_train, y_train=y_train,
                     max_iterations=100, device=device,
-                    # Apply same constraints as FedCF-IoT for fair comparison
+                    # CRITICAL: Enable constraints for fair comparison
+                    apply_constraints=True,       # ← MUST BE TRUE!
                     feature_ranges=(-5.0, 5.0),
                     max_features_to_change=10
                 )
