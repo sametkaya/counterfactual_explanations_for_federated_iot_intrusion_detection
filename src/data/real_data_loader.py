@@ -206,18 +206,35 @@ class CICIoT2023Loader(BaseDatasetLoader):
 
         print(f"Label column: {label_col}")
 
-        # Label mapping
+        # Label mapping - CASE INSENSITIVE ve flexible matching
         y_raw = data[label_col].astype(str)
 
         def map_label(label):
-            label_lower = str(label).lower().strip().replace(' ', '').replace('-', '_')
+            # Normalize: lowercase, remove spaces, replace - with _
+            label_clean = str(label).lower().strip().replace(' ', '').replace('-', '_')
+
             # Exact match
-            if label_lower in self.ATTACK_MAPPING:
-                return self.ATTACK_MAPPING[label_lower]
-            # Partial match
-            for key, val in self.ATTACK_MAPPING.items():
-                if key in label_lower or label_lower in key:
-                    return val
+            if label_clean in self.ATTACK_MAPPING:
+                return self.ATTACK_MAPPING[label_clean]
+
+            # Keyword-based matching
+            if 'ddos' in label_clean:
+                return 'DDoS'
+            if 'dos' in label_clean and 'ddos' not in label_clean:
+                return 'DoS'
+            if 'mirai' in label_clean:
+                return 'Mirai'
+            if 'recon' in label_clean or 'scan' in label_clean or 'ping' in label_clean:
+                return 'Recon'
+            if 'spoof' in label_clean or 'arp' in label_clean or 'dns_spoof' in label_clean:
+                return 'Spoofing'
+            if 'sql' in label_clean or 'xss' in label_clean or 'injection' in label_clean or 'backdoor' in label_clean or 'upload' in label_clean or 'browser' in label_clean or 'vulnerability' in label_clean or 'command' in label_clean:
+                return 'Web'
+            if 'brute' in label_clean or 'dictionary' in label_clean or 'password' in label_clean:
+                return 'BruteForce'
+            if 'benign' in label_clean or 'normal' in label_clean:
+                return 'Benign'
+
             return 'Unknown'
 
         y_category = y_raw.apply(map_label)
@@ -702,7 +719,7 @@ if __name__ == "__main__":
     print("Real Data Loader Test")
     print("="*60)
 
-    BASE_PATH = "dataset"
+    BASE_PATH = "../../dataset"
 
     datasets = [
         ('ciciot2023', f'{BASE_PATH}/ciciot2023/'),
