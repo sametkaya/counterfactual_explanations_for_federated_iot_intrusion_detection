@@ -753,6 +753,136 @@ def eval_cf(gen, samples, device, max_samples=50):
         'validity_per_sample': metrics['validity']
     }
 
+def eval_cf_strict(model, gen, samples, device, max_samples=50,
+                   confidence_threshold=0.7, max_proximity=0.5):
+    """
+    Strict CF validity evaluation for exp12/13.
+
+    Daha gerçekçi validity ölçümü:
+    1. Confidence threshold (model CF'e yüksek güvenle karar vermeli)
+    2. Proximity limit (çok uzak CF'ler invalid sayılır)
+
+    Args:
+        model: Trained model
+        gen: CF generator
+        samples: Attack samples to generate CFs for
+        device: torch device
+        max_samples: Maximum samples to evaluate
+        confidence_threshold: Minimum confidence for valid CF (default 0.7)
+        max_proximity: Maximum allowed proximity (default 0.5)
+
+    Returns:
+        dict with strict validity metrics
+    """
+    metrics = {
+        'validity_strict': [],      # Strict: class change + high confidence + proximity
+        'validity_basic': [],       # Basic: just class change
+        'confidence_scores': [],    # Model confidence on CF
+        'proximity': [],
+        'sparsity': [],
+        'time': []
+    }
+
+    model.eval()
+
+    for i in range(min(max_samples, len(samples))):
+        try:
+            original = samples[i].to(device)
+
+            # Original prediction
+            with torch.no_grad():
+                orig_output = model(original.unsqueeze(0))
+                orig_class = orig_output.argmax(1).item()
+
+            t0 = time.time()
+
+            # Generate CF
+            try:
+                result = gen.generate(original, target_class=0)
+                # CF'leri al
+                if hasattr(result, 'counterfactuals') and result.counterfactuals:
+                    cf = result.counterfactuals[0]  # İlk CF'i al
+                else:
+                    cf = None
+            except:
+                cf = None
+
+            dt = time.time() - t0
+
+            if cf is None:
+                metrics['validity_strict'].append(0.0)
+                metrics['validity_basic'].append(0.0)
+                metrics['confidence_scores'].append(0.0)
+                metrics['proximity'].append(1.0)
+                metrics['sparsity'].append(0.0)
+                metrics['time'].append(dt)
+                continue
+
+            # CF prediction
+            with torch.no_grad():
+                if isinstance(cf, np.ndarray):
+                    cf_tensor = torch.tensor(cf, dtype=torch.float32).to(device)
+                else:
+                    cf_tensor = cf.to(device) if hasattr(cf, 'to') else torch.tensor(cf, dtype=torch.float32).to(device)
+
+                if cf_tensor.dim() == 1:
+                    cf_tensor = cf_tensor.unsqueeze(0)
+
+                cf_output = model(cf_tensor)
+                cf_probs = torch.softmax(cf_output, dim=1)
+                cf_class = cf_output.argmax(1).item()
+                cf_confidence = cf_probs[0, cf_class].item()
+
+            # Proximity (L2 distance, normalized)
+            orig_tensor = original.unsqueeze(0) if original.dim() == 1 else original
+            proximity = torch.norm(cf_tensor.cpu() - orig_tensor.cpu()).item() / np.sqrt(cf_tensor.shape[1])
+
+            # Basic validity: did class change?
+            basic_valid = 1.0 if cf_class != orig_class else 0.0
+
+            # Strict validity: class change + high confidence + reasonable proximity
+            strict_valid = 1.0 if (
+                cf_class != orig_class and
+                cf_confidence >= confidence_threshold and
+                proximity <= max_proximity
+            ) else 0.0
+
+            # Sparsity
+            sparsity = torch.sum(torch.abs(cf_tensor.cpu() - orig_tensor.cpu()) > 0.01).item()
+
+            metrics['validity_strict'].append(strict_valid)
+            metrics['validity_basic'].append(basic_valid)
+            metrics['confidence_scores'].append(cf_confidence)
+            metrics['proximity'].append(proximity)
+            metrics['sparsity'].append(sparsity)
+            metrics['time'].append(dt)
+
+        except Exception as e:
+            metrics['validity_strict'].append(0.0)
+            metrics['validity_basic'].append(0.0)
+            metrics['confidence_scores'].append(0.0)
+            metrics['proximity'].append(1.0)
+            metrics['sparsity'].append(0.0)
+            metrics['time'].append(0.0)
+
+    if not metrics['validity_strict']:
+        return {
+            'validity_strict': 0.0, 'validity_basic': 0.0,
+            'confidence': 0.0, 'proximity': 1.0, 'sparsity': 0.0, 'time': 0.0
+        }
+
+    return {
+        'validity_strict': float(np.mean(metrics['validity_strict'])),
+        'validity_strict_std': float(np.std(metrics['validity_strict'])),
+        'validity_basic': float(np.mean(metrics['validity_basic'])),
+        'confidence': float(np.mean(metrics['confidence_scores'])),
+        'proximity': float(np.mean(metrics['proximity'])),
+        'sparsity': float(np.mean(metrics['sparsity'])),
+        'time': float(np.mean(metrics['time'])),
+        'n_samples': len(metrics['validity_strict'])
+    }
+
+
 def compute_ci(values, confidence=0.95):
     """
     Fixed CI calculation - Wilson score interval
@@ -2801,7 +2931,7 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
     # 5. Her epsilon için deney
     # =========================================================================
     all_epsilons = epsilon_values + [float('inf')]  # inf = No DP baseline
-    raw_results = {eps: {'accuracies': [], 'f1s': [], 'cf_validities': []} for eps in all_epsilons}
+    raw_results = {eps: {'accuracies': [], 'f1s': [], 'cf_validities': [], 'cf_proximities': []} for eps in all_epsilons}
 
     for eps in all_epsilons:
         eps_str = str(eps) if eps != float('inf') else 'inf'
@@ -2854,7 +2984,7 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
             raw_results[eps]['accuracies'].append(acc)
             raw_results[eps]['f1s'].append(f1)
 
-            # CF Validity
+            # CF Metrics (Validity + Proximity)
             try:
                 cf_gen = CounterfactualGenerator(
                     model=model, feature_count=info['num_features'], num_cfs=Config.NUM_CFS,
@@ -2864,10 +2994,13 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
                 if attacks is not None:
                     cf_result = eval_cf(cf_gen, attacks, device, max_samples=n_cf_samples)
                     raw_results[eps]['cf_validities'].append(cf_result.get('validity', 0))
+                    raw_results[eps]['cf_proximities'].append(cf_result.get('proximity', 0))
                 else:
                     raw_results[eps]['cf_validities'].append(0)
-            except Exception:
+                    raw_results[eps]['cf_proximities'].append(0)
+            except Exception as e:
                 raw_results[eps]['cf_validities'].append(0)
+                raw_results[eps]['cf_proximities'].append(0)
 
         # Aggregate
         results['epsilons'][eps_str] = {
@@ -2886,14 +3019,17 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
                 float(np.percentile(raw_results[eps]['cf_validities'], 2.5)),
                 float(np.percentile(raw_results[eps]['cf_validities'], 97.5))
             ],
+            'cf_proximity': float(np.mean(raw_results[eps]['cf_proximities'])),
+            'cf_proximity_std': float(np.std(raw_results[eps]['cf_proximities'])),
             'n_runs': n_runs,
             'raw_accuracies': raw_results[eps]['accuracies'],
-            'raw_cf_validities': raw_results[eps]['cf_validities']
+            'raw_cf_validities': raw_results[eps]['cf_validities'],
+            'raw_cf_proximities': raw_results[eps]['cf_proximities']
         }
 
         r = results['epsilons'][eps_str]
         logger._log(f"    Run {n_runs}/{n_runs}: Acc={r['model_accuracy']*100:.2f}%±{r['model_accuracy_std']*100:.2f}%, "
-                   f"CF={r['cf_validity']*100:.2f}%±{r['cf_validity_std']*100:.2f}%")
+                   f"Valid={r['cf_validity']*100:.2f}%, Prox={r['cf_proximity']:.4f}")
 
     # =========================================================================
     # 6. Statistical Tests (vs No-DP baseline)
@@ -2929,11 +3065,11 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
     # =========================================================================
     # 8. Summary
     # =========================================================================
-    logger._log("\n" + "=" * 85)
+    logger._log("\n" + "=" * 100)
     logger._log("EXPERIMENT 12 SUMMARY: Privacy Budget vs Performance")
-    logger._log("=" * 85)
-    logger._log(f"{'ε':<8} {'σ':<8} {'Model Accuracy':<22} {'Δ Acc':<10} {'CF Validity':<22} {'Sig':<6}")
-    logger._log("-" * 85)
+    logger._log("=" * 100)
+    logger._log(f"{'ε':<8} {'σ':<8} {'Model Accuracy':<20} {'Δ Acc':<10} {'CF Validity':<14} {'CF Proximity':<14} {'Sig':<6}")
+    logger._log("-" * 100)
 
     for eps_str in [str(e) for e in epsilon_values] + ['inf']:
         if eps_str in results['epsilons']:
@@ -2942,11 +3078,12 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
             drop = r.get('accuracy_drop_pct', 0)
             test_key = f"eps_{eps_str}_vs_baseline"
             sig = "✓" if results['statistical_tests'].get(test_key, {}).get('accuracy', {}).get('significant', False) else "-"
+            prox = r.get('cf_proximity', 0)
 
-            logger._log(f"{eps_str:<8} {sigma:<8} {r['model_accuracy']*100:.2f}% ± {r['model_accuracy_std']*100:.2f}%      "
-                       f"{drop:+.2f}%     {r['cf_validity']*100:.2f}% ± {r['cf_validity_std']*100:.2f}%      {sig}")
+            logger._log(f"{eps_str:<8} {sigma:<8} {r['model_accuracy']*100:.2f}% ± {r['model_accuracy_std']*100:.2f}%    "
+                       f"{drop:+.2f}%     {r['cf_validity']*100:.1f}%          {prox:.4f}         {sig}")
 
-    logger._log("-" * 85)
+    logger._log("-" * 100)
     logger._log("KEY FINDING: Model accuracy vs privacy tradeoff with statistical significance")
 
     # Metadata
@@ -3234,7 +3371,7 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
         'D_Clip_Only': {'use_clipping': True, 'use_noise': False, 'noise_std': 0}
     }
 
-    raw_results = {cond: {'accuracies': [], 'cf_validities': []} for cond in conditions}
+    raw_results = {cond: {'accuracies': [], 'cf_validities': [], 'cf_proximities': []} for cond in conditions}
 
     # =========================================================================
     # 5. Run experiments
@@ -3287,7 +3424,7 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
             acc = accuracy_score(labels, preds)
             raw_results[cond_name]['accuracies'].append(acc)
 
-            # CF Validity
+            # CF Metrics (Validity + Proximity)
             try:
                 cf_gen = CounterfactualGenerator(
                     model=model, feature_count=info['num_features'], num_cfs=Config.NUM_CFS,
@@ -3297,10 +3434,13 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
                 if attacks is not None:
                     cf_result = eval_cf(cf_gen, attacks, device, max_samples=n_cf_samples)
                     raw_results[cond_name]['cf_validities'].append(cf_result.get('validity', 0))
+                    raw_results[cond_name]['cf_proximities'].append(cf_result.get('proximity', 0))
                 else:
                     raw_results[cond_name]['cf_validities'].append(0)
+                    raw_results[cond_name]['cf_proximities'].append(0)
             except:
                 raw_results[cond_name]['cf_validities'].append(0)
+                raw_results[cond_name]['cf_proximities'].append(0)
 
         # Aggregate
         results['conditions'][cond_name] = {
@@ -3313,14 +3453,17 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
                 float(np.percentile(raw_results[cond_name]['cf_validities'], 2.5)),
                 float(np.percentile(raw_results[cond_name]['cf_validities'], 97.5))
             ],
+            'cf_proximity': float(np.mean(raw_results[cond_name]['cf_proximities'])),
+            'cf_proximity_std': float(np.std(raw_results[cond_name]['cf_proximities'])),
             'n_runs': n_runs,
             'raw_accuracies': raw_results[cond_name]['accuracies'],
-            'raw_cf_validities': raw_results[cond_name]['cf_validities']
+            'raw_cf_validities': raw_results[cond_name]['cf_validities'],
+            'raw_cf_proximities': raw_results[cond_name]['cf_proximities']
         }
 
         r = results['conditions'][cond_name]
         logger._log(f"    Acc={r['model_accuracy']*100:.2f}%±{r['model_accuracy_std']*100:.2f}%, "
-                   f"CF={r['cf_validity']*100:.2f}%±{r['cf_validity_std']*100:.2f}%")
+                   f"Valid={r['cf_validity']*100:.1f}%, Prox={r['cf_proximity']:.4f}")
 
     # =========================================================================
     # 6. Validity delta vs baseline
@@ -3381,19 +3524,20 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
     # =========================================================================
     # 9. Summary
     # =========================================================================
-    logger._log("\n" + "=" * 85)
+    logger._log("\n" + "=" * 105)
     logger._log("EXPERIMENT 13 SUMMARY: DP PARADOX ANALYSIS (2x2 Factorial)")
-    logger._log("=" * 85)
-    logger._log(f"{'Condition':<16} {'Clip':<6} {'Noise':<6} {'Model Acc':<18} {'CF Validity':<20} {'Δ Valid':<10}")
-    logger._log("-" * 85)
+    logger._log("=" * 105)
+    logger._log(f"{'Condition':<16} {'Clip':<6} {'Noise':<6} {'Model Acc':<18} {'CF Validity':<12} {'CF Proximity':<14} {'Δ Valid':<10}")
+    logger._log("-" * 105)
 
     for cond in ['A_Standard', 'D_Clip_Only', 'C_Noise_Only', 'B_DP_SGD']:
         r = results['conditions'][cond]
         clip = "Yes" if r['config']['use_clipping'] else "No"
         noise = "Yes" if r['config']['use_noise'] else "No"
         delta_v = r['validity_delta_pct']
+        prox = r.get('cf_proximity', 0)
         logger._log(f"{cond:<16} {clip:<6} {noise:<6} {r['model_accuracy']*100:.2f}%±{r['model_accuracy_std']*100:.2f}%   "
-                   f"{r['cf_validity']*100:.2f}%±{r['cf_validity_std']*100:.2f}%    {delta_v:+.2f}%")
+                   f"{r['cf_validity']*100:.1f}%        {prox:.4f}         {delta_v:+.2f}%")
 
     logger._log("-" * 85)
     logger._log(f"\n  Factorial Analysis (Main Effects on CF Validity):")
