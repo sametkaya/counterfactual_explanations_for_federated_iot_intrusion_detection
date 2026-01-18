@@ -2773,7 +2773,9 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
             # Fresh model
             model = IDSMLP(
                 input_dim=info['num_features'],
-                num_classes=info['num_classes']
+                num_classes=info['num_classes'],
+                hidden_dims=Config.MODEL_HIDDEN_LAYERS,
+                dropout=Config.MODEL_DROPOUT
             ).to(device)
 
             optimizer = torch.optim.Adam(model.parameters(), lr=Config.LEARNING_RATE)
@@ -2999,8 +3001,7 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
                 input_dim=info['num_features'],
                 num_classes=info['num_classes'],
                 hidden_dims=Config.MODEL_HIDDEN_LAYERS,
-                dropout=Config.MODEL_DROPOUT,
-                use_batchnorm=Config.MODEL_BATCHNORM
+                dropout=Config.MODEL_DROPOUT
             ).to(device)
 
             optimizer = torch.optim.Adam(model.parameters(), lr=Config.LEARNING_RATE)
