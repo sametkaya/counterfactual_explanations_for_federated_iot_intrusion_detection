@@ -1,0 +1,186 @@
+[15:59:47] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: toniot
+============================================================
+[15:59:47] 
+Device: cuda
+[15:59:47] Skipping experiments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+[15:59:47] 
+============================================================
+DATA LOADING
+============================================================
+[16:01:48]   Train: 400000, Test: 100000, Features: 32
+[16:01:48]   Classes: 10
+[16:01:48] 
+[SKIPPED] Experiment 1: Model Training
+[16:03:08] 
+[SKIPPED] Experiment 2: CF Comparison
+[16:03:08] 
+[SKIPPED] Experiment 3: Privacy-Utility
+[16:03:08] 
+[SKIPPED] Experiment 4: FL Aggregation
+[16:03:08] 
+[SKIPPED] Experiment 5: Scalability
+[16:03:08] 
+[SKIPPED] Experiment 6: Heterogeneity
+[16:03:08] 
+[SKIPPED] Experiment 7: Multi-class
+[16:03:08] 
+[SKIPPED] Experiment 8: Ablation
+[16:03:08] 
+[SKIPPED] Experiment 9: Latency
+[16:03:08] 
+[SKIPPED] Experiment 10: Privacy Attack
+[16:03:08] 
+[SKIPPED] Experiment 11: CF Case Study
+[16:03:08] 
+============================================================
+EXPERIMENT 12: PRIVACY BUDGET vs MODEL ACCURACY
+============================================================
+[16:03:08] Addresses Reviewer Concern: 'Model accuracy at different ε not reported'
+[16:03:08]   [i] exp1 bulunamadı, toniot için bilinen best config kullanılıyor
+[16:03:08]       (Kaynak: önceki deney logları)
+[16:03:08] 
+  [!] UYARI: exp1 bulunamadı, default config kullanılıyor!
+[16:03:08]       Öneri: --only 1,12,13 ile çalıştırın
+[16:03:08]       hidden_dims: [128, 64]
+[16:03:08]       dropout: 0.2
+[16:03:09]       learning_rate: 0.001
+[16:03:09] 
+  Deney Parametreleri:
+[16:03:09]     n_runs: 5
+[16:03:09]     n_cf_samples: 100
+[16:03:09]     delta: 1e-05
+[16:03:09] 
+  Noise Multiplier (RDP Formula: σ = √(2ln(1.25/δ))/ε):
+[16:03:09]     ε=0.5: σ=9.6896
+[16:03:09]     ε=1.0: σ=4.8448
+[16:03:09]     ε=2.0: σ=2.4224
+[16:03:09]     ε=5.0: σ=0.9690
+[16:03:09]     ε=10.0: σ=0.4845
+[16:03:09] 
+  ε = 0.5...
+[16:49:53]     Run 5/5: Acc=47.89%±11.89%, Valid=100.00%, Prox=0.2536
+[16:49:53] 
+  ε = 1.0...
+[18:42:03]     Run 5/5: Acc=73.85%±4.96%, Valid=100.00%, Prox=0.2838
+[18:42:03] 
+  ε = 2.0...
+[19:25:29]     Run 5/5: Acc=83.85%±3.16%, Valid=100.00%, Prox=0.2887
+[19:25:29] 
+  ε = 5.0...
+[20:10:50]     Run 5/5: Acc=88.99%±1.11%, Valid=100.00%, Prox=0.2870
+[20:10:50] 
+  ε = 10.0...
+[20:54:52]     Run 5/5: Acc=91.42%±1.51%, Valid=100.00%, Prox=0.2774
+[20:54:52] 
+  ε = inf...
+[21:32:19]     Run 5/5: Acc=98.62%±0.21%, Valid=100.00%, Prox=0.2008
+[21:32:19] 
+  İstatistiksel Testler (Wilcoxon vs No-DP baseline):
+[21:32:19]     ε=0.5: Acc p=0.0625(ns), CF p=1.0000(ns)
+[21:32:19]     ε=1.0: Acc p=0.0625(ns), CF p=1.0000(ns)
+[21:32:19]     ε=2.0: Acc p=0.0625(ns), CF p=1.0000(ns)
+[21:32:19]     ε=5.0: Acc p=0.0625(ns), CF p=1.0000(ns)
+[21:32:19]     ε=10.0: Acc p=0.0625(ns), CF p=1.0000(ns)
+[21:32:19] 
+====================================================================================================
+[21:32:19] EXPERIMENT 12 SUMMARY: Privacy Budget vs Performance
+[21:32:19] ====================================================================================================
+[21:32:19] ε        σ        Model Accuracy       Δ Acc      CF Validity    CF Proximity   Sig   
+[21:32:19] ----------------------------------------------------------------------------------------------------
+[21:32:19] 0.5      9.690    47.89% ± 11.89%    -51.44%     100.0%          0.2536         -
+[21:32:19] 1.0      4.845    73.85% ± 4.96%    -25.12%     100.0%          0.2838         -
+[21:32:19] 2.0      2.422    83.85% ± 3.16%    -14.97%     100.0%          0.2887         -
+[21:32:19] 5.0      0.969    88.99% ± 1.11%    -9.76%     100.0%          0.2870         -
+[21:32:19] 10.0     0.484    91.42% ± 1.51%    -7.30%     100.0%          0.2774         -
+[21:32:19] inf      0.000    98.62% ± 0.21%    +0.00%     100.0%          0.2008         -
+[21:32:19] ----------------------------------------------------------------------------------------------------
+[21:32:19] KEY FINDING: Model accuracy vs privacy tradeoff with statistical significance
+[21:32:19] 
+Saved to: experiments/exp_06_toniot
+[21:32:19]   [Checkpoint saved]
+[21:32:19] 
+============================================================
+EXPERIMENT 13: DP PARADOX CONTROLLED EXPERIMENT
+============================================================
+[21:32:19] Addresses Reviewer Concern: 'DP Paradox hypotheses are speculative'
+[21:32:19]   [i] exp1 bulunamadı, toniot için bilinen best config kullanılıyor
+[21:32:19]       (Kaynak: önceki deney logları)
+[21:32:19] 
+  [!] UYARI: exp1 bulunamadı!
+[21:32:19]       hidden_dims: [128, 64]
+[21:32:19]       dropout: 0.2
+[21:32:19] 
+  2x2 Factorial Design:
+[21:32:19]   ┌─────────────────┬──────────────────┬──────────────────┐
+[21:32:19]   │                 │   No Clipping    │   With Clipping  │
+[21:32:19]   ├─────────────────┼──────────────────┼──────────────────┤
+[21:32:19]   │   No Noise      │   A (Standard)   │   D (Clip Only)  │
+[21:32:19]   │   With Noise    │   C (Noise Only) │   B (DP-SGD)     │
+[21:32:19]   └─────────────────┴──────────────────┴──────────────────┘
+[21:32:19] 
+  Noise Calibration (RDP Formula):
+[21:32:19]     Reference ε: 2.0
+[21:32:19]     δ: 1e-05
+[21:32:19]     σ = √(2ln(1.25/1e-05))/2.0 = 2.4224
+[21:32:19]     noise_std = σ × clip_norm = 2.422403
+[21:32:19] 
+  A_Standard: clip=False, noise=False...
+[22:12:35]     Acc=98.62%±0.21%, Valid=100.0%, Prox=0.2008
+[22:12:35] 
+  B_DP_SGD: clip=True, noise=True...
+[23:02:33]     Acc=83.85%±3.16%, Valid=100.0%, Prox=0.2887
+[23:02:33] 
+  C_Noise_Only: clip=False, noise=True...
+[23:42:43]     Acc=87.21%±0.92%, Valid=100.0%, Prox=0.2856
+[23:42:43] 
+  D_Clip_Only: clip=True, noise=False...
+[00:19:37]     Acc=98.69%±0.69%, Valid=100.0%, Prox=0.1905
+[00:19:37] 
+  İstatistiksel Testler:
+[00:19:37]     Kruskal-Wallis H=0.00, p=1.0000 ns
+[00:19:37]     Pairwise (Mann-Whitney U):
+[00:19:37]       A_Standard vs B_DP_SGD: p=1.0000 (ns)
+[00:19:37]       A_Standard vs C_Noise_Only: p=1.0000 (ns)
+[00:19:37]       A_Standard vs D_Clip_Only: p=1.0000 (ns)
+[00:19:37]       B_DP_SGD vs C_Noise_Only: p=1.0000 (ns)
+[00:19:37] 
+=========================================================================================================
+[00:19:37] EXPERIMENT 13 SUMMARY: DP PARADOX ANALYSIS (2x2 Factorial)
+[00:19:37] =========================================================================================================
+[00:19:37] Condition        Clip   Noise  Model Acc          CF Validity  CF Proximity   Δ Valid   
+[00:19:37] ---------------------------------------------------------------------------------------------------------
+[00:19:37] A_Standard       No     No     98.62%±0.21%   100.0%        0.2008         +0.00%
+[00:19:37] D_Clip_Only      Yes    No     98.69%±0.69%   100.0%        0.1905         +0.00%
+[00:19:37] C_Noise_Only     No     Yes    87.21%±0.92%   100.0%        0.2856         +0.00%
+[00:19:37] B_DP_SGD         Yes    Yes    83.85%±3.16%   100.0%        0.2887         +0.00%
+[00:19:37] -------------------------------------------------------------------------------------
+[00:19:37] 
+  Factorial Analysis (Main Effects on CF Validity):
+[00:19:37]     NOISE effect:    +0.00%
+[00:19:37]     CLIPPING effect: +0.00%
+[00:19:37]     Interaction:     +0.00%
+[00:19:37] 
+  Interpretation:
+[00:19:37]     DP-SGD vs Standard:        +0.00% CF validity
+[00:19:37]     Noise-Only vs Standard:    +0.00% CF validity
+[00:19:37]     Clipping-Only vs Standard: +0.00% CF validity
+[00:19:37] 
+  ? CONCLUSION: Effects are small - may need further analysis
+[00:19:37] 
+Saved to: experiments/exp_06_toniot
+[00:19:37]   [Checkpoint saved]
+[00:19:37] 
+============================================================
+SUMMARY
+============================================================
+[00:19:37] All experiments completed (check log for any errors)
+[00:19:37] 
+============================================================
+GENERATING FIGURES
+============================================================
+[00:19:37] Warning: visualization.py not found. Skipping figure generation.
+[00:19:37] Place visualization.py in the same directory to enable figures.
+[00:19:37] 
+Saved to: experiments/exp_06_toniot

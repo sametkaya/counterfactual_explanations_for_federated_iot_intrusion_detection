@@ -1,0 +1,492 @@
+[11:44:00] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: ciciot2023
+============================================================
+[11:44:00] 
+Device: cuda
+[11:44:00] 
+============================================================
+DATA LOADING
+============================================================
+[11:48:34]   Train: 400000, Test: 100000, Features: 39
+[11:48:34]   Classes: 8
+[11:48:34] 
+============================================================
+EXPERIMENT 1: MODEL TRAINING (FAIR COMPARISON)
+============================================================
+[11:48:34] 
+  Class weights applied for imbalanced data:
+[11:48:34]     Benign: 5.3294
+[11:48:34]     DDoS: 0.1730
+[11:48:34]     DoS: 0.7249
+[11:48:34]     Recon: 8.5281
+[11:48:34]     Web: 221.2389
+[11:48:34]     BruteForce: 467.2897
+[11:48:34]     Spoofing: 11.8850
+[11:48:34]     Mirai: 2.2418
+[11:48:34] 
+  Training PyTorch MLP with hyperparameter tuning (same as baselines)...
+[11:48:34]     Tuning on 360,000 samples, validating on 40,000 samples
+[11:48:34]     Testing 12 configurations...
+[12:22:05]     Tuning completed in 2011.2s
+[12:22:05]     Best config: {'hidden_dims': (256, 128), 'learning_rate': 0.001, 'dropout': 0.3} (val F1-macro: 0.6199)
+[12:22:05] 
+  Training final PyTorch MLP with best hyperparameters...
+[12:22:05]     - Architecture: (256, 128)
+[12:22:05]     - Learning rate: 0.001
+[12:22:05]     - Dropout: 0.3
+[12:22:05]     - Weighted CrossEntropyLoss (class balanced)
+[12:22:05]     - Early stopping (patience=10)
+[12:22:05]     - Max epochs: 20
+[12:23:41]   Epoch 5: Acc=0.7429, F1-macro=0.6063, Loss=0.6271, LR=0.001000
+[12:25:15]   Epoch 10: Acc=0.7435, F1-macro=0.6096, Loss=0.6050, LR=0.001000
+[12:26:50]   Epoch 15: Acc=0.7130, F1-macro=0.6119, Loss=0.5885, LR=0.001000
+[12:28:24]   Epoch 20: Acc=0.7252, F1-macro=0.6002, Loss=0.5693, LR=0.000500
+[12:28:24]   Loaded best model (F1-macro: 0.6403)
+[12:28:24] 
+  Computing detailed classification metrics...
+[12:28:26] 
+  PyTorch MLP Results:
+[12:28:26]     Accuracy:      0.7301
+[12:28:26]     F1 (macro):    0.6403
+[12:28:26]     F1 (weighted): 0.7566
+[12:28:26]     ROC-AUC:       0.9229
+[12:28:26]     Training time: 378.5s
+[12:28:26] 
+  Per-Class F1 Scores:
+[12:28:26]     Benign: F1=0.7776, Precision=0.7400, Recall=0.8192, Support=2345
+[12:28:26]     DDoS: F1=0.7896, Precision=0.9733, Recall=0.6642, Support=72235
+[12:28:26]     DoS: F1=0.5547, Precision=0.3968, Recall=0.9212, Support=17243
+[12:28:26]     Recon: F1=0.6748, Precision=0.7079, Recall=0.6446, Support=1466
+[12:28:26]     Web: F1=0.1333, Precision=0.1270, Recall=0.1404, Support=57
+[12:28:26]     BruteForce: F1=0.5116, Precision=0.6471, Recall=0.4231, Support=26
+[12:28:26]     Spoofing: F1=0.6943, Precision=0.7213, Recall=0.6692, Support=1052
+[12:28:26]     Mirai: F1=0.9869, Precision=0.9770, Recall=0.9970, Support=5576
+[12:28:26] 
+============================================================
+[12:28:26]   FAIR BASELINE COMPARISON
+[12:28:26] ============================================================
+[12:28:26]   All models trained with:
+[12:28:26]     - Same train/test split
+[12:28:26]     - Class weights for imbalanced data
+[12:28:26]     - Hyperparameter tuning (GridSearchCV)
+[12:28:26]     - Same evaluation metrics
+[12:28:26] 
+  Fair Comparison Settings:
+[12:28:26]     - Cross-validation folds: 5
+[12:28:26]     - Class weights: Applied (balanced)
+[12:28:26]     - Hyperparameter tuning: GridSearchCV
+[12:28:26]     - Train samples: 400,000
+[12:28:26]     - Test samples: 100,000
+[12:28:26] 
+  [1/6] Majority Class Baseline...
+[12:28:26]     Accuracy: 0.7224, F1-macro: 0.1048
+[12:28:26] 
+  [2/6] Logistic Regression (with hyperparameter tuning)...
+[12:30:14]     Best params: {'C': 10.0, 'max_iter': 500, 'solver': 'lbfgs'}
+[12:30:14]     Accuracy: 0.6960, F1-macro: 0.5094
+[12:30:14]     Training time: 107.6s
+[12:30:14] 
+  [3/6] Random Forest (with hyperparameter tuning)...
+[12:31:11]     Best params: {'max_depth': 20, 'min_samples_split': 2, 'n_estimators': 200}
+[12:31:11]     Accuracy: 0.7551, F1-macro: 0.6540
+[12:31:11]     Training time: 57.3s
+[12:31:11] 
+  [4/6] XGBoost (with hyperparameter tuning)...
+[12:32:26]     Best params: {'learning_rate': 0.1, 'max_depth': 6, 'n_estimators': 200, 'subsample': 0.8}
+[12:32:26]     Accuracy: 0.8545, F1-macro: 0.6656
+[12:32:26]     Training time: 74.9s
+[12:32:26] 
+  [5/6] Sklearn MLP (fair NN baseline with sample weights)...
+[12:33:53]     Resampled training size: 467,266 (from 400,000)
+[12:38:55]     Best params: {'alpha': 0.0001, 'hidden_layer_sizes': (128, 64), 'learning_rate_init': 0.001}
+[12:38:55]     Accuracy: 0.8494, F1-macro: 0.6192
+[12:38:55]     Training time: 388.4s
+[12:38:55] 
+  [6/6] Computing statistical comparison...
+[12:38:55] 
+================================================================================
+[12:38:55]   FINAL MODEL COMPARISON (FAIR - ALL WITH CLASS WEIGHTS & TUNING)
+[12:38:55] ================================================================================
+[12:38:55]   Model                  Accuracy   F1-macro     F1-wtd       Prec     Recall    Time(s)
+[12:38:55]   --------------------------------------------------------------------------------
+[12:38:55]   XGBoost                  0.8545     0.6656     0.8356     0.7577     0.6355       74.9 *
+[12:38:55]   RandomForest             0.7551     0.6540     0.7793     0.7271     0.6625       57.3
+[12:38:55]   PyTorchMLP               0.7301     0.6403     0.7566     0.6613     0.6598      378.5
+[12:38:55]   SklearnMLP               0.8494     0.6192     0.8267     0.6504     0.6097      388.4
+[12:38:55]   LogisticRegression       0.6960     0.5094     0.7285     0.5457     0.6268      107.6
+[12:38:55]   MajorityClass            0.7224     0.1048     0.6059     0.0903     0.1250        0.0
+[12:38:55]   --------------------------------------------------------------------------------
+[12:38:55]   * Best model by F1-macro
+[12:38:55] 
+  Discussion:
+[12:38:55]     XGBoost achieves the best F1-macro score.
+[12:38:55]     PyTorch MLP ranks #3 in this comparison.
+[12:38:55]     However, PyTorch MLP is chosen for the following reasons:
+[12:38:55]       1. Gradient-based counterfactual generation requires neural networks
+[12:38:55]       2. Federated learning aggregation (FedAvg) works with neural network weights
+[12:38:55]       3. Differential privacy (DP-SGD) is designed for gradient descent
+[12:38:55]       4. The performance gap is acceptable given these advantages
+[12:38:55] 
+Saved to: experiments/exp_03_ciciot2023
+[12:38:55]   [Checkpoint saved]
+[12:38:55] 
+============================================================
+EXPERIMENT 2: CF METHODS COMPARISON
+============================================================
+[12:38:55]   100 attack samples
+[12:38:56] 
+  [1/7] DiCE Baseline...
+[12:39:04]     Validity: 100.00%
+[12:39:04] 
+  [2/7] DiCE + Constraints...
+[12:51:54]     Validity: 85.60%
+[12:51:54] 
+  [3/7] FedCF-IoT (No DP)...
+[13:05:08]     Validity: 88.80%
+[13:05:08] 
+  [4/7] FedCF-IoT (DP eps=2.0)...
+[13:16:00]     Validity: 95.20%
+[13:16:00] 
+  [5/7] Wachter (2017) [with constraints]...
+[13:20:02]     Validity: 74.40%
+[13:20:02] 
+  [6/7] Growing Spheres (2018) [with constraints]...
+[13:24:22]     Validity: 98.80%
+[13:24:22] 
+  [7/7] FACE (2020) [with constraints]...
+[13:24:22]     Validity: 15.60%
+[13:24:22] 
+  Statistical Analysis:
+[13:24:23] --------------------------------------------------
+[13:24:41]   Kruskal-Wallis p-value: 2.2528e-38
+[13:24:41]   Effect size: 0.537 (large)
+[13:24:41] 
+  Pairwise vs FedCF_DP:
+[13:24:42]     vs DiCE_Baseline: p=3.4532e-03*, d=0.292
+[13:24:43]     vs DiCE_Constraints: p=1.0651e-01, d=0.161
+[13:24:44]     vs FedCF_NoDP: p=1.8246e-01, d=0.133
+[13:24:44]     vs Wachter: p=1.2957e-03*, d=0.322
+[13:24:45]     vs GrowingSpheres: p=1.0129e-01, d=0.164
+[13:24:46]     vs FACE: p=2.4258e-19*, d=0.899
+[13:24:46] 
+Saved to: experiments/exp_03_ciciot2023
+[13:24:46]   [Checkpoint saved]
+[13:24:46] 
+============================================================
+EXPERIMENT 3: PRIVACY-UTILITY TRADEOFF
+============================================================
+[13:24:46] 
+  eps = 0.5...
+[13:31:24]     Validity: 98.67%, CI: (0.9605333333333334, 1.0)
+[13:31:24] 
+  eps = 1.0...
+[13:35:51]     Validity: 98.67%, CI: (0.9605333333333334, 1.0)
+[13:35:51] 
+  eps = 2.0...
+[13:41:22]     Validity: 94.00%, CI: (0.87724058709607, 1.0)
+[13:41:22] 
+  eps = 5.0...
+[13:47:23]     Validity: 95.33%, CI: (0.908526628854165, 0.9981400378125017)
+[13:47:23] 
+  eps = 10.0...
+[13:54:22]     Validity: 94.00%, CI: (0.8801210109192437, 0.9998789890807562)
+[13:54:22] 
+Saved to: experiments/exp_03_ciciot2023
+[13:54:22]   [Checkpoint saved]
+[13:54:22] 
+============================================================
+EXPERIMENT 4: FL AGGREGATION METHODS (FAIR COMPARISON)
+============================================================
+[13:54:22] 
+  Class weights applied for imbalanced data (same as Exp 1)
+[13:54:22] 
+  [1/4] Centralized (with class weights)...
+[14:07:14]     Accuracy: 0.7037, F1-macro: 0.5755
+[14:07:14] 
+  [2/4] FedAvg (with class weights)...
+[15:02:10]     Accuracy: 0.7120, F1-macro: 0.6100
+[15:02:10] 
+  [3/4] FedProx (with class weights)...
+[16:33:00]     Accuracy: 0.7071, F1-macro: 0.6192
+[16:33:00] 
+  [4/4] FedNova (with class weights)...
+[18:30:53]     Accuracy: 0.7216, F1-macro: 0.6237
+[18:30:53] 
+  ======================================================================
+[18:30:53]   FL AGGREGATION COMPARISON (FAIR - ALL WITH CLASS WEIGHTS)
+[18:30:53]   ======================================================================
+[18:30:53]   Method              Accuracy     F1-macro  F1-weighted          Gap
+[18:30:53]   -----------------------------------------------------------------
+[18:30:53]   Centralized           0.7037       0.5755       0.7329            -
+[18:30:53]   FedAvg                0.7120       0.6100       0.7405      -0.0084
+[18:30:53]   FedProx               0.7071       0.6192       0.7359      -0.0035
+[18:30:53]   FedNova               0.7216       0.6237       0.7491      -0.0180
+[18:30:53] 
+Saved to: experiments/exp_03_ciciot2023
+[18:30:53]   [Checkpoint saved]
+[18:30:53] 
+============================================================
+EXPERIMENT 5: SCALABILITY (CLIENT COUNT) - FAIR COMPARISON
+============================================================
+[18:30:53] 
+  Class weights applied for fair comparison
+[18:30:53] 
+  Clients = 5...
+[19:16:35]     Accuracy: 0.7042, F1-macro: 0.6291, Time: 2739.1s
+[19:16:35] 
+  Clients = 10...
+[20:03:55]     Accuracy: 0.6989, F1-macro: 0.6189, Time: 2837.9s
+[20:03:55] 
+  Clients = 20...
+[20:50:15]     Accuracy: 0.7023, F1-macro: 0.6122, Time: 2778.0s
+[20:50:15] 
+  Clients = 50...
+[21:40:38]     Accuracy: 0.7110, F1-macro: 0.5994, Time: 3021.0s
+[21:40:38] 
+Saved to: experiments/exp_03_ciciot2023
+[21:40:38]   [Checkpoint saved]
+[21:40:38] 
+============================================================
+EXPERIMENT 6: NON-IID HETEROGENEITY (FAIR COMPARISON)
+============================================================
+[21:40:38] 
+  Class weights applied for fair comparison
+[21:40:38] 
+  Dirichlet alpha = 0.1 (very non-IID)...
+[21:40:39]     Active clients: 10/10
+[22:34:11]     Final Accuracy: 0.7892, F1-macro: 0.3088
+[22:34:11] 
+  Dirichlet alpha = 0.5 (moderate)...
+[22:34:11]     Active clients: 10/10
+[23:30:36]     Final Accuracy: 0.8323, F1-macro: 0.5424
+[23:30:36] 
+  Dirichlet alpha = 1.0 (moderate)...
+[23:30:36]     Active clients: 10/10
+[00:19:51]     Final Accuracy: 0.7565, F1-macro: 0.6223
+[00:19:51] 
+  Dirichlet alpha = 10.0 (near IID)...
+[00:19:51]     Active clients: 10/10
+[00:59:17]     Final Accuracy: 0.7056, F1-macro: 0.6215
+[00:59:17] 
+Saved to: experiments/exp_03_ciciot2023
+[00:59:17]   [Checkpoint saved]
+[00:59:17] 
+============================================================
+EXPERIMENT 7: MULTI-CLASS ANALYSIS
+============================================================
+[00:59:17] 
+  DDoS (30 samples)...
+[01:01:36]     Validity: 96.00%
+[01:01:36] 
+  DoS (30 samples)...
+[01:04:02]     Validity: 99.00%
+[01:04:02] 
+  Recon (30 samples)...
+[01:04:43]     Validity: 100.00%
+[01:04:43] 
+  Web (30 samples)...
+[01:05:05]     Validity: 100.00%
+[01:05:05] 
+  BruteForce (26 samples)...
+[01:05:24]     Validity: 100.00%
+[01:05:24] 
+  Spoofing (30 samples)...
+[01:06:08]     Validity: 100.00%
+[01:06:08] 
+  Mirai (30 samples)...
+[01:10:35]     Validity: 89.00%
+[01:10:35] 
+Saved to: experiments/exp_03_ciciot2023
+[01:10:35]   [Checkpoint saved]
+[01:10:35] 
+============================================================
+EXPERIMENT 8: ABLATION STUDY
+============================================================
+[01:10:35] 
+  Full...
+[01:14:13]     Validity: 95.20%
+[01:14:13] 
+  No_Constraints...
+[01:14:15]     Validity: 100.00%
+[01:14:15] 
+  No_DP...
+[01:19:06]     Validity: 86.40%
+[01:19:06] 
+  No_Diversity...
+[01:22:13]     Validity: 96.80%
+[01:22:13] 
+  Contributions: constraints=-4.8%, dp=+8.8%, diversity=-1.6%
+[01:22:13] 
+Saved to: experiments/exp_03_ciciot2023
+[01:22:13]   [Checkpoint saved]
+[01:22:13] 
+============================================================
+EXPERIMENT 9: LATENCY ANALYSIS
+============================================================
+[01:22:13] 
+  max_iter = 50...
+[01:23:18]     Time: 3241.6ms (p95: 3571.6ms), Validity: 62.00%
+[01:23:18] 
+  max_iter = 100...
+[01:24:52]     Time: 4693.7ms (p95: 6768.6ms), Validity: 87.00%
+[01:24:52] 
+  max_iter = 200...
+[01:26:57]     Time: 6232.0ms (p95: 13520.6ms), Validity: 93.00%
+[01:26:57] 
+  max_iter = 300...
+[01:29:44]     Time: 8340.7ms (p95: 20461.7ms), Validity: 96.00%
+[01:29:44] 
+  max_iter = 500...
+[01:32:27]     Time: 8181.7ms (p95: 33823.8ms), Validity: 97.00%
+[01:32:27] 
+Saved to: experiments/exp_03_ciciot2023
+[01:32:27]   [Checkpoint saved]
+[01:32:27] 
+============================================================
+EXPERIMENT 10: PRIVACY ATTACK EVALUATION
+============================================================
+[01:32:27]   Samples per attack: 500
+[01:32:27] 
+  [1/3] MIA on Base Model (No DP)...
+[01:32:27]     Threshold MIA Accuracy: 51.20%
+[01:32:27]     Loss MIA Accuracy: 49.20%
+[01:32:27]     Privacy Leakage: 1.20%
+[01:32:27]     Vulnerability: LOW
+[01:32:27] 
+  [2/3] Training DP Model (eps=2.0)...
+[01:36:26]     DP Model trained
+[01:36:26] 
+  [3/3] MIA on DP Model...
+[01:36:26]     Threshold MIA Accuracy: 51.40%
+[01:36:26]     Loss MIA Accuracy: 51.60%
+[01:36:26]     Privacy Leakage: 1.60%
+[01:36:26]     Vulnerability: LOW
+[01:36:26] 
+  ==================================================
+[01:36:26]   PRIVACY COMPARISON:
+[01:36:26]   ==================================================
+[01:36:26]   No DP Leakage:   1.20%
+[01:36:26]   With DP Leakage: 1.60%
+[01:36:26]   Reduction:       -33.3%
+[01:36:26]   DP Effective:    NO
+[01:36:26] 
+Saved to: experiments/exp_03_ciciot2023
+[01:36:26]   [Checkpoint saved]
+[01:36:26] 
+============================================================
+EXPERIMENT 11: CF CASE STUDY
+============================================================
+[01:36:26]   Generating case studies for attack types...
+[01:37:10] 
+  Case 1: DDoS → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 0.3360
+[01:37:10]     Changes: 10 features
+[01:37:10]       • Header_Length: -1.572 → -0.067 (↑)
+[01:37:10]       • Time_To_Live: -0.176 → 0.882 (↑)
+[01:37:10]       • fin_flag_number: -0.312 → -1.090 (↓)
+[01:37:10]       • syn_flag_number: -0.515 → -0.949 (↓)
+[01:37:10]       • rst_flag_number: -0.329 → -2.328 (↓)
+[01:37:10]       ... and 5 more changes
+[01:37:10] 
+  Case 2: DoS → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 0.3989
+[01:37:10]     Changes: 10 features
+[01:37:10]       • Protocol Type: -0.339 → -1.577 (↓)
+[01:37:10]       • fin_flag_number: -0.312 → -1.153 (↓)
+[01:37:10]       • psh_flag_number: -0.339 → -0.202 (↑)
+[01:37:10]       • ack_flag_number: -0.378 → 0.839 (↑)
+[01:37:10]       • fin_count: -0.310 → -0.659 (↓)
+[01:37:10]       ... and 5 more changes
+[01:37:10] 
+  Case 3: Recon → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 0.1049
+[01:37:10]     Changes: 10 features
+[01:37:10]       • psh_flag_number: 0.384 → 0.668 (↑)
+[01:37:10]       • ack_count: -0.173 → 0.182 (↑)
+[01:37:10]       • fin_count: -0.310 → -0.032 (↑)
+[01:37:10]       • HTTP: -0.236 → -0.555 (↓)
+[01:37:10]       • DHCP: -0.035 → -0.390 (↓)
+[01:37:10]       ... and 5 more changes
+[01:37:10] 
+  Case 4: Web → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 0.0905
+[01:37:10]     Changes: 10 features
+[01:37:10]       • fin_flag_number: -0.312 → -0.437 (↓)
+[01:37:10]       • syn_flag_number: -0.515 → -0.383 (↑)
+[01:37:10]       • psh_flag_number: 0.022 → -0.108 (↓)
+[01:37:10]       • Telnet: -0.016 → -0.155 (↓)
+[01:37:10]       • SMTP: -0.018 → -0.163 (↓)
+[01:37:10]       ... and 5 more changes
+[01:37:10] 
+  Case 5: BruteForce → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 1.0683
+[01:37:10]     Changes: 10 features
+[01:37:10]       • Time_To_Live: 0.948 → 1.112 (↑)
+[01:37:10]       • rst_flag_number: -0.329 → -0.619 (↓)
+[01:37:10]       • HTTPS: 1.556 → 1.883 (↑)
+[01:37:10]       • DNS: -0.118 → -0.328 (↓)
+[01:37:10]       • Telnet: -0.016 → 0.206 (↑)
+[01:37:10]       ... and 5 more changes
+[01:37:10] 
+  Case 6: Spoofing → Benign
+[01:37:10]     Validity: ✓
+[01:37:10]     Proximity: 0.5105
+[01:37:10]     Changes: 10 features
+[01:37:10]       • Header_Length: 0.534 → 0.765 (↑)
+[01:37:10]       • fin_flag_number: -0.312 → -0.487 (↓)
+[01:37:10]       • syn_flag_number: -0.515 → -0.664 (↓)
+[01:37:10]       • TCP: -0.154 → 0.070 (↑)
+[01:37:11]       • UDP: 0.207 → 0.368 (↑)
+[01:37:11]       ... and 5 more changes
+[01:37:11] 
+  Case 7: Mirai → Benign
+[01:37:11]     Validity: ✓
+[01:37:11]     Proximity: 0.8150
+[01:37:11]     Changes: 10 features
+[01:37:11]       • Header_Length: -1.550 → 2.430 (↑)
+[01:37:11]       • Time_To_Live: -0.191 → -3.116 (↓)
+[01:37:11]       • rst_flag_number: -0.329 → -3.735 (↓)
+[01:37:11]       • fin_count: -0.310 → -4.146 (↓)
+[01:37:11]       • HTTP: -0.236 → -1.883 (↓)
+[01:37:11]       ... and 5 more changes
+[01:37:11] 
+  Analyzing feature importance from CFs...
+[01:37:11] 
+  Top 10 Most Changed Features in CFs:
+[01:37:11]   Rank   Feature                           Count   Avg Magnitude
+[01:37:11]   ------------------------------------------------------------
+[01:37:11]   1      SMTP                                  4          1.8465
+[01:37:11]   2      fin_flag_number                       4          0.4792
+[01:37:11]   3      HTTP                                  3          1.2582
+[01:37:11]   4      Tot sum                               3          0.1953
+[01:37:11]   5      UDP                                   3          0.3120
+[01:37:11]   6      Header_Length                         3          1.9054
+[01:37:11]   7      Telnet                                3          0.2480
+[01:37:11]   8      Time_To_Live                          3          1.3826
+[01:37:11]   9      psh_flag_number                       3          0.1842
+[01:37:11]   10     rst_flag_number                       3          1.8982
+[01:37:11] 
+Saved to: experiments/exp_03_ciciot2023
+[01:37:11]   [Checkpoint saved]
+[01:37:11] 
+============================================================
+SUMMARY
+============================================================
+[01:37:11] Model Accuracy: 0.7301
+[01:37:11] F1-Score (macro): 0.6403
+[01:37:11] F1-Score (weighted): 0.7566
+[01:37:11] All experiments completed (check log for any errors)
+[01:37:11] 
+============================================================
+GENERATING FIGURES
+============================================================
+[01:37:12] Warning: visualization.py not found. Skipping figure generation.
+[01:37:12] Place visualization.py in the same directory to enable figures.
+[01:37:12] 
+Saved to: experiments/exp_03_ciciot2023

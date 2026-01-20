@@ -1,0 +1,188 @@
+[15:59:38] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: ciciot2023
+============================================================
+[15:59:38] 
+Device: cuda
+[15:59:38] Skipping experiments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+[15:59:38] 
+============================================================
+DATA LOADING
+============================================================
+[16:03:47]   Train: 400000, Test: 100000, Features: 39
+[16:03:47]   Classes: 8
+[16:03:47] 
+[SKIPPED] Experiment 1: Model Training
+[16:05:16] 
+[SKIPPED] Experiment 2: CF Comparison
+[16:05:16] 
+[SKIPPED] Experiment 3: Privacy-Utility
+[16:05:16] 
+[SKIPPED] Experiment 4: FL Aggregation
+[16:05:16] 
+[SKIPPED] Experiment 5: Scalability
+[16:05:16] 
+[SKIPPED] Experiment 6: Heterogeneity
+[16:05:16] 
+[SKIPPED] Experiment 7: Multi-class
+[16:05:16] 
+[SKIPPED] Experiment 8: Ablation
+[16:05:16] 
+[SKIPPED] Experiment 9: Latency
+[16:05:16] 
+[SKIPPED] Experiment 10: Privacy Attack
+[16:05:16] 
+[SKIPPED] Experiment 11: CF Case Study
+[16:05:16] 
+============================================================
+EXPERIMENT 12: PRIVACY BUDGET vs MODEL ACCURACY
+============================================================
+[16:05:16] Addresses Reviewer Concern: 'Model accuracy at different ε not reported'
+[16:05:16]   [i] exp1 bulunamadı, ciciot2023 için bilinen best config kullanılıyor
+[16:05:16]       (Kaynak: önceki deney logları)
+[16:05:16] 
+  [!] UYARI: exp1 bulunamadı, default config kullanılıyor!
+[16:05:16]       Öneri: --only 1,12,13 ile çalıştırın
+[16:05:16]       hidden_dims: [256, 128]
+[16:05:16]       dropout: 0.3
+[16:05:16]       learning_rate: 0.001
+[16:05:16] 
+  Deney Parametreleri:
+[16:05:16]     n_runs: 5
+[16:05:16]     n_cf_samples: 100
+[16:05:16]     delta: 1e-05
+[16:05:16] 
+  Noise Multiplier (RDP Formula: σ = √(2ln(1.25/δ))/ε):
+[16:05:16]     ε=0.5: σ=9.6896
+[16:05:16]     ε=1.0: σ=4.8448
+[16:05:16]     ε=2.0: σ=2.4224
+[16:05:16]     ε=5.0: σ=0.9690
+[16:05:16]     ε=10.0: σ=0.4845
+[16:05:16] 
+  ε = 0.5...
+[16:55:00]     Run 5/5: Acc=36.07%±9.52%, Valid=100.00%, Prox=0.2194
+[16:55:00] 
+  ε = 1.0...
+[18:49:37]     Run 5/5: Acc=50.91%±4.76%, Valid=100.00%, Prox=0.2602
+[18:49:37] 
+  ε = 2.0...
+[19:46:14]     Run 5/5: Acc=62.22%±4.70%, Valid=100.00%, Prox=0.3340
+[19:46:14] 
+  ε = 5.0...
+[21:03:18]     Run 5/5: Acc=61.92%±4.34%, Valid=99.80%, Prox=0.4583
+[21:03:18] 
+  ε = 10.0...
+[22:36:34]     Run 5/5: Acc=62.37%±2.87%, Valid=99.60%, Prox=0.5325
+[22:36:34] 
+  ε = inf...
+[00:58:43]     Run 5/5: Acc=70.68%±0.95%, Valid=80.76%, Prox=0.5746
+[00:58:43] 
+  İstatistiksel Testler (Wilcoxon vs No-DP baseline):
+[00:58:43]     ε=0.5: Acc p=0.0625(ns), CF p=0.0625(ns)
+[00:58:43]     ε=1.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[00:58:43]     ε=2.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[00:58:43]     ε=5.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[00:58:43]     ε=10.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[00:58:43] 
+====================================================================================================
+[00:58:44] EXPERIMENT 12 SUMMARY: Privacy Budget vs Performance
+[00:58:44] ====================================================================================================
+[00:58:44] ε        σ        Model Accuracy       Δ Acc      CF Validity    CF Proximity   Sig   
+[00:58:44] ----------------------------------------------------------------------------------------------------
+[00:58:44] 0.5      9.690    36.07% ± 9.52%    -48.97%     100.0%          0.2194         -
+[00:58:44] 1.0      4.845    50.91% ± 4.76%    -27.98%     100.0%          0.2602         -
+[00:58:44] 2.0      2.422    62.22% ± 4.70%    -11.98%     100.0%          0.3340         -
+[00:58:44] 5.0      0.969    61.92% ± 4.34%    -12.39%     99.8%          0.4583         -
+[00:58:44] 10.0     0.484    62.37% ± 2.87%    -11.76%     99.6%          0.5325         -
+[00:58:44] inf      0.000    70.68% ± 0.95%    +0.00%     80.8%          0.5746         -
+[00:58:44] ----------------------------------------------------------------------------------------------------
+[00:58:44] KEY FINDING: Model accuracy vs privacy tradeoff with statistical significance
+[00:58:44] 
+Saved to: experiments/exp_05_ciciot2023
+[00:58:44]   [Checkpoint saved]
+[00:58:44] 
+============================================================
+EXPERIMENT 13: DP PARADOX CONTROLLED EXPERIMENT
+============================================================
+[00:58:44] Addresses Reviewer Concern: 'DP Paradox hypotheses are speculative'
+[00:58:44]   [i] exp1 bulunamadı, ciciot2023 için bilinen best config kullanılıyor
+[00:58:44]       (Kaynak: önceki deney logları)
+[00:58:44] 
+  [!] UYARI: exp1 bulunamadı!
+[00:58:44]       hidden_dims: [256, 128]
+[00:58:44]       dropout: 0.3
+[00:58:44] 
+  2x2 Factorial Design:
+[00:58:44]   ┌─────────────────┬──────────────────┬──────────────────┐
+[00:58:44]   │                 │   No Clipping    │   With Clipping  │
+[00:58:44]   ├─────────────────┼──────────────────┼──────────────────┤
+[00:58:44]   │   No Noise      │   A (Standard)   │   D (Clip Only)  │
+[00:58:44]   │   With Noise    │   C (Noise Only) │   B (DP-SGD)     │
+[00:58:44]   └─────────────────┴──────────────────┴──────────────────┘
+[00:58:44] 
+  Noise Calibration (RDP Formula):
+[00:58:44]     Reference ε: 2.0
+[00:58:44]     δ: 1e-05
+[00:58:44]     σ = √(2ln(1.25/1e-05))/2.0 = 2.4224
+[00:58:44]     noise_std = σ × clip_norm = 2.422403
+[00:58:44] 
+  A_Standard: clip=False, noise=False...
+[02:59:22]     Acc=70.68%±0.95%, Valid=80.8%, Prox=0.5746
+[02:59:22] 
+  B_DP_SGD: clip=True, noise=True...
+[03:42:09]     Acc=62.22%±4.70%, Valid=100.0%, Prox=0.3340
+[03:42:09] 
+  C_Noise_Only: clip=False, noise=True...
+[04:45:46]     Acc=62.00%±3.55%, Valid=99.7%, Prox=0.5218
+[04:45:46] 
+  D_Clip_Only: clip=True, noise=False...
+[06:35:32]     Acc=71.82%±1.07%, Valid=87.3%, Prox=0.4408
+[06:35:32] 
+  İstatistiksel Testler:
+[06:35:32]     Kruskal-Wallis H=16.71, p=0.0008 *
+[06:35:32]     Pairwise (Mann-Whitney U):
+[06:35:33]       A_Standard vs B_DP_SGD: p=0.0075 (*)
+[06:35:33]       A_Standard vs C_Noise_Only: p=0.0119 (*)
+[06:35:33]       A_Standard vs D_Clip_Only: p=0.0952 (ns)
+[06:35:33]       B_DP_SGD vs C_Noise_Only: p=0.0248 (*)
+[06:35:33] 
+=========================================================================================================
+[06:35:33] EXPERIMENT 13 SUMMARY: DP PARADOX ANALYSIS (2x2 Factorial)
+[06:35:33] =========================================================================================================
+[06:35:33] Condition        Clip   Noise  Model Acc          CF Validity  CF Proximity   Δ Valid   
+[06:35:33] ---------------------------------------------------------------------------------------------------------
+[06:35:33] A_Standard       No     No     70.68%±0.95%   80.8%        0.5746         +0.00%
+[06:35:33] D_Clip_Only      Yes    No     71.82%±1.07%   87.3%        0.4408         +6.52%
+[06:35:33] C_Noise_Only     No     Yes    62.00%±3.55%   99.7%        0.5218         +18.92%
+[06:35:33] B_DP_SGD         Yes    Yes    62.22%±4.70%   100.0%        0.3340         +19.24%
+[06:35:33] -------------------------------------------------------------------------------------
+[06:35:33] 
+  Factorial Analysis (Main Effects on CF Validity):
+[06:35:33]     NOISE effect:    +15.82%
+[06:35:33]     CLIPPING effect: +3.42%
+[06:35:33]     Interaction:     -6.20%
+[06:35:33] 
+  Interpretation:
+[06:35:33]     DP-SGD vs Standard:        +19.24% CF validity
+[06:35:33]     Noise-Only vs Standard:    +18.92% CF validity
+[06:35:33]     Clipping-Only vs Standard: +6.52% CF validity
+[06:35:33] 
+  ✓ CONCLUSION: Gaussian noise alone improves CF validity
+[06:35:33]   ✓ C (Noise Only) ≈ B (DP-SGD): Noise is the PRIMARY cause
+[06:35:33]   → SUPPORTS 'implicit regularization' hypothesis
+[06:35:33] 
+Saved to: experiments/exp_05_ciciot2023
+[06:35:33]   [Checkpoint saved]
+[06:35:33] 
+============================================================
+SUMMARY
+============================================================
+[06:35:33] All experiments completed (check log for any errors)
+[06:35:33] 
+============================================================
+GENERATING FIGURES
+============================================================
+[06:35:33] Warning: visualization.py not found. Skipping figure generation.
+[06:35:33] Place visualization.py in the same directory to enable figures.
+[06:35:33] 
+Saved to: experiments/exp_05_ciciot2023

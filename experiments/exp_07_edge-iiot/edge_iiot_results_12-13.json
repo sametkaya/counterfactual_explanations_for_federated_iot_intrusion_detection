@@ -1,0 +1,704 @@
+{
+  "name": "FedCF_Comprehensive",
+  "dataset": "edge-iiot",
+  "experiments": {
+    "exp12_epsilon_vs_accuracy": {
+      "epsilons": {
+        "0.5": {
+          "epsilon": 0.5,
+          "noise_multiplier": 9.689610525210778,
+          "model_accuracy": 0.281424,
+          "model_accuracy_std": 0.19348252195999513,
+          "model_accuracy_ci_95": [
+            0.09239800000000001,
+            0.570832
+          ],
+          "model_f1_macro": 0.14264098717997398,
+          "cf_validity": 0.994,
+          "cf_validity_std": 0.004898979485566333,
+          "cf_validity_ci_95": [
+            0.9866,
+            0.9998
+          ],
+          "cf_proximity": 0.17799655521139499,
+          "cf_proximity_std": 0.012663128431977911,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.09155,
+            0.41965,
+            0.20826,
+            0.58763,
+            0.10003
+          ],
+          "raw_cf_validities": [
+            0.9919999999999999,
+            0.9940000000000001,
+            0.9860000000000001,
+            0.998,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.19980699121206996,
+            0.1624979633055627,
+            0.17955056387931104,
+            0.16893908611685038,
+            0.17918817154318092
+          ],
+          "accuracy_drop_pct": -71.65430467311559
+        },
+        "1.0": {
+          "epsilon": 1.0,
+          "noise_multiplier": 4.844805262605389,
+          "model_accuracy": 0.548714,
+          "model_accuracy_std": 0.196206318817718,
+          "model_accuracy_ci_95": [
+            0.248729,
+            0.761911
+          ],
+          "model_f1_macro": 0.2778364563505239,
+          "cf_validity": 0.9955999999999999,
+          "cf_validity_std": 0.0034409301068170435,
+          "cf_validity_ci_95": [
+            0.9904,
+            0.9998
+          ],
+          "cf_proximity": 0.19983372322618967,
+          "cf_proximity_std": 0.028006316122951725,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.53661,
+            0.736,
+            0.48353,
+            0.76479,
+            0.22264
+          ],
+          "raw_cf_validities": [
+            0.99,
+            0.9940000000000001,
+            0.996,
+            1.0,
+            0.998
+          ],
+          "raw_cf_proximities": [
+            0.22455160700529816,
+            0.22670111284404992,
+            0.2016580039933324,
+            0.1972050761505962,
+            0.1490528161376715
+          ],
+          "accuracy_drop_pct": -44.73221947809691
+        },
+        "2.0": {
+          "epsilon": 2.0,
+          "noise_multiplier": 2.4224026313026945,
+          "model_accuracy": 0.786972,
+          "model_accuracy_std": 0.07018280057108009,
+          "model_accuracy_ci_95": [
+            0.678544,
+            0.8639129999999999
+          ],
+          "model_f1_macro": 0.4441519285219469,
+          "cf_validity": 0.9924000000000002,
+          "cf_validity_std": 0.004630334761116052,
+          "cf_validity_ci_95": [
+            0.9880000000000001,
+            0.998
+          ],
+          "cf_proximity": 0.23838390164822343,
+          "cf_proximity_std": 0.04543716444159816,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.80813,
+            0.86649,
+            0.74878,
+            0.84072,
+            0.67074
+          ],
+          "raw_cf_validities": [
+            0.9880000000000001,
+            0.9880000000000001,
+            0.998,
+            0.99,
+            0.998
+          ],
+          "raw_cf_proximities": [
+            0.23580183960497375,
+            0.2966301116496325,
+            0.2709336854368448,
+            0.22568596502393487,
+            0.16286790652573113
+          ],
+          "accuracy_drop_pct": -20.734306445829493
+        },
+        "5.0": {
+          "epsilon": 5.0,
+          "noise_multiplier": 0.9689610525210778,
+          "model_accuracy": 0.933878,
+          "model_accuracy_std": 0.014342413186071575,
+          "model_accuracy_ci_95": [
+            0.914048,
+            0.946056
+          ],
+          "model_f1_macro": 0.623028004836387,
+          "cf_validity": 0.9892,
+          "cf_validity_std": 0.007222188034107122,
+          "cf_validity_ci_95": [
+            0.9788,
+            0.9978
+          ],
+          "cf_proximity": 0.35011997814327483,
+          "cf_proximity_std": 0.02819330074076999,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.94467,
+            0.9461,
+            0.91952,
+            0.94566,
+            0.91344
+          ],
+          "raw_cf_validities": [
+            0.986,
+            0.978,
+            0.998,
+            0.996,
+            0.988
+          ],
+          "raw_cf_proximities": [
+            0.3706045231819153,
+            0.3899267768263818,
+            0.33969339343160393,
+            0.34276816265285015,
+            0.30760703462362293
+          ],
+          "accuracy_drop_pct": -5.937584354994023
+        },
+        "10.0": {
+          "epsilon": 10.0,
+          "noise_multiplier": 0.4844805262605389,
+          "model_accuracy": 0.955294,
+          "model_accuracy_std": 0.0041991551531230685,
+          "model_accuracy_ci_95": [
+            0.9487450000000001,
+            0.95919
+          ],
+          "model_f1_macro": 0.7163743105118744,
+          "cf_validity": 0.9892,
+          "cf_validity_std": 0.007756287771866129,
+          "cf_validity_ci_95": [
+            0.9772,
+            0.9992
+          ],
+          "cf_proximity": 0.38235155922919517,
+          "cf_proximity_std": 0.01592297408455847,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.9572,
+            0.95921,
+            0.95275,
+            0.95901,
+            0.9483
+          ],
+          "raw_cf_validities": [
+            0.9880000000000001,
+            0.99,
+            0.976,
+            1.0,
+            0.992
+          ],
+          "raw_cf_proximities": [
+            0.3874887563586236,
+            0.4045883665829896,
+            0.3893328048288823,
+            0.3725210332274437,
+            0.3578268351480364
+          ],
+          "accuracy_drop_pct": -3.780513845298487
+        },
+        "inf": {
+          "epsilon": null,
+          "noise_multiplier": 0,
+          "model_accuracy": 0.992828,
+          "model_accuracy_std": 0.0007879949238415033,
+          "model_accuracy_ci_95": [
+            0.991721,
+            0.993618
+          ],
+          "model_f1_macro": 0.9253965543253642,
+          "cf_validity": 0.9056,
+          "cf_validity_std": 0.024013329631685825,
+          "cf_validity_ci_95": [
+            0.8674,
+            0.9328
+          ],
+          "cf_proximity": 0.4227758199632167,
+          "cf_proximity_std": 0.02089669191268982,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.99209,
+            0.99342,
+            0.99364,
+            0.99168,
+            0.99331
+          ],
+          "raw_cf_validities": [
+            0.8639999999999999,
+            0.898,
+            0.9099999999999998,
+            0.9339999999999999,
+            0.9219999999999999
+          ],
+          "raw_cf_proximities": [
+            0.45933554100990287,
+            0.4029245871007442,
+            0.40174760814011096,
+            0.42569670630991463,
+            0.42417465725541115
+          ],
+          "accuracy_drop_pct": 0.0
+        }
+      },
+      "statistical_tests": {
+        "eps_0.5_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -3.671390359773462,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.966717046402474,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_1.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -2.259518517734077,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 4.3707842579672125,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_2.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -2.9190890845177577,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.9126083057590018,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_5.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -3.968712689811546,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.912182431803734,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_10.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -8.044363227588832,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.733331856064797,
+            "effect_interpretation": "large"
+          }
+        }
+      },
+      "metadata": {
+        "n_runs": 5,
+        "n_cf_samples": 100,
+        "delta": 1e-05,
+        "model_config": {
+          "hidden_dims": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "from_exp1": false,
+          "source": "dataset_default:edge-iiot"
+        },
+        "config_source": "default",
+        "noise_formula": "σ = √(2ln(1.25/δ))/ε (Gaussian mechanism, RDP)",
+        "statistical_test": "Wilcoxon signed-rank (paired, α=0.05)",
+        "epochs": 20,
+        "batch_size": 64
+      }
+    },
+    "exp13_dp_paradox_controlled": {
+      "conditions": {
+        "A_Standard": {
+          "config": {
+            "use_clipping": false,
+            "use_noise": false,
+            "noise_std": 0
+          },
+          "model_accuracy": 0.992828,
+          "model_accuracy_std": 0.0007879949238415033,
+          "cf_validity": 0.9056,
+          "cf_validity_std": 0.024013329631685825,
+          "cf_validity_ci_95": [
+            0.8674,
+            0.9328
+          ],
+          "cf_proximity": 0.4227758199632167,
+          "cf_proximity_std": 0.02089669191268982,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.99209,
+            0.99342,
+            0.99364,
+            0.99168,
+            0.99331
+          ],
+          "raw_cf_validities": [
+            0.8639999999999999,
+            0.898,
+            0.9099999999999998,
+            0.9339999999999999,
+            0.9219999999999999
+          ],
+          "raw_cf_proximities": [
+            0.45933554100990287,
+            0.4029245871007442,
+            0.40174760814011096,
+            0.42569670630991463,
+            0.42417465725541115
+          ],
+          "validity_delta_pct": 0.0
+        },
+        "B_DP_SGD": {
+          "config": {
+            "use_clipping": true,
+            "use_noise": true,
+            "noise_std": 2.4224026313026945
+          },
+          "model_accuracy": 0.786972,
+          "model_accuracy_std": 0.07018280057108009,
+          "cf_validity": 0.9924000000000002,
+          "cf_validity_std": 0.004630334761116052,
+          "cf_validity_ci_95": [
+            0.9880000000000001,
+            0.998
+          ],
+          "cf_proximity": 0.23838390164822343,
+          "cf_proximity_std": 0.04543716444159816,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.80813,
+            0.86649,
+            0.74878,
+            0.84072,
+            0.67074
+          ],
+          "raw_cf_validities": [
+            0.9880000000000001,
+            0.9880000000000001,
+            0.998,
+            0.99,
+            0.998
+          ],
+          "raw_cf_proximities": [
+            0.23580183960497375,
+            0.2966301116496325,
+            0.2709336854368448,
+            0.22568596502393487,
+            0.16286790652573113
+          ],
+          "validity_delta_pct": 8.680000000000021
+        },
+        "C_Noise_Only": {
+          "config": {
+            "use_clipping": false,
+            "use_noise": true,
+            "noise_std": 2.4224026313026945
+          },
+          "model_accuracy": 0.93514,
+          "model_accuracy_std": 0.016390121415047518,
+          "cf_validity": 0.9856000000000001,
+          "cf_validity_std": 0.008708616422830854,
+          "cf_validity_ci_95": [
+            0.9742000000000001,
+            0.9938000000000001
+          ],
+          "cf_proximity": 0.3503979843690992,
+          "cf_proximity_std": 0.032927321710225776,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.94439,
+            0.95183,
+            0.9101,
+            0.94795,
+            0.92143
+          ],
+          "raw_cf_validities": [
+            0.992,
+            0.9740000000000001,
+            0.9919999999999999,
+            0.9940000000000001,
+            0.9760000000000001
+          ],
+          "raw_cf_proximities": [
+            0.3707749137580395,
+            0.3977921690344811,
+            0.3122654378190637,
+            0.35639097025990485,
+            0.3147664309740067
+          ],
+          "validity_delta_pct": 8.000000000000018
+        },
+        "D_Clip_Only": {
+          "config": {
+            "use_clipping": true,
+            "use_noise": false,
+            "noise_std": 0
+          },
+          "model_accuracy": 0.9942439999999999,
+          "model_accuracy_std": 0.0006232046212922586,
+          "cf_validity": 0.9316000000000001,
+          "cf_validity_std": 0.02633324894501248,
+          "cf_validity_ci_95": [
+            0.8865999999999999,
+            0.9535999999999999
+          ],
+          "cf_proximity": 0.3861727773845196,
+          "cf_proximity_std": 0.012424399699015794,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.99381,
+            0.99461,
+            0.99511,
+            0.99332,
+            0.99437
+          ],
+          "raw_cf_validities": [
+            0.9440000000000001,
+            0.8819999999999999,
+            0.9279999999999999,
+            0.954,
+            0.9499999999999998
+          ],
+          "raw_cf_proximities": [
+            0.3752306033670903,
+            0.4072366280406714,
+            0.39212567749619487,
+            0.3734568923115731,
+            0.38281408570706843
+          ],
+          "validity_delta_pct": 2.6000000000000134
+        }
+      },
+      "statistical_tests": {
+        "kruskal_wallis": {
+          "statistic": 15.091265060240966,
+          "p_value": 0.001740294447032295,
+          "significant": "True"
+        },
+        "A_Standard_vs_B_DP_SGD": {
+          "test": "Mann-Whitney U",
+          "statistic": 0.0,
+          "p_value": 0.011667312343319386,
+          "significant": "True",
+          "effect_size": 1.0,
+          "effect_interpretation": "large"
+        },
+        "A_Standard_vs_C_Noise_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 0.0,
+          "p_value": 0.007936507936507936,
+          "significant": "True",
+          "effect_size": 1.0,
+          "effect_interpretation": "large"
+        },
+        "A_Standard_vs_D_Clip_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 5.0,
+          "p_value": 0.15079365079365079,
+          "significant": "False",
+          "effect_size": 0.6,
+          "effect_interpretation": "medium"
+        },
+        "B_DP_SGD_vs_C_Noise_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 16.0,
+          "p_value": 0.5283593272709488,
+          "significant": "False",
+          "effect_size": -0.28,
+          "effect_interpretation": "small"
+        }
+      },
+      "factorial_analysis": {
+        "main_effect_noise": 7.040000000000002,
+        "main_effect_clipping": 1.6400000000000192,
+        "interaction": -1.9200000000000106
+      },
+      "metadata": {
+        "n_runs": 5,
+        "n_cf_samples": 100,
+        "reference_epsilon": 2.0,
+        "delta": 1e-05,
+        "noise_multiplier": 2.4224026313026945,
+        "noise_std": 2.4224026313026945,
+        "clip_norm": 1.0,
+        "model_config": {
+          "hidden_dims": [
+            128,
+            64
+          ],
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "from_exp1": false,
+          "source": "dataset_default:edge-iiot"
+        },
+        "config_source": "default",
+        "experimental_design": "2x2 Factorial (Clipping × Noise)",
+        "statistical_tests": [
+          "Kruskal-Wallis H",
+          "Mann-Whitney U (pairwise)"
+        ],
+        "noise_formula": "σ = √(2ln(1.25/δ))/ε (Gaussian mechanism, RDP)"
+      },
+      "conclusion": "implicit_regularization_confirmed"
+    }
+  },
+  "environment": {
+    "python_version": "3.10.12",
+    "pytorch_version": "2.7.1+cu118",
+    "cuda_available": true,
+    "cuda_version": "11.8",
+    "gpu_name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU"
+  },
+  "config": {
+    "max_samples": 500000,
+    "test_size": 0.2,
+    "stratified": true,
+    "batch_size": 64,
+    "epochs": 20,
+    "learning_rate": 0.001,
+    "random_seed": 42,
+    "model_hidden_layers": [
+      256,
+      128,
+      64
+    ],
+    "model_activation": "ReLU",
+    "model_dropout": 0.3,
+    "model_batchnorm": true,
+    "num_cfs": 5,
+    "cf_max_iter": 300,
+    "cf_proximity_weight": 0.5,
+    "cf_diversity_weight": 0.1,
+    "cf_feasibility_weight": 1.0,
+    "cf_learning_rate": 0.01,
+    "dp_epsilon_values": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "dp_delta": 1e-05,
+    "dp_clip_norm": 1.0,
+    "dp_noise_multiplier_base": 0.5,
+    "fl_rounds": 30,
+    "local_epochs": 5,
+    "fl_default_clients": 10,
+    "fl_proximal_mu": 0.01,
+    "client_counts": [
+      5,
+      10,
+      20,
+      50
+    ],
+    "dirichlet_alphas": [
+      0.1,
+      0.5,
+      1.0,
+      10.0
+    ]
+  },
+  "constraints": {
+    "type": "generic",
+    "description": "Dataset-agnostic constraints for fair comparison (StandardScaler compatible)",
+    "list": [
+      {
+        "name": "reasonable_range",
+        "rule": "feature in [-5, 5]"
+      },
+      {
+        "name": "sparsity",
+        "rule": "max_changes=10, threshold=0.01"
+      }
+    ]
+  },
+  "dataset_info": {
+    "total_samples": 500000,
+    "train_samples": 400000,
+    "test_samples": 100000,
+    "num_features": 56,
+    "num_classes": 15,
+    "class_distribution": {
+      "0": 363920,
+      "1": 27460,
+      "2": 26221,
+      "3": 11400,
+      "4": 11369,
+      "5": 11393,
+      "6": 11217,
+      "7": 11249,
+      "8": 8641,
+      "9": 5523,
+      "10": 5115,
+      "11": 3581,
+      "12": 2410,
+      "13": 206,
+      "14": 295
+    }
+  },
+  "duration": 21863.747063
+}

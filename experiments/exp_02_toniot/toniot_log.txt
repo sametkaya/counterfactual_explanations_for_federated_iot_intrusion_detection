@@ -1,0 +1,500 @@
+[10:47:55] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: toniot
+============================================================
+[10:47:55] 
+Device: cuda
+[10:47:55] 
+============================================================
+DATA LOADING
+============================================================
+[10:50:15]   Train: 400000, Test: 100000, Features: 32
+[10:50:15]   Classes: 10
+[10:50:15] 
+============================================================
+EXPERIMENT 1: MODEL TRAINING (FAIR COMPARISON)
+============================================================
+[10:50:15] 
+  Class weights applied for imbalanced data:
+[10:50:15]     ddos: 2.7844
+[10:50:15]     normal: 4.4126
+[10:50:15]     dos: 0.3637
+[10:50:15]     scanning: 0.6619
+[10:50:15]     backdoor: 4.9529
+[10:50:15]     injection: 3333.3333
+[10:50:15]     password: 1.2992
+[10:50:15]     xss: 29.3255
+[10:50:15]     ransomware: 0.3127
+[10:50:15]     mitm: 1.0522
+[10:50:15] 
+  Training PyTorch MLP with hyperparameter tuning (same as baselines)...
+[10:50:15]     Tuning on 360,000 samples, validating on 40,000 samples
+[10:50:15]     Testing 12 configurations...
+[11:17:16]     Tuning completed in 1620.9s
+[11:17:16]     Best config: {'hidden_dims': (128, 64), 'learning_rate': 0.001, 'dropout': 0.2} (val F1-macro: 0.8522)
+[11:17:16] 
+  Training final PyTorch MLP with best hyperparameters...
+[11:17:16]     - Architecture: (128, 64)
+[11:17:16]     - Learning rate: 0.001
+[11:17:16]     - Dropout: 0.2
+[11:17:16]     - Weighted CrossEntropyLoss (class balanced)
+[11:17:16]     - Early stopping (patience=10)
+[11:17:16]     - Max epochs: 20
+[11:18:30]   Epoch 5: Acc=0.9835, F1-macro=0.8403, Loss=0.1510, LR=0.001000
+[11:19:48]   Epoch 10: Acc=0.9850, F1-macro=0.9355, Loss=0.1369, LR=0.001000
+[11:21:00]   Epoch 15: Acc=0.9856, F1-macro=0.8857, Loss=0.1264, LR=0.001000
+[11:22:14]   Epoch 20: Acc=0.9876, F1-macro=0.8710, Loss=0.1116, LR=0.000500
+[11:22:14]   Early stopping at epoch 20 (no improvement for 10 epochs)
+[11:22:14]   Loaded best model (F1-macro: 0.9355)
+[11:22:14] 
+  Computing detailed classification metrics...
+[11:22:16] 
+  PyTorch MLP Results:
+[11:22:16]     Accuracy:      0.9850
+[11:22:16]     F1 (macro):    0.9355
+[11:22:16]     F1 (weighted): 0.9858
+[11:22:16]     ROC-AUC:       0.9998
+[11:22:16]     Training time: 297.3s
+[11:22:16] 
+  Per-Class F1 Scores:
+[11:22:16]     ddos: F1=0.8722, Precision=0.9160, Recall=0.8324, Support=3591
+[11:22:16]     normal: F1=0.9991, Precision=0.9991, Recall=0.9991, Support=2266
+[11:22:16]     dos: F1=0.9920, Precision=0.9913, Recall=0.9927, Support=27495
+[11:22:16]     scanning: F1=0.9920, Precision=0.9986, Recall=0.9855, Support=15109
+[11:22:16]     backdoor: F1=0.9530, Precision=0.9152, Recall=0.9941, Support=2019
+[11:22:16]     injection: F1=1.0000, Precision=1.0000, Recall=1.0000, Support=3
+[11:22:16]     password: F1=0.9730, Precision=0.9657, Recall=0.9804, Support=7697
+[11:22:16]     xss: F1=0.5899, Precision=0.4199, Recall=0.9912, Support=341
+[11:22:16]     ransomware: F1=0.9993, Precision=0.9998, Recall=0.9988, Support=31975
+[11:22:16]     mitm: F1=0.9841, Precision=0.9965, Recall=0.9720, Support=9504
+[11:22:16] 
+============================================================
+[11:22:16]   FAIR BASELINE COMPARISON
+[11:22:16] ============================================================
+[11:22:16]   All models trained with:
+[11:22:16]     - Same train/test split
+[11:22:16]     - Class weights for imbalanced data
+[11:22:16]     - Hyperparameter tuning (GridSearchCV)
+[11:22:16]     - Same evaluation metrics
+[11:22:16] 
+  Fair Comparison Settings:
+[11:22:16]     - Cross-validation folds: 5
+[11:22:16]     - Class weights: Applied (balanced)
+[11:22:16]     - Hyperparameter tuning: GridSearchCV
+[11:22:16]     - Train samples: 400,000
+[11:22:16]     - Test samples: 100,000
+[11:22:16] 
+  [1/6] Majority Class Baseline...
+[11:22:16]     Accuracy: 0.3197, F1-macro: 0.0485
+[11:22:16] 
+  [2/6] Logistic Regression (with hyperparameter tuning)...
+[11:24:01]     Best params: {'C': 10.0, 'max_iter': 500, 'solver': 'lbfgs'}
+[11:24:01]     Accuracy: 0.9394, F1-macro: 0.8375
+[11:24:01]     Training time: 105.4s
+[11:24:01] 
+  [3/6] Random Forest (with hyperparameter tuning)...
+[11:24:41]     Best params: {'max_depth': 20, 'min_samples_split': 2, 'n_estimators': 200}
+[11:24:41]     Accuracy: 0.9995, F1-macro: 0.9483
+[11:24:41]     Training time: 39.8s
+[11:24:41] 
+  [4/6] XGBoost (with hyperparameter tuning)...
+[11:25:33]     Best params: {'learning_rate': 0.1, 'max_depth': 10, 'n_estimators': 100, 'subsample': 0.8}
+[11:25:33]     Accuracy: 0.9996, F1-macro: 0.9490
+[11:25:33]     Training time: 51.2s
+[11:25:33] 
+  [5/6] Sklearn MLP (fair NN baseline with sample weights)...
+[11:27:21]     Resampled training size: 473,867 (from 400,000)
+[11:29:09]     Best params: {'alpha': 0.001, 'hidden_layer_sizes': (128, 64), 'learning_rate_init': 0.001}
+[11:29:09]     Accuracy: 0.9985, F1-macro: 0.8931
+[11:29:09]     Training time: 216.6s
+[11:29:09] 
+  [6/6] Computing statistical comparison...
+[11:29:09] 
+================================================================================
+[11:29:09]   FINAL MODEL COMPARISON (FAIR - ALL WITH CLASS WEIGHTS & TUNING)
+[11:29:09] ================================================================================
+[11:29:09]   Model                  Accuracy   F1-macro     F1-wtd       Prec     Recall    Time(s)
+[11:29:09]   --------------------------------------------------------------------------------
+[11:29:09]   XGBoost                  0.9996     0.9490     0.9996     0.9993     0.9320       51.2 *
+[11:29:09]   RandomForest             0.9995     0.9483     0.9995     0.9989     0.9310       39.8
+[11:29:09]   PyTorchMLP               0.9850     0.9355     0.9858     0.9202     0.9746      297.3
+[11:29:09]   SklearnMLP               0.9985     0.8931     0.9985     0.8944     0.8918      216.6
+[11:29:09]   LogisticRegression       0.9394     0.8375     0.9409     0.7966     0.9350      105.4
+[11:29:09]   MajorityClass            0.3197     0.0485     0.1549     0.0320     0.1000        0.0
+[11:29:09]   --------------------------------------------------------------------------------
+[11:29:10]   * Best model by F1-macro
+[11:29:10] 
+  Discussion:
+[11:29:10]     XGBoost achieves the best F1-macro score.
+[11:29:10]     PyTorch MLP ranks #3 in this comparison.
+[11:29:10]     However, PyTorch MLP is chosen for the following reasons:
+[11:29:10]       1. Gradient-based counterfactual generation requires neural networks
+[11:29:10]       2. Federated learning aggregation (FedAvg) works with neural network weights
+[11:29:10]       3. Differential privacy (DP-SGD) is designed for gradient descent
+[11:29:10]       4. The performance gap is acceptable given these advantages
+[11:29:10] 
+Saved to: experiments/exp_02_toniot
+[11:29:10]   [Checkpoint saved]
+[11:29:10] 
+============================================================
+EXPERIMENT 2: CF METHODS COMPARISON
+============================================================
+[11:29:10]   100 attack samples
+[11:29:10] 
+  [1/7] DiCE Baseline...
+[11:29:11]     Validity: 100.00%
+[11:29:11] 
+  [2/7] DiCE + Constraints...
+[11:30:25]     Validity: 100.00%
+[11:30:25] 
+  [3/7] FedCF-IoT (No DP)...
+[11:31:33]     Validity: 100.00%
+[11:31:33] 
+  [4/7] FedCF-IoT (DP eps=2.0)...
+[11:32:37]     Validity: 100.00%
+[11:32:37] 
+  [5/7] Wachter (2017) [with constraints]...
+[11:35:15]     Validity: 100.00%
+[11:35:15] 
+  [6/7] Growing Spheres (2018) [with constraints]...
+[11:36:35]     Validity: 100.00%
+[11:36:35] 
+  [7/7] FACE (2020) [with constraints]...
+[11:36:35]     Validity: 19.20%
+[11:36:35] 
+  Statistical Analysis:
+[11:36:35] --------------------------------------------------
+[11:36:46]   Kruskal-Wallis p-value: 3.3657e-70
+[11:36:46]   Effect size: 0.971 (large)
+[11:36:46] 
+  Pairwise vs FedCF_DP:
+[11:36:47]     vs DiCE_Baseline: p=1.0000e+00, d=0.000
+[11:36:47]     vs DiCE_Constraints: p=1.0000e+00, d=0.000
+[11:36:48]     vs FedCF_NoDP: p=1.0000e+00, d=0.000
+[11:36:48]     vs Wachter: p=1.0000e+00, d=0.000
+[11:36:49]     vs GrowingSpheres: p=1.0000e+00, d=0.000
+[11:36:49]     vs FACE: p=2.0451e-20*, d=0.926
+[11:36:49] 
+Saved to: experiments/exp_02_toniot
+[11:36:49]   [Checkpoint saved]
+[11:36:49] 
+============================================================
+EXPERIMENT 3: PRIVACY-UTILITY TRADEOFF
+============================================================
+[11:36:49] 
+  eps = 0.5...
+[11:37:32]     Validity: 100.00%, CI: (0.8864829086095221, 1.0)
+[11:37:32] 
+  eps = 1.0...
+[11:38:09]     Validity: 100.00%, CI: (0.8864829086095221, 1.0)
+[11:38:09] 
+  eps = 2.0...
+[11:38:45]     Validity: 100.00%, CI: (0.8864829086095221, 1.0)
+[11:38:45] 
+  eps = 5.0...
+[11:39:21]     Validity: 100.00%, CI: (0.8864829086095221, 1.0)
+[11:39:21] 
+  eps = 10.0...
+[11:39:55]     Validity: 100.00%, CI: (0.8864829086095221, 1.0)
+[11:39:55] 
+Saved to: experiments/exp_02_toniot
+[11:39:55]   [Checkpoint saved]
+[11:39:55] 
+============================================================
+EXPERIMENT 4: FL AGGREGATION METHODS (FAIR COMPARISON)
+============================================================
+[11:39:55] 
+  Class weights applied for imbalanced data (same as Exp 1)
+[11:39:55] 
+  [1/4] Centralized (with class weights)...
+[11:49:31]     Accuracy: 0.9838, F1-macro: 0.9037
+[11:49:31] 
+  [2/4] FedAvg (with class weights)...
+[12:39:32]     Accuracy: 0.9711, F1-macro: 0.8670
+[12:39:32] 
+  [3/4] FedProx (with class weights)...
+[14:17:08]     Accuracy: 0.9604, F1-macro: 0.8543
+[14:17:08] 
+  [4/4] FedNova (with class weights)...
+[15:10:36]     Accuracy: 0.9769, F1-macro: 0.8933
+[15:10:36] 
+  ======================================================================
+[15:10:36]   FL AGGREGATION COMPARISON (FAIR - ALL WITH CLASS WEIGHTS)
+[15:10:36]   ======================================================================
+[15:10:36]   Method              Accuracy     F1-macro  F1-weighted          Gap
+[15:10:36]   -----------------------------------------------------------------
+[15:10:36]   Centralized           0.9838       0.9037       0.9844            -
+[15:10:36]   FedAvg                0.9711       0.8670       0.9715      +0.0127
+[15:10:36]   FedProx               0.9604       0.8543       0.9609      +0.0234
+[15:10:36]   FedNova               0.9769       0.8933       0.9777      +0.0069
+[15:10:36] 
+Saved to: experiments/exp_02_toniot
+[15:10:36]   [Checkpoint saved]
+[15:10:36] 
+============================================================
+EXPERIMENT 5: SCALABILITY (CLIENT COUNT) - FAIR COMPARISON
+============================================================
+[15:10:36] 
+  Class weights applied for fair comparison
+[15:10:36] 
+  Clients = 5...
+[16:05:55]     Accuracy: 0.9847, F1-macro: 0.8872, Time: 3316.7s
+[16:05:55] 
+  Clients = 10...
+[18:06:56]     Accuracy: 0.9829, F1-macro: 0.9019, Time: 7258.4s
+[18:06:56] 
+  Clients = 20...
+[18:52:34]     Accuracy: 0.9765, F1-macro: 0.8652, Time: 2736.1s
+[18:52:34] 
+  Clients = 50...
+[19:36:24]     Accuracy: 0.9619, F1-macro: 0.7909, Time: 2627.2s
+[19:36:24] 
+Saved to: experiments/exp_02_toniot
+[19:36:24]   [Checkpoint saved]
+[19:36:24] 
+============================================================
+EXPERIMENT 6: NON-IID HETEROGENEITY (FAIR COMPARISON)
+============================================================
+[19:36:24] 
+  Class weights applied for fair comparison
+[19:36:24] 
+  Dirichlet alpha = 0.1 (very non-IID)...
+[19:36:24]     Active clients: 10/10
+[20:23:33]     Final Accuracy: 0.6958, F1-macro: 0.5234
+[20:23:33] 
+  Dirichlet alpha = 0.5 (moderate)...
+[20:23:34]     Active clients: 10/10
+[21:10:56]     Final Accuracy: 0.9724, F1-macro: 0.8302
+[21:10:56] 
+  Dirichlet alpha = 1.0 (moderate)...
+[21:10:56]     Active clients: 10/10
+[22:04:55]     Final Accuracy: 0.9441, F1-macro: 0.8230
+[22:04:55] 
+  Dirichlet alpha = 10.0 (near IID)...
+[22:04:55]     Active clients: 10/10
+[23:02:35]     Final Accuracy: 0.9835, F1-macro: 0.8918
+[23:02:36] 
+Saved to: experiments/exp_02_toniot
+[23:02:36]   [Checkpoint saved]
+[23:02:36] 
+============================================================
+EXPERIMENT 7: MULTI-CLASS ANALYSIS
+============================================================
+[23:02:36] 
+  normal (30 samples)...
+[23:03:12]     Validity: 100.00%
+[23:03:12] 
+  dos (30 samples)...
+[23:03:45]     Validity: 100.00%
+[23:03:45] 
+  scanning (30 samples)...
+[23:04:08]     Validity: 100.00%
+[23:04:08] 
+  backdoor (30 samples)...
+[23:04:36]     Validity: 100.00%
+[23:04:36] 
+  password (30 samples)...
+[23:05:11]     Validity: 100.00%
+[23:05:11] 
+  xss (30 samples)...
+[23:05:41]     Validity: 100.00%
+[23:05:41] 
+  ransomware (30 samples)...
+[23:06:10]     Validity: 100.00%
+[23:06:10] 
+  mitm (30 samples)...
+[23:06:54]     Validity: 100.00%
+[23:06:54] 
+Saved to: experiments/exp_02_toniot
+[23:06:54]   [Checkpoint saved]
+[23:06:54] 
+============================================================
+EXPERIMENT 8: ABLATION STUDY
+============================================================
+[23:06:54] 
+  Full...
+[23:07:44]     Validity: 100.00%
+[23:07:44] 
+  No_Constraints...
+[23:07:46]     Validity: 100.00%
+[23:07:46] 
+  No_DP...
+[23:08:21]     Validity: 100.00%
+[23:08:21] 
+  No_Diversity...
+[23:08:51]     Validity: 100.00%
+[23:08:51] 
+  Contributions: constraints=+0.0%, dp=+0.0%, diversity=+0.0%
+[23:08:51] 
+Saved to: experiments/exp_02_toniot
+[23:08:51]   [Checkpoint saved]
+[23:08:51] 
+============================================================
+EXPERIMENT 9: LATENCY ANALYSIS
+============================================================
+[23:08:51] 
+  max_iter = 50...
+[23:09:18]     Time: 1376.8ms (p95: 2461.6ms), Validity: 100.00%
+[23:09:18] 
+  max_iter = 100...
+[23:09:49]     Time: 1542.6ms (p95: 3094.0ms), Validity: 100.00%
+[23:09:49] 
+  max_iter = 200...
+[23:10:20]     Time: 1535.2ms (p95: 2177.8ms), Validity: 100.00%
+[23:10:20] 
+  max_iter = 300...
+[23:10:53]     Time: 1645.5ms (p95: 3207.4ms), Validity: 100.00%
+[23:10:53] 
+  max_iter = 500...
+[23:11:22]     Time: 1478.5ms (p95: 2595.2ms), Validity: 100.00%
+[23:11:22] 
+Saved to: experiments/exp_02_toniot
+[23:11:22]   [Checkpoint saved]
+[23:11:22] 
+============================================================
+EXPERIMENT 10: PRIVACY ATTACK EVALUATION
+============================================================
+[23:11:23]   Samples per attack: 500
+[23:11:23] 
+  [1/3] MIA on Base Model (No DP)...
+[23:11:23]     Threshold MIA Accuracy: 51.20%
+[23:11:23]     Loss MIA Accuracy: 51.20%
+[23:11:23]     Privacy Leakage: 1.20%
+[23:11:23]     Vulnerability: LOW
+[23:11:23] 
+  [2/3] Training DP Model (eps=2.0)...
+[23:16:32]     DP Model trained
+[23:16:32] 
+  [3/3] MIA on DP Model...
+[23:16:32]     Threshold MIA Accuracy: 50.80%
+[23:16:32]     Loss MIA Accuracy: 51.00%
+[23:16:32]     Privacy Leakage: 1.00%
+[23:16:32]     Vulnerability: LOW
+[23:16:32] 
+  ==================================================
+[23:16:32]   PRIVACY COMPARISON:
+[23:16:32]   ==================================================
+[23:16:32]   No DP Leakage:   1.20%
+[23:16:32]   With DP Leakage: 1.00%
+[23:16:32]   Reduction:       16.7%
+[23:16:32]   DP Effective:    YES
+[23:16:32] 
+Saved to: experiments/exp_02_toniot
+[23:16:32]   [Checkpoint saved]
+[23:16:32] 
+============================================================
+EXPERIMENT 11: CF CASE STUDY
+============================================================
+[23:16:32]   Generating case studies for attack types...
+[23:16:40] 
+  Case 1: normal → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.1695
+[23:16:40]     Changes: 10 features
+[23:16:40]       • ts: 1.634 → 1.063 (↓)
+[23:16:40]       • service: -0.505 → -0.000 (↑)
+[23:16:40]       • dst_ip_bytes: -0.015 → 0.135 (↑)
+[23:16:40]       • dns_qclass: -0.013 → 0.393 (↑)
+[23:16:40]       • dns_qtype: -0.055 → -0.228 (↓)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 2: dos → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.1948
+[23:16:40]     Changes: 10 features
+[23:16:40]       • ts: 0.401 → 0.967 (↑)
+[23:16:40]       • proto: -0.282 → -0.076 (↑)
+[23:16:40]       • service: -0.505 → -0.987 (↓)
+[23:16:40]       • src_bytes: -0.504 → -0.069 (↑)
+[23:16:40]       • src_ip_bytes: -0.014 → -0.392 (↓)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 3: scanning → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.2112
+[23:16:40]     Changes: 10 features
+[23:16:40]       • service: -0.505 → -1.358 (↓)
+[23:16:40]       • duration: -0.239 → 0.322 (↑)
+[23:16:40]       • src_bytes: -0.504 → -0.556 (↓)
+[23:16:40]       • dst_bytes: -0.021 → -0.862 (↓)
+[23:16:40]       • dst_pkts: -0.004 → -0.829 (↓)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 4: backdoor → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.1893
+[23:16:40]     Changes: 10 features
+[23:16:40]       • ts: 0.074 → -0.620 (↓)
+[23:16:40]       • dst_port: -0.460 → 0.176 (↑)
+[23:16:40]       • service: 1.734 → 1.122 (↓)
+[23:16:40]       • missed_bytes: -0.007 → 0.917 (↑)
+[23:16:40]       • src_ip_bytes: 0.019 → -0.501 (↓)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 5: injection → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.0901
+[23:16:40]     Changes: 10 features
+[23:16:40]       • ts: 1.745 → 1.581 (↓)
+[23:16:40]       • src_port: -0.272 → -0.129 (↑)
+[23:16:40]       • service: 4.221 → 4.094 (↓)
+[23:16:40]       • dst_pkts: 0.018 → 0.183 (↑)
+[23:16:40]       • dst_ip_bytes: 0.080 → 0.205 (↑)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 6: password → Benign
+[23:16:40]     Validity: ✓
+[23:16:40]     Proximity: 0.1940
+[23:16:40]     Changes: 10 features
+[23:16:40]       • src_port: 0.635 → 0.281 (↓)
+[23:16:40]       • duration: -0.227 → 0.609 (↑)
+[23:16:40]       • src_pkts: 0.029 → 0.448 (↑)
+[23:16:40]       • dns_qtype: -0.055 → 0.642 (↑)
+[23:16:40]       • dns_AA: -0.268 → 0.330 (↑)
+[23:16:40]       ... and 5 more changes
+[23:16:40] 
+  Case 7: xss → Benign
+[23:16:40]     Validity: ✓
+[23:16:41]     Proximity: 0.1456
+[23:16:41]     Changes: 10 features
+[23:16:41]       • src_port: 0.204 → 0.823 (↑)
+[23:16:41]       • proto: -0.282 → -0.389 (↓)
+[23:16:41]       • src_bytes: -0.504 → -1.041 (↓)
+[23:16:41]       • conn_state: -1.598 → -2.239 (↓)
+[23:16:41]       • dst_ip_bytes: -0.016 → 0.491 (↑)
+[23:16:41]       ... and 5 more changes
+[23:16:41] 
+  Analyzing feature importance from CFs...
+[23:16:41] 
+  Top 10 Most Changed Features in CFs:
+[23:16:41]   Rank   Feature                           Count   Avg Magnitude
+[23:16:41]   ------------------------------------------------------------
+[23:16:41]   1      service                               5          0.5157
+[23:16:41]   2      dns_RD                                4          0.5495
+[23:16:41]   3      dns_qtype                             4          0.3611
+[23:16:41]   4      ts                                    4          0.4987
+[23:16:41]   5      dst_ip_bytes                          4          0.3519
+[23:16:41]   6      ssl_resumed                           3          0.2133
+[23:16:41]   7      dns_rejected                          3          0.7949
+[23:16:41]   8      src_bytes                             3          0.3416
+[23:16:41]   9      src_port                              3          0.3721
+[23:16:41]   10     dns_qclass                            3          0.2313
+[23:16:41] 
+Saved to: experiments/exp_02_toniot
+[23:16:41]   [Checkpoint saved]
+[23:16:41] 
+============================================================
+SUMMARY
+============================================================
+[23:16:41] Model Accuracy: 0.9850
+[23:16:41] F1-Score (macro): 0.9355
+[23:16:41] F1-Score (weighted): 0.9858
+[23:16:41] All experiments completed (check log for any errors)
+[23:16:41] 
+============================================================
+GENERATING FIGURES
+============================================================
+[23:16:42] Warning: visualization.py not found. Skipping figure generation.
+[23:16:42] Place visualization.py in the same directory to enable figures.
+[23:16:42] 
+Saved to: experiments/exp_02_toniot

@@ -1,0 +1,187 @@
+[16:01:23] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: edge-iiot
+============================================================
+[16:01:23] 
+Device: cuda
+[16:01:23] Skipping experiments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+[16:01:23] 
+============================================================
+DATA LOADING
+============================================================
+[16:01:41]   Train: 400000, Test: 100000, Features: 56
+[16:01:41]   Classes: 15
+[16:01:41] 
+[SKIPPED] Experiment 1: Model Training
+[16:02:18] 
+[SKIPPED] Experiment 2: CF Comparison
+[16:02:18] 
+[SKIPPED] Experiment 3: Privacy-Utility
+[16:02:18] 
+[SKIPPED] Experiment 4: FL Aggregation
+[16:02:18] 
+[SKIPPED] Experiment 5: Scalability
+[16:02:18] 
+[SKIPPED] Experiment 6: Heterogeneity
+[16:02:18] 
+[SKIPPED] Experiment 7: Multi-class
+[16:02:18] 
+[SKIPPED] Experiment 8: Ablation
+[16:02:18] 
+[SKIPPED] Experiment 9: Latency
+[16:02:18] 
+[SKIPPED] Experiment 10: Privacy Attack
+[16:02:18] 
+[SKIPPED] Experiment 11: CF Case Study
+[16:02:18] 
+============================================================
+EXPERIMENT 12: PRIVACY BUDGET vs MODEL ACCURACY
+============================================================
+[16:02:18] Addresses Reviewer Concern: 'Model accuracy at different ε not reported'
+[16:02:18]   [i] exp1 bulunamadı, edge-iiot için bilinen best config kullanılıyor
+[16:02:18]       (Kaynak: önceki deney logları)
+[16:02:18] 
+  [!] UYARI: exp1 bulunamadı, default config kullanılıyor!
+[16:02:18]       Öneri: --only 1,12,13 ile çalıştırın
+[16:02:18]       hidden_dims: [128, 64]
+[16:02:18]       dropout: 0.3
+[16:02:18]       learning_rate: 0.001
+[16:02:18] 
+  Deney Parametreleri:
+[16:02:18]     n_runs: 5
+[16:02:18]     n_cf_samples: 100
+[16:02:18]     delta: 1e-05
+[16:02:18] 
+  Noise Multiplier (RDP Formula: σ = √(2ln(1.25/δ))/ε):
+[16:02:18]     ε=0.5: σ=9.6896
+[16:02:18]     ε=1.0: σ=4.8448
+[16:02:18]     ε=2.0: σ=2.4224
+[16:02:18]     ε=5.0: σ=0.9690
+[16:02:18]     ε=10.0: σ=0.4845
+[16:02:18] 
+  ε = 0.5...
+[16:24:42]     Run 5/5: Acc=28.14%±19.35%, Valid=99.40%, Prox=0.1780
+[16:24:42] 
+  ε = 1.0...
+[16:48:12]     Run 5/5: Acc=54.87%±19.62%, Valid=99.56%, Prox=0.1998
+[16:48:12] 
+  ε = 2.0...
+[17:14:12]     Run 5/5: Acc=78.70%±7.02%, Valid=99.24%, Prox=0.2384
+[17:14:12] 
+  ε = 5.0...
+[17:47:41]     Run 5/5: Acc=93.39%±1.43%, Valid=98.92%, Prox=0.3501
+[17:47:41] 
+  ε = 10.0...
+[18:23:11]     Run 5/5: Acc=95.53%±0.42%, Valid=98.92%, Prox=0.3824
+[18:23:11] 
+  ε = inf...
+[19:18:39]     Run 5/5: Acc=99.28%±0.08%, Valid=90.56%, Prox=0.4228
+[19:18:39] 
+  İstatistiksel Testler (Wilcoxon vs No-DP baseline):
+[19:18:39]     ε=0.5: Acc p=0.0625(ns), CF p=0.0625(ns)
+[19:18:39]     ε=1.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[19:18:39]     ε=2.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[19:18:39]     ε=5.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[19:18:39]     ε=10.0: Acc p=0.0625(ns), CF p=0.0625(ns)
+[19:18:39] 
+====================================================================================================
+[19:18:39] EXPERIMENT 12 SUMMARY: Privacy Budget vs Performance
+[19:18:39] ====================================================================================================
+[19:18:39] ε        σ        Model Accuracy       Δ Acc      CF Validity    CF Proximity   Sig   
+[19:18:39] ----------------------------------------------------------------------------------------------------
+[19:18:39] 0.5      9.690    28.14% ± 19.35%    -71.65%     99.4%          0.1780         -
+[19:18:39] 1.0      4.845    54.87% ± 19.62%    -44.73%     99.6%          0.1998         -
+[19:18:39] 2.0      2.422    78.70% ± 7.02%    -20.73%     99.2%          0.2384         -
+[19:18:39] 5.0      0.969    93.39% ± 1.43%    -5.94%     98.9%          0.3501         -
+[19:18:39] 10.0     0.484    95.53% ± 0.42%    -3.78%     98.9%          0.3824         -
+[19:18:39] inf      0.000    99.28% ± 0.08%    +0.00%     90.6%          0.4228         -
+[19:18:39] ----------------------------------------------------------------------------------------------------
+[19:18:39] KEY FINDING: Model accuracy vs privacy tradeoff with statistical significance
+[19:18:39] 
+Saved to: experiments/exp_05_edge-iiot
+[19:18:39]   [Checkpoint saved]
+[19:18:39] 
+============================================================
+EXPERIMENT 13: DP PARADOX CONTROLLED EXPERIMENT
+============================================================
+[19:18:39] Addresses Reviewer Concern: 'DP Paradox hypotheses are speculative'
+[19:18:39]   [i] exp1 bulunamadı, edge-iiot için bilinen best config kullanılıyor
+[19:18:39]       (Kaynak: önceki deney logları)
+[19:18:39] 
+  [!] UYARI: exp1 bulunamadı!
+[19:18:39]       hidden_dims: [128, 64]
+[19:18:39]       dropout: 0.3
+[19:18:39] 
+  2x2 Factorial Design:
+[19:18:39]   ┌─────────────────┬──────────────────┬──────────────────┐
+[19:18:39]   │                 │   No Clipping    │   With Clipping  │
+[19:18:39]   ├─────────────────┼──────────────────┼──────────────────┤
+[19:18:39]   │   No Noise      │   A (Standard)   │   D (Clip Only)  │
+[19:18:39]   │   With Noise    │   C (Noise Only) │   B (DP-SGD)     │
+[19:18:39]   └─────────────────┴──────────────────┴──────────────────┘
+[19:18:39] 
+  Noise Calibration (RDP Formula):
+[19:18:39]     Reference ε: 2.0
+[19:18:39]     δ: 1e-05
+[19:18:39]     σ = √(2ln(1.25/1e-05))/2.0 = 2.4224
+[19:18:39]     noise_std = σ × clip_norm = 2.422403
+[19:18:39] 
+  A_Standard: clip=False, noise=False...
+[20:14:12]     Acc=99.28%±0.08%, Valid=90.6%, Prox=0.4228
+[20:14:12] 
+  B_DP_SGD: clip=True, noise=True...
+[20:40:09]     Acc=78.70%±7.02%, Valid=99.2%, Prox=0.2384
+[20:40:09] 
+  C_Noise_Only: clip=False, noise=True...
+[21:12:43]     Acc=93.51%±1.64%, Valid=98.6%, Prox=0.3504
+[21:12:43] 
+  D_Clip_Only: clip=True, noise=False...
+[22:05:46]     Acc=99.42%±0.06%, Valid=93.2%, Prox=0.3862
+[22:05:46] 
+  İstatistiksel Testler:
+[22:05:46]     Kruskal-Wallis H=15.09, p=0.0017 *
+[22:05:46]     Pairwise (Mann-Whitney U):
+[22:05:46]       A_Standard vs B_DP_SGD: p=0.0117 (*)
+[22:05:46]       A_Standard vs C_Noise_Only: p=0.0079 (*)
+[22:05:46]       A_Standard vs D_Clip_Only: p=0.1508 (ns)
+[22:05:46]       B_DP_SGD vs C_Noise_Only: p=0.5284 (ns)
+[22:05:46] 
+=========================================================================================================
+[22:05:46] EXPERIMENT 13 SUMMARY: DP PARADOX ANALYSIS (2x2 Factorial)
+[22:05:46] =========================================================================================================
+[22:05:46] Condition        Clip   Noise  Model Acc          CF Validity  CF Proximity   Δ Valid   
+[22:05:46] ---------------------------------------------------------------------------------------------------------
+[22:05:46] A_Standard       No     No     99.28%±0.08%   90.6%        0.4228         +0.00%
+[22:05:46] D_Clip_Only      Yes    No     99.42%±0.06%   93.2%        0.3862         +2.60%
+[22:05:46] C_Noise_Only     No     Yes    93.51%±1.64%   98.6%        0.3504         +8.00%
+[22:05:46] B_DP_SGD         Yes    Yes    78.70%±7.02%   99.2%        0.2384         +8.68%
+[22:05:46] -------------------------------------------------------------------------------------
+[22:05:46] 
+  Factorial Analysis (Main Effects on CF Validity):
+[22:05:46]     NOISE effect:    +7.04%
+[22:05:46]     CLIPPING effect: +1.64%
+[22:05:46]     Interaction:     -1.92%
+[22:05:46] 
+  Interpretation:
+[22:05:46]     DP-SGD vs Standard:        +8.68% CF validity
+[22:05:46]     Noise-Only vs Standard:    +8.00% CF validity
+[22:05:46]     Clipping-Only vs Standard: +2.60% CF validity
+[22:05:46] 
+  ✓ CONCLUSION: Gaussian noise alone improves CF validity
+[22:05:46]   ✓ C (Noise Only) ≈ B (DP-SGD): Noise is the PRIMARY cause
+[22:05:46]   → SUPPORTS 'implicit regularization' hypothesis
+[22:05:46] 
+Saved to: experiments/exp_05_edge-iiot
+[22:05:46]   [Checkpoint saved]
+[22:05:46] 
+============================================================
+SUMMARY
+============================================================
+[22:05:46] All experiments completed (check log for any errors)
+[22:05:46] 
+============================================================
+GENERATING FIGURES
+============================================================
+[22:05:47] Generated 1 figures
+[22:05:47] 
+Saved to: experiments/exp_05_edge-iiot

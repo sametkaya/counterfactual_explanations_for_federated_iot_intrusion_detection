@@ -1,0 +1,2912 @@
+{
+  "name": "FedCF_Comprehensive",
+  "dataset": "ciciot2023",
+  "experiments": {
+    "exp1_training": {
+      "accuracy": 0.73009,
+      "f1_macro": 0.6403367186616672,
+      "history": {
+        "accuracy": [
+          0.72868,
+          0.71264,
+          0.72138,
+          0.7053,
+          0.74285,
+          0.71963,
+          0.76982,
+          0.77036,
+          0.69868,
+          0.74346,
+          0.73009,
+          0.70616,
+          0.70312,
+          0.69537,
+          0.71299,
+          0.71562,
+          0.72121,
+          0.72014,
+          0.72512,
+          0.72525
+        ],
+        "f1_macro": [
+          0.5593161174720117,
+          0.6056739571483098,
+          0.5493041545210209,
+          0.55178442429469,
+          0.606257269665156,
+          0.559288728640717,
+          0.6097520643144005,
+          0.6221766060312388,
+          0.5492585558526129,
+          0.609607135576038,
+          0.6403367186616672,
+          0.6250026603927941,
+          0.6216859265831498,
+          0.5531335152135275,
+          0.6118989275808846,
+          0.6248340892945174,
+          0.6017421257653459,
+          0.5728298439850427,
+          0.5679959039038818,
+          0.6001546273599039
+        ],
+        "loss": [
+          0.7488888646644354,
+          0.6678466839462519,
+          0.649358790257275,
+          0.6334784390807152,
+          0.6271164827460051,
+          0.6203601911920309,
+          0.6137588777929545,
+          0.6102066805192828,
+          0.6099371563640237,
+          0.6050029111716151,
+          0.6003351645967364,
+          0.601734921401143,
+          0.59903521776855,
+          0.5942673281012475,
+          0.5884535757082701,
+          0.592444171410501,
+          0.5900576716291904,
+          0.570174975554198,
+          0.566799438842237,
+          0.5693305933441222
+        ]
+      },
+      "training_time": 378.5021462440491,
+      "classification_metrics": {
+        "accuracy": 0.73009,
+        "precision_macro": 0.6612875951497663,
+        "precision_weighted": 0.86152290449603,
+        "recall_macro": 0.6598488083603795,
+        "recall_weighted": 0.73009,
+        "f1_macro": 0.6403367186616672,
+        "f1_weighted": 0.7566472719150871,
+        "roc_auc": 0.9228751305810604,
+        "confusion_matrix": [
+          [
+            1921,
+            0,
+            0,
+            252,
+            10,
+            0,
+            162,
+            0
+          ],
+          [
+            2,
+            47976,
+            24135,
+            11,
+            0,
+            0,
+            12,
+            99
+          ],
+          [
+            1,
+            1315,
+            15885,
+            4,
+            0,
+            0,
+            6,
+            32
+          ],
+          [
+            405,
+            0,
+            0,
+            945,
+            31,
+            6,
+            79,
+            0
+          ],
+          [
+            22,
+            0,
+            0,
+            20,
+            8,
+            0,
+            7,
+            0
+          ],
+          [
+            8,
+            0,
+            0,
+            4,
+            2,
+            11,
+            1,
+            0
+          ],
+          [
+            237,
+            0,
+            0,
+            99,
+            12,
+            0,
+            704,
+            0
+          ],
+          [
+            0,
+            1,
+            11,
+            0,
+            0,
+            0,
+            5,
+            5559
+          ]
+        ],
+        "per_class_metrics": {
+          "Benign": {
+            "precision": 0.7399845916795069,
+            "recall": 0.8191897654584221,
+            "f1": 0.7775753895972475,
+            "support": 2345
+          },
+          "DDoS": {
+            "precision": 0.9733019556926074,
+            "recall": 0.6641655707067211,
+            "f1": 0.7895529388530944,
+            "support": 72235
+          },
+          "DoS": {
+            "precision": 0.3968174664634908,
+            "recall": 0.9212434031201067,
+            "f1": 0.5547019590040856,
+            "support": 17243
+          },
+          "Recon": {
+            "precision": 0.7078651685393258,
+            "recall": 0.6446111869031378,
+            "f1": 0.6747590146376294,
+            "support": 1466
+          },
+          "Web": {
+            "precision": 0.12698412698412698,
+            "recall": 0.14035087719298245,
+            "f1": 0.13333333333333333,
+            "support": 57
+          },
+          "BruteForce": {
+            "precision": 0.6470588235294118,
+            "recall": 0.4230769230769231,
+            "f1": 0.5116279069767442,
+            "support": 26
+          },
+          "Spoofing": {
+            "precision": 0.7213114754098361,
+            "recall": 0.6692015209125475,
+            "f1": 0.6942800788954635,
+            "support": 1052
+          },
+          "Mirai": {
+            "precision": 0.9769771528998242,
+            "recall": 0.9969512195121951,
+            "f1": 0.9868631279957394,
+            "support": 5576
+          }
+        },
+        "training_time": 378.5021462440491
+      },
+      "baseline_comparison": {
+        "MajorityClass": {
+          "accuracy": 0.72235,
+          "f1_macro": 0.10484947890962928,
+          "f1_weighted": 0.6059041687229657,
+          "precision_macro": 0.09029375,
+          "recall_macro": 0.125,
+          "training_time": 0.0,
+          "hyperparameters": {
+            "strategy": "most_frequent"
+          },
+          "note": "Always predicts class 1 (lower bound baseline)"
+        },
+        "LogisticRegression": {
+          "accuracy": 0.69599,
+          "f1_macro": 0.5093604757088963,
+          "f1_weighted": 0.7285110699563154,
+          "precision_macro": 0.5457420424899398,
+          "recall_macro": 0.6267637704938162,
+          "training_time": 107.57732963562012,
+          "hyperparameters": {
+            "C": 10.0,
+            "max_iter": 500,
+            "solver": "lbfgs"
+          },
+          "cv_score": 0.5209542919510949
+        },
+        "RandomForest": {
+          "accuracy": 0.75507,
+          "f1_macro": 0.6540357218218624,
+          "f1_weighted": 0.7792652480743226,
+          "precision_macro": 0.7270789866098271,
+          "recall_macro": 0.6624849177298453,
+          "training_time": 57.25745630264282,
+          "hyperparameters": {
+            "max_depth": 20,
+            "min_samples_split": 2,
+            "n_estimators": 200
+          },
+          "cv_score": 0.6202563464193148,
+          "feature_importance": [
+            0.03781023827511203,
+            0.02831225824331589,
+            0.047000126988911546,
+            0.06740112148769599,
+            0.009568804761888748,
+            0.012054065992453386,
+            0.008494708550449695,
+            0.02470460751089003,
+            0.03413043358142126,
+            0.00030346009270262376,
+            0.00015615979411484252,
+            0.02431315690719302,
+            0.011974387785205995,
+            0.008336591021809182,
+            0.006743677730156599,
+            0.013983626038711231,
+            0.032346665660605796,
+            0.007073078009124293,
+            4.0607367110817325e-06,
+            4.8429033062950535e-06,
+            0.017250839991230376,
+            3.005411369101368e-05,
+            0.02262917081108288,
+            0.01442604411961891,
+            0.0014750542725845387,
+            0.00405001974578899,
+            0.01315264840632112,
+            0.000737376574425872,
+            0.004067935483599484,
+            0.004122484128175604,
+            0.09446066227408396,
+            0.04775888311730041,
+            0.06725133385909174,
+            0.06279074743897252,
+            0.03789110219395503,
+            0.07373576998514957,
+            0.07258625793110547,
+            0.050007328496141985,
+            0.036860214985901134
+          ]
+        },
+        "XGBoost": {
+          "accuracy": 0.85453,
+          "f1_macro": 0.6655880272692247,
+          "f1_weighted": 0.8355558300085119,
+          "precision_macro": 0.7577452519465481,
+          "recall_macro": 0.635510793980333,
+          "training_time": 74.92335844039917,
+          "hyperparameters": {
+            "learning_rate": 0.1,
+            "max_depth": 6,
+            "n_estimators": 200,
+            "subsample": 0.8
+          },
+          "cv_score": 0.6366655791009898
+        },
+        "SklearnMLP": {
+          "accuracy": 0.84937,
+          "f1_macro": 0.6191863832150687,
+          "f1_weighted": 0.826713081635052,
+          "precision_macro": 0.6504145550573021,
+          "recall_macro": 0.6096691411554996,
+          "training_time": 388.3646957874298,
+          "hyperparameters": {
+            "alpha": 0.0001,
+            "hidden_layer_sizes": [
+              128,
+              64
+            ],
+            "learning_rate_init": 0.001
+          },
+          "cv_score": 0.5789830912337977
+        },
+        "comparison_metadata": {
+          "cv_folds": 5,
+          "class_weights": "balanced",
+          "hyperparameter_tuning": "GridSearchCV",
+          "evaluation_metrics": [
+            "accuracy",
+            "f1_macro",
+            "f1_weighted",
+            "precision_macro",
+            "recall_macro"
+          ],
+          "train_size": 400000,
+          "test_size": 100000,
+          "random_state": 42
+        },
+        "PyTorchMLP": {
+          "accuracy": 0.73009,
+          "f1_macro": 0.6403367186616672,
+          "f1_weighted": 0.7566472719150871,
+          "precision_macro": 0.6612875951497663,
+          "recall_macro": 0.6598488083603795,
+          "training_time": 378.5021462440491,
+          "hyperparameters": {
+            "hidden_layers": [
+              256,
+              128,
+              64
+            ],
+            "dropout": 0.3,
+            "batch_norm": true,
+            "learning_rate": 0.001,
+            "epochs": 20,
+            "class_weights": "balanced"
+          }
+        }
+      },
+      "model_ranking": [
+        [
+          "XGBoost",
+          0.6655880272692247
+        ],
+        [
+          "RandomForest",
+          0.6540357218218624
+        ],
+        [
+          "PyTorchMLP",
+          0.6403367186616672
+        ],
+        [
+          "SklearnMLP",
+          0.6191863832150687
+        ],
+        [
+          "LogisticRegression",
+          0.5093604757088963
+        ],
+        [
+          "MajorityClass",
+          0.10484947890962928
+        ]
+      ],
+      "fair_comparison_settings": {
+        "cv_folds": 5,
+        "class_weights": "balanced",
+        "hyperparameter_tuning": "GridSearchCV",
+        "evaluation_metrics": [
+          "accuracy",
+          "f1_macro",
+          "f1_weighted",
+          "precision_macro",
+          "recall_macro"
+        ],
+        "train_size": 400000,
+        "test_size": 100000,
+        "random_state": 42
+      }
+    },
+    "exp2_cf_comparison": {
+      "methods": {
+        "DiCE_Baseline": {
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.9286499658256813,
+            1.0
+          ],
+          "proximity": 0.6379090104103089,
+          "proximity_std": 0.22446977626757325,
+          "sparsity": 38.732,
+          "diversity": 3.1816891427040104,
+          "time": 0.16935954093933106,
+          "n_samples": 50,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "DiCE_Constraints": {
+          "validity": 0.856,
+          "validity_std": 0.2829558269412383,
+          "validity_ci": [
+            0.7767723684564533,
+            0.9352276315435467
+          ],
+          "proximity": 0.5747714511156082,
+          "proximity_std": 0.20300906898790133,
+          "sparsity": 10.0,
+          "diversity": 9.793240797042847,
+          "time": 15.40111138343811,
+          "n_samples": 50,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            0.4,
+            0.8,
+            1.0,
+            0.8,
+            0.2,
+            1.0,
+            0.2,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            0.8,
+            1.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ]
+        },
+        "FedCF_NoDP": {
+          "validity": 0.8880000000000001,
+          "validity_std": 0.2303388807822075,
+          "validity_ci": [
+            0.823505113380982,
+            0.9524948866190183
+          ],
+          "proximity": 0.5437234704494476,
+          "proximity_std": 0.19594727159175207,
+          "sparsity": 10.0,
+          "diversity": 9.04067835664749,
+          "time": 15.874506978988647,
+          "n_samples": 50,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            0.2,
+            1.0,
+            0.6,
+            0.8,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0
+          ]
+        },
+        "FedCF_DP": {
+          "validity": 0.9519999999999998,
+          "validity_std": 0.12367699866992245,
+          "validity_ci": [
+            0.9173704403724215,
+            0.9866295596275781
+          ],
+          "proximity": 0.45077703166008,
+          "proximity_std": 0.16832407200236668,
+          "sparsity": 10.0,
+          "diversity": 7.432031129837036,
+          "time": 13.048633632659913,
+          "n_samples": 50,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            0.6,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0
+          ]
+        },
+        "Wachter": {
+          "validity": 0.7439999999999999,
+          "validity_std": 0.36008887791766075,
+          "validity_per_sample": [
+            1.0,
+            0.6,
+            1.0,
+            0.6,
+            1.0,
+            0.4,
+            1.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            0.8,
+            0.2,
+            1.0,
+            0.4,
+            0.8,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            0.2,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            0.0,
+            1.0,
+            1.0,
+            0.6,
+            0.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "proximity": 0.18235166442394257,
+          "sparsity": 9.54,
+          "n_samples": 50
+        },
+        "GrowingSpheres": {
+          "validity": 0.9880000000000001,
+          "validity_std": 0.04749736834815166,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "proximity": 0.658816231071949,
+          "sparsity": 10.0,
+          "n_samples": 50
+        },
+        "FACE": {
+          "validity": 0.15600000000000003,
+          "validity_std": 0.2342306555513176,
+          "validity_per_sample": [
+            0.2,
+            0.0,
+            0.0,
+            0.0,
+            0.4,
+            0.0,
+            0.0,
+            0.0,
+            0.6,
+            0.0,
+            0.0,
+            0.0,
+            0.6,
+            0.0,
+            0.4,
+            0.0,
+            0.0,
+            0.4,
+            0.0,
+            0.0,
+            0.4,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.6,
+            0.8,
+            0.0,
+            0.4,
+            0.6,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.6,
+            0.4,
+            0.0,
+            0.0,
+            0.0,
+            0.2,
+            0.0,
+            0.0,
+            0.4,
+            0.0,
+            0.4,
+            0.0,
+            0.4
+          ],
+          "proximity": 0.29794366443157194,
+          "sparsity": 9.364,
+          "n_samples": 50
+        }
+      },
+      "statistical_tests": {
+        "overall": {
+          "metric": "validity",
+          "methods": [
+            "DiCE_Baseline",
+            "DiCE_Constraints",
+            "FedCF_NoDP",
+            "FedCF_DP",
+            "Wachter",
+            "GrowingSpheres",
+            "FACE"
+          ],
+          "descriptive": {
+            "DiCE_Baseline": {
+              "mean": 1.0,
+              "std": 0.0,
+              "median": 1.0,
+              "min": 1.0,
+              "max": 1.0,
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            "DiCE_Constraints": {
+              "mean": 0.856,
+              "std": 0.2829558269412383,
+              "median": 1.0,
+              "min": 0.0,
+              "max": 1.0,
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            "FedCF_NoDP": {
+              "mean": 0.8880000000000001,
+              "std": 0.2303388807822075,
+              "median": 1.0,
+              "min": 0.2,
+              "max": 1.0,
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            "FedCF_DP": {
+              "mean": 0.9519999999999998,
+              "std": 0.12367699866992245,
+              "median": 1.0,
+              "min": 0.4,
+              "max": 1.0,
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            "Wachter": {
+              "mean": 0.7439999999999999,
+              "std": 0.36008887791766075,
+              "median": 1.0,
+              "min": 0.0,
+              "max": 1.0,
+              "ci_95": [
+                0.8,
+                1.0
+              ]
+            },
+            "GrowingSpheres": {
+              "mean": 0.9880000000000001,
+              "std": 0.04749736834815166,
+              "median": 1.0,
+              "min": 0.8,
+              "max": 1.0,
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            "FACE": {
+              "mean": 0.15600000000000003,
+              "std": 0.2342306555513176,
+              "median": 0.0,
+              "min": 0.0,
+              "max": 0.8,
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "pairwise_tests": [
+            {
+              "comparison": "DiCE_Baseline vs DiCE_Constraints",
+              "test": "Mann-Whitney U",
+              "statistic": 1600.0,
+              "p_value": 6.467789018912501e-05,
+              "significant": "True",
+              "effect_size": 0.3995059929963059,
+              "effect_interpretation": "medium",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Baseline vs FedCF_NoDP",
+              "test": "Mann-Whitney U",
+              "statistic": 1575.0,
+              "p_value": 0.00012834548362487447,
+              "significant": "True",
+              "effect_size": 0.3829611954696689,
+              "effect_interpretation": "medium",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Baseline vs FedCF_DP",
+              "test": "Mann-Whitney U",
+              "statistic": 1450.0,
+              "p_value": 0.0034531977479158008,
+              "significant": "True",
+              "effect_size": 0.29242207378160434,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Baseline vs Wachter",
+              "test": "Mann-Whitney U",
+              "statistic": 1775.0,
+              "p_value": 3.760362959933064e-07,
+              "significant": "True",
+              "effect_size": 0.5080705198110984,
+              "effect_interpretation": "large",
+              "ci_95": [
+                0.0,
+                0.19999999999999996
+              ]
+            },
+            {
+              "comparison": "DiCE_Baseline vs GrowingSpheres",
+              "test": "Mann-Whitney U",
+              "statistic": 1325.0,
+              "p_value": 0.08218430617277306,
+              "significant": "False",
+              "effect_size": 0.1738150456752602,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Baseline vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2500.0,
+              "p_value": 5.053189469081785e-21,
+              "significant": "True",
+              "effect_size": 0.9408072342241548,
+              "effect_interpretation": "large",
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Constraints vs FedCF_NoDP",
+              "test": "Mann-Whitney U",
+              "statistic": 1213.5,
+              "p_value": 0.7504489089578071,
+              "significant": "False",
+              "effect_size": 0.031804749649758636,
+              "effect_interpretation": "negligible",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Constraints vs FedCF_DP",
+              "test": "Mann-Whitney U",
+              "statistic": 1080.0,
+              "p_value": 0.10650554834971421,
+              "significant": "False",
+              "effect_size": 0.1614100871703921,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Constraints vs Wachter",
+              "test": "Mann-Whitney U",
+              "statistic": 1454.5,
+              "p_value": 0.0982113665854686,
+              "significant": "False",
+              "effect_size": 0.16535874390597635,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.19999999999999996
+              ]
+            },
+            {
+              "comparison": "DiCE_Constraints vs GrowingSpheres",
+              "test": "Mann-Whitney U",
+              "statistic": 963.0,
+              "p_value": 0.0025208877709645217,
+              "significant": "True",
+              "effect_size": 0.30208228778046453,
+              "effect_interpretation": "medium",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "DiCE_Constraints vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2357.5,
+              "p_value": 1.1816675614381737e-15,
+              "significant": "True",
+              "effect_size": 0.8006346213769057,
+              "effect_interpretation": "large",
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "comparison": "FedCF_NoDP vs FedCF_DP",
+              "test": "Mann-Whitney U",
+              "statistic": 1112.0,
+              "p_value": 0.18245529746213962,
+              "significant": "False",
+              "effect_size": 0.1333233169314612,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "FedCF_NoDP vs Wachter",
+              "test": "Mann-Whitney U",
+              "statistic": 1499.5,
+              "p_value": 0.04167178248253673,
+              "significant": "True",
+              "effect_size": 0.20367831012309226,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.19999999999999996
+              ]
+            },
+            {
+              "comparison": "FedCF_NoDP vs GrowingSpheres",
+              "test": "Mann-Whitney U",
+              "statistic": 989.5,
+              "p_value": 0.004935474569529891,
+              "significant": "True",
+              "effect_size": 0.28112153134175644,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "FedCF_NoDP vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2422.5,
+              "p_value": 2.6334640190752487e-17,
+              "significant": "True",
+              "effect_size": 0.8461771379799652,
+              "effect_interpretation": "large",
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "comparison": "FedCF_DP vs Wachter",
+              "test": "Mann-Whitney U",
+              "statistic": 1624.0,
+              "p_value": 0.0012956618778530065,
+              "significant": "True",
+              "effect_size": 0.3216938901583065,
+              "effect_interpretation": "medium",
+              "ci_95": [
+                0.0,
+                0.19999999999999996
+              ]
+            },
+            {
+              "comparison": "FedCF_DP vs GrowingSpheres",
+              "test": "Mann-Whitney U",
+              "statistic": 1120.5,
+              "p_value": 0.10129269793493706,
+              "significant": "False",
+              "effect_size": 0.163861868749724,
+              "effect_interpretation": "small",
+              "ci_95": [
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "comparison": "FedCF_DP vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2480.0,
+              "p_value": 2.4257872803075e-19,
+              "significant": "True",
+              "effect_size": 0.8992087385353317,
+              "effect_interpretation": "large",
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            },
+            {
+              "comparison": "Wachter vs GrowingSpheres",
+              "test": "Mann-Whitney U",
+              "statistic": 774.5,
+              "p_value": 1.2156270432630787e-05,
+              "significant": "True",
+              "effect_size": 0.43747661864162674,
+              "effect_interpretation": "medium",
+              "ci_95": [
+                -0.19999999999999996,
+                0.0
+              ]
+            },
+            {
+              "comparison": "Wachter vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2207.0,
+              "p_value": 5.230376570572421e-12,
+              "significant": "True",
+              "effect_size": 0.6899179453622378,
+              "effect_interpretation": "large",
+              "ci_95": [
+                0.8,
+                1.0
+              ]
+            },
+            {
+              "comparison": "GrowingSpheres vs FACE",
+              "test": "Mann-Whitney U",
+              "statistic": 2498.5,
+              "p_value": 1.6849970515709097e-20,
+              "significant": "True",
+              "effect_size": 0.9280617158233395,
+              "effect_interpretation": "large",
+              "ci_95": [
+                1.0,
+                1.0
+              ]
+            }
+          ],
+          "overall_test": {
+            "test": "Kruskal-Wallis H",
+            "statistic": 190.24861137758253,
+            "p_value": 2.2527986655904196e-38,
+            "significant": "True",
+            "effect_size": 0.5371679631999491,
+            "effect_interpretation": "large"
+          }
+        },
+        "FedCF_DP_vs_DiCE_Baseline": {
+          "p_value": 0.0034531977479158008,
+          "significant": "True",
+          "effect_size": 0.29242207378160434,
+          "effect_interpretation": "small",
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "FedCF_DP_vs_DiCE_Constraints": {
+          "p_value": 0.10650554834971421,
+          "significant": "False",
+          "effect_size": 0.1614100871703921,
+          "effect_interpretation": "small",
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "FedCF_DP_vs_FedCF_NoDP": {
+          "p_value": 0.18245529746213962,
+          "significant": "False",
+          "effect_size": 0.1333233169314612,
+          "effect_interpretation": "small",
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "FedCF_DP_vs_Wachter": {
+          "p_value": 0.0012956618778530065,
+          "significant": "True",
+          "effect_size": 0.3216938901583065,
+          "effect_interpretation": "medium",
+          "ci_95": [
+            0.0,
+            0.19999999999999996
+          ]
+        },
+        "FedCF_DP_vs_GrowingSpheres": {
+          "p_value": 0.10129269793493706,
+          "significant": "False",
+          "effect_size": 0.163861868749724,
+          "effect_interpretation": "small",
+          "ci_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "FedCF_DP_vs_FACE": {
+          "p_value": 2.4257872803075e-19,
+          "significant": "True",
+          "effect_size": 0.8992087385353317,
+          "effect_interpretation": "large",
+          "ci_95": [
+            1.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "exp3_privacy": {
+      "epsilons": {
+        "0.5": {
+          "epsilon": 0.5,
+          "validity": 0.9866666666666667,
+          "validity_std": 0.07180219742846006,
+          "validity_ci": [
+            0.9605333333333334,
+            1.0
+          ],
+          "proximity": 0.3724841779470444,
+          "proximity_std": 0.16703512610995566,
+          "sparsity": 10.0,
+          "diversity": 5.866215099493661,
+          "time": 13.265067966779073,
+          "n_samples": 30,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "1.0": {
+          "epsilon": 1.0,
+          "validity": 0.9866666666666667,
+          "validity_std": 0.07180219742846006,
+          "validity_ci": [
+            0.9605333333333334,
+            1.0
+          ],
+          "proximity": 0.4048326277732849,
+          "proximity_std": 0.16560689188944938,
+          "sparsity": 10.0,
+          "diversity": 6.23558519522349,
+          "time": 8.91175529162089,
+          "n_samples": 30,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "2.0": {
+          "epsilon": 2.0,
+          "validity": 0.9400000000000001,
+          "validity_std": 0.1724335620850342,
+          "validity_ci": [
+            0.87724058709607,
+            1.0
+          ],
+          "proximity": 0.46341390182574593,
+          "proximity_std": 0.1829485357156625,
+          "sparsity": 10.0,
+          "diversity": 7.467917614777883,
+          "time": 11.014400506019593,
+          "n_samples": 30,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "5.0": {
+          "epsilon": 5.0,
+          "validity": 0.9533333333333334,
+          "validity_std": 0.12310790208412926,
+          "validity_ci": [
+            0.908526628854165,
+            0.9981400378125017
+          ],
+          "proximity": 0.5276711601018905,
+          "proximity_std": 0.20261989264540947,
+          "sparsity": 10.0,
+          "diversity": 8.681142545541126,
+          "time": 12.05951509475708,
+          "n_samples": 30,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "10.0": {
+          "epsilon": 10.0,
+          "validity": 0.94,
+          "validity_std": 0.1645195023900409,
+          "validity_ci": [
+            0.8801210109192437,
+            0.9998789890807562
+          ],
+          "proximity": 0.5589315478007,
+          "proximity_std": 0.2103740880392933,
+          "sparsity": 10.0,
+          "diversity": 9.21299946784973,
+          "time": 13.95296220779419,
+          "n_samples": 30,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      }
+    },
+    "exp4_fl_aggregation": {
+      "methods": {
+        "Centralized": {
+          "accuracy": 0.70366,
+          "f1_macro": 0.5754916748088226,
+          "f1_weighted": 0.7329384181842722
+        },
+        "FedAvg": {
+          "accuracy": 0.71202,
+          "f1_macro": 0.6099946773173857,
+          "f1_weighted": 0.7404808429899776
+        },
+        "FedProx": {
+          "accuracy": 0.70713,
+          "f1_macro": 0.6191576544923055,
+          "f1_weighted": 0.7359371222291826
+        },
+        "FedNova": {
+          "accuracy": 0.72164,
+          "f1_macro": 0.6237493555481268,
+          "f1_weighted": 0.7491341284574882
+        }
+      },
+      "fair_comparison": true,
+      "class_weights": "balanced"
+    },
+    "exp5_scalability": {
+      "client_counts": {
+        "5": {
+          "num_clients": 5,
+          "accuracy": 0.70415,
+          "f1_macro": 0.6290562452257747,
+          "train_time": 2739.136237382889,
+          "time_per_round": 91.30454124609629
+        },
+        "10": {
+          "num_clients": 10,
+          "accuracy": 0.69887,
+          "f1_macro": 0.6189418873693306,
+          "train_time": 2837.8554408550262,
+          "time_per_round": 94.59518136183421
+        },
+        "20": {
+          "num_clients": 20,
+          "accuracy": 0.70232,
+          "f1_macro": 0.6121546871710478,
+          "train_time": 2777.9954047203064,
+          "time_per_round": 92.59984682401021
+        },
+        "50": {
+          "num_clients": 50,
+          "accuracy": 0.711,
+          "f1_macro": 0.5994295081879749,
+          "train_time": 3021.019335746765,
+          "time_per_round": 100.70064452489217
+        }
+      },
+      "fair_comparison": true
+    },
+    "exp6_heterogeneity": {
+      "alphas": {
+        "0.1": {
+          "alpha": 0.1,
+          "accuracy": 0.78921,
+          "f1_macro": 0.3088075495980496,
+          "active_clients": 10
+        },
+        "0.5": {
+          "alpha": 0.5,
+          "accuracy": 0.83228,
+          "f1_macro": 0.5424382036256492,
+          "active_clients": 10
+        },
+        "1.0": {
+          "alpha": 1.0,
+          "accuracy": 0.75655,
+          "f1_macro": 0.6223276390804808,
+          "active_clients": 10
+        },
+        "10.0": {
+          "alpha": 10.0,
+          "accuracy": 0.70558,
+          "f1_macro": 0.6214726063512125,
+          "active_clients": 10
+        }
+      },
+      "fair_comparison": true
+    },
+    "exp7_multiclass": {
+      "classes": {
+        "DDoS": {
+          "class_id": 1,
+          "n_samples": 20,
+          "validity": 0.96,
+          "validity_std": 0.13564659966250533,
+          "validity_ci": [
+            0.8948662128510614,
+            1.0
+          ],
+          "proximity": 0.4332156273722648,
+          "proximity_std": 0.1783977388383209,
+          "sparsity": 10.0,
+          "diversity": 6.749540228843689,
+          "time": 6.93943966627121,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "DoS": {
+          "class_id": 2,
+          "n_samples": 20,
+          "validity": 0.99,
+          "validity_std": 0.043588989435406726,
+          "validity_ci": [
+            0.9690697594559173,
+            1.0
+          ],
+          "proximity": 0.3709720978140831,
+          "proximity_std": 0.05941652933643404,
+          "sparsity": 10.0,
+          "diversity": 6.430768301486969,
+          "time": 7.328140997886658,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0
+          ]
+        },
+        "Recon": {
+          "class_id": 3,
+          "n_samples": 20,
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.8388698745050667,
+            1.0
+          ],
+          "proximity": 0.4354129385575652,
+          "proximity_std": 0.5785924056720211,
+          "sparsity": 10.0,
+          "diversity": 3.004234945774078,
+          "time": 2.0470161199569703,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "Web": {
+          "class_id": 4,
+          "n_samples": 20,
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.8388698745050667,
+            1.0
+          ],
+          "proximity": 0.45308257736265645,
+          "proximity_std": 0.42350693489619784,
+          "sparsity": 10.0,
+          "diversity": 2.7073715209960936,
+          "time": 1.0833345890045165,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "BruteForce": {
+          "class_id": 5,
+          "n_samples": 20,
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.8388698745050667,
+            1.0
+          ],
+          "proximity": 1.1845628711581229,
+          "proximity_std": 1.2409629779484046,
+          "sparsity": 10.0,
+          "diversity": 2.341426223814487,
+          "time": 0.9581554889678955,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "Spoofing": {
+          "class_id": 6,
+          "n_samples": 20,
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.8388698745050667,
+            1.0
+          ],
+          "proximity": 0.3298017813265324,
+          "proximity_std": 0.22186846645492653,
+          "sparsity": 10.0,
+          "diversity": 3.6948401600122454,
+          "time": 2.1759250283241274,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "Mirai": {
+          "class_id": 7,
+          "n_samples": 20,
+          "validity": 0.8899999999999999,
+          "validity_std": 0.1729161646579058,
+          "validity_ci": [
+            0.8069703870833407,
+            0.9730296129166591
+          ],
+          "proximity": 0.632848930954933,
+          "proximity_std": 0.14675687989834904,
+          "sparsity": 10.0,
+          "diversity": 10.592933311462403,
+          "time": 13.384427809715271,
+          "validity_per_sample": [
+            0.8,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            0.6,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            0.4,
+            1.0
+          ]
+        }
+      }
+    },
+    "exp8_ablation": {
+      "configs": {
+        "Full": {
+          "config": {
+            "lambda_feas": 1.0,
+            "lambda_div": 0.1,
+            "use_dp": true,
+            "constraints": true
+          },
+          "validity": 0.9519999999999998,
+          "validity_std": 0.12998461447417536,
+          "validity_ci": [
+            0.897238582925805,
+            1.0
+          ],
+          "proximity": 0.46155562102794645,
+          "proximity_std": 0.16720923278332303,
+          "sparsity": 10.0,
+          "diversity": 7.879848633766175,
+          "time": 8.681458292007447,
+          "n_samples": 25,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            0.4
+          ]
+        },
+        "No_Constraints": {
+          "config": {
+            "lambda_feas": 0.0,
+            "lambda_div": 0.1,
+            "use_dp": true,
+            "constraints": false
+          },
+          "validity": 1.0,
+          "validity_std": 0.0,
+          "validity_ci": [
+            0.8668035060468213,
+            1.0
+          ],
+          "proximity": 0.5545879204273224,
+          "proximity_std": 0.21891224173746296,
+          "sparsity": 38.608000000000004,
+          "diversity": 2.926675199985504,
+          "time": 0.11724678993225097,
+          "n_samples": 25,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "No_DP": {
+          "config": {
+            "lambda_feas": 1.0,
+            "lambda_div": 0.1,
+            "use_dp": false,
+            "constraints": true
+          },
+          "validity": 0.8639999999999999,
+          "validity_std": 0.23130931671681537,
+          "validity_ci": [
+            0.766551344117783,
+            0.9614486558822167
+          ],
+          "proximity": 0.5626520079374313,
+          "proximity_std": 0.1750615324245364,
+          "sparsity": 10.0,
+          "diversity": 9.706957046508789,
+          "time": 11.607263069152832,
+          "n_samples": 25,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            1.0,
+            0.2,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            0.8,
+            0.8,
+            1.0,
+            1.0,
+            0.6,
+            1.0,
+            0.4
+          ]
+        },
+        "No_Diversity": {
+          "config": {
+            "lambda_feas": 1.0,
+            "lambda_div": 0.0,
+            "use_dp": true,
+            "constraints": true
+          },
+          "validity": 0.968,
+          "validity_std": 0.12237646832622685,
+          "validity_ci": [
+            0.9164438304549427,
+            1.0
+          ],
+          "proximity": 0.4157830802202225,
+          "proximity_std": 0.15443531662342191,
+          "sparsity": 10.0,
+          "diversity": 6.90055903339386,
+          "time": 7.509119701385498,
+          "n_samples": 25,
+          "validity_per_sample": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.4,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.8,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "contributions": {
+        "constraints": -0.048000000000000154,
+        "dp": 0.08799999999999997,
+        "diversity": -0.016000000000000125
+      }
+    },
+    "exp9_latency": {
+      "latency": {
+        "50": {
+          "max_iter": 50,
+          "mean_time": 3.2416481971740723,
+          "std_time": 0.31504029864923455,
+          "p95_time": 3.5716069102287293,
+          "validity": 0.6200000000000001
+        },
+        "100": {
+          "max_iter": 100,
+          "mean_time": 4.693666315078735,
+          "std_time": 1.4654283934515246,
+          "p95_time": 6.76863523721695,
+          "validity": 0.8699999999999999
+        },
+        "200": {
+          "max_iter": 200,
+          "mean_time": 6.2319600820541385,
+          "std_time": 3.564362447580048,
+          "p95_time": 13.520642721652985,
+          "validity": 0.93
+        },
+        "300": {
+          "max_iter": 300,
+          "mean_time": 8.340729355812073,
+          "std_time": 6.638323294598045,
+          "p95_time": 20.461727964878087,
+          "validity": 0.96
+        },
+        "500": {
+          "max_iter": 500,
+          "mean_time": 8.181718814373017,
+          "std_time": 8.885451146380666,
+          "p95_time": 33.82379983663559,
+          "validity": 0.97
+        }
+      }
+    },
+    "exp10_privacy_attack": {
+      "mia_results": {
+        "no_dp": {
+          "threshold_mia": {
+            "attack_accuracy": 0.512,
+            "attack_precision": 0.5075,
+            "attack_recall": 0.812,
+            "attack_f1": 0.6246153846153846,
+            "attack_auc": 0.4988039999999999,
+            "privacy_leakage": 0.01200000000000001,
+            "vulnerability_score": 0.02400000000000002
+          },
+          "loss_mia": {
+            "attack_accuracy": 0.492,
+            "attack_precision": 0.492,
+            "attack_recall": 0.492,
+            "attack_f1": 0.492,
+            "attack_auc": 0.48074199999999995,
+            "privacy_leakage": 0,
+            "vulnerability_score": 0
+          },
+          "summary": {
+            "average_attack_accuracy": 0.502,
+            "max_privacy_leakage": 0.01200000000000001,
+            "overall_vulnerability": "LOW",
+            "dp_recommendation": "Model has good privacy properties"
+          }
+        },
+        "with_dp": {
+          "threshold_mia": {
+            "attack_accuracy": 0.514,
+            "attack_precision": 0.51,
+            "attack_recall": 0.714,
+            "attack_f1": 0.595,
+            "attack_auc": 0.51447,
+            "privacy_leakage": 0.014000000000000012,
+            "vulnerability_score": 0.028000000000000025
+          },
+          "loss_mia": {
+            "attack_accuracy": 0.516,
+            "attack_precision": 0.5114285714285715,
+            "attack_recall": 0.716,
+            "attack_f1": 0.5966666666666667,
+            "attack_auc": 0.514128,
+            "privacy_leakage": 0.016000000000000014,
+            "vulnerability_score": 0.03200000000000003
+          },
+          "summary": {
+            "average_attack_accuracy": 0.515,
+            "max_privacy_leakage": 0.016000000000000014,
+            "overall_vulnerability": "LOW",
+            "dp_recommendation": "Model has good privacy properties"
+          }
+        }
+      },
+      "dp_comparison": {
+        "no_dp_leakage": 0.01200000000000001,
+        "dp_leakage": 0.016000000000000014,
+        "leakage_reduction_pct": -33.333305555578704,
+        "dp_effective": false
+      },
+      "summary": {
+        "conclusion": "DP not effective",
+        "recommendation": "Use epsilon <= 2.0 for sensitive data"
+      }
+    },
+    "exp11_case_study": {
+      "case_studies": [
+        {
+          "attack_type": "DDoS",
+          "original_class": 1,
+          "validity": 1.0,
+          "proximity": 0.3360287666320801,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "Header_Length",
+              "original": -1.5724769830703735,
+              "counterfactual": -0.06728561967611313,
+              "change": 1.5051913261413574
+            },
+            {
+              "feature": "Time_To_Live",
+              "original": -0.1763433963060379,
+              "counterfactual": 0.882084310054779,
+              "change": 1.0584276914596558
+            },
+            {
+              "feature": "fin_flag_number",
+              "original": -0.3124856948852539,
+              "counterfactual": -1.0903491973876953,
+              "change": -0.7778635025024414
+            },
+            {
+              "feature": "syn_flag_number",
+              "original": -0.5154656767845154,
+              "counterfactual": -0.9493203163146973,
+              "change": -0.4338546395301819
+            },
+            {
+              "feature": "rst_flag_number",
+              "original": -0.3289710581302643,
+              "counterfactual": -2.328077554702759,
+              "change": -1.999106526374817
+            },
+            {
+              "feature": "SMTP",
+              "original": -0.01808406226336956,
+              "counterfactual": -2.0264148712158203,
+              "change": -2.008330821990967
+            },
+            {
+              "feature": "UDP",
+              "original": -0.5416399836540222,
+              "counterfactual": 0.07478722929954529,
+              "change": 0.6164271831512451
+            },
+            {
+              "feature": "Max",
+              "original": -0.28466111421585083,
+              "counterfactual": 1.2073925733566284,
+              "change": 1.492053747177124
+            },
+            {
+              "feature": "Std",
+              "original": -0.23180395364761353,
+              "counterfactual": -0.844988226890564,
+              "change": -0.6131842732429504
+            },
+            {
+              "feature": "Tot size",
+              "original": -0.31287306547164917,
+              "counterfactual": -0.24762849509716034,
+              "change": 0.06524457037448883
+            }
+          ]
+        },
+        {
+          "attack_type": "DoS",
+          "original_class": 2,
+          "validity": 1.0,
+          "proximity": 0.3989354997873306,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "Protocol Type",
+              "original": -0.3387729525566101,
+              "counterfactual": -1.5774691104888916,
+              "change": -1.2386960983276367
+            },
+            {
+              "feature": "fin_flag_number",
+              "original": -0.3124856948852539,
+              "counterfactual": -1.1528984308242798,
+              "change": -0.8404127359390259
+            },
+            {
+              "feature": "psh_flag_number",
+              "original": -0.3389274477958679,
+              "counterfactual": -0.2017764300107956,
+              "change": 0.13715101778507233
+            },
+            {
+              "feature": "ack_flag_number",
+              "original": -0.3783780038356781,
+              "counterfactual": 0.8388452529907227,
+              "change": 1.2172232866287231
+            },
+            {
+              "feature": "fin_count",
+              "original": -0.3095390498638153,
+              "counterfactual": -0.6586034893989563,
+              "change": -0.349064439535141
+            },
+            {
+              "feature": "HTTP",
+              "original": -0.2356264442205429,
+              "counterfactual": -2.0431644916534424,
+              "change": -1.8075380325317383
+            },
+            {
+              "feature": "HTTPS",
+              "original": 4.290884971618652,
+              "counterfactual": 3.4853124618530273,
+              "change": -0.805572509765625
+            },
+            {
+              "feature": "Telnet",
+              "original": -0.015786180272698402,
+              "counterfactual": -0.39875996112823486,
+              "change": -0.3829737901687622
+            },
+            {
+              "feature": "AVG",
+              "original": -0.3122590184211731,
+              "counterfactual": 0.9106536507606506,
+              "change": 1.2229126691818237
+            },
+            {
+              "feature": "IAT",
+              "original": -0.012550821527838707,
+              "counterfactual": 1.480522871017456,
+              "change": 1.4930737018585205
+            }
+          ]
+        },
+        {
+          "attack_type": "Recon",
+          "original_class": 3,
+          "validity": 1.0,
+          "proximity": 0.10492191016674042,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "psh_flag_number",
+              "original": 0.3835206925868988,
+              "counterfactual": 0.6684661507606506,
+              "change": 0.28494545817375183
+            },
+            {
+              "feature": "ack_count",
+              "original": -0.17286787927150726,
+              "counterfactual": 0.18180085718631744,
+              "change": 0.3546687364578247
+            },
+            {
+              "feature": "fin_count",
+              "original": -0.3095390498638153,
+              "counterfactual": -0.03195776417851448,
+              "change": 0.27758127450942993
+            },
+            {
+              "feature": "HTTP",
+              "original": -0.2356264442205429,
+              "counterfactual": -0.5551996231079102,
+              "change": -0.31957316398620605
+            },
+            {
+              "feature": "DHCP",
+              "original": -0.03538037836551666,
+              "counterfactual": -0.38957473635673523,
+              "change": -0.3541943430900574
+            },
+            {
+              "feature": "ARP",
+              "original": -0.1518552452325821,
+              "counterfactual": -0.3944983184337616,
+              "change": -0.2426430732011795
+            },
+            {
+              "feature": "ICMP",
+              "original": -0.44725796580314636,
+              "counterfactual": -0.7130429148674011,
+              "change": -0.26578494906425476
+            },
+            {
+              "feature": "IPv",
+              "original": 0.1518552452325821,
+              "counterfactual": -0.10661903023719788,
+              "change": -0.25847429037094116
+            },
+            {
+              "feature": "Tot sum",
+              "original": -0.5782708525657654,
+              "counterfactual": -0.8747329115867615,
+              "change": -0.2964620590209961
+            },
+            {
+              "feature": "Max",
+              "original": 0.011532680131494999,
+              "counterfactual": -0.2609778642654419,
+              "change": -0.2725105583667755
+            }
+          ]
+        },
+        {
+          "attack_type": "Web",
+          "original_class": 4,
+          "validity": 1.0,
+          "proximity": 0.09047052413225173,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "fin_flag_number",
+              "original": -0.3124856948852539,
+              "counterfactual": -0.43689215183258057,
+              "change": -0.12440645694732666
+            },
+            {
+              "feature": "syn_flag_number",
+              "original": -0.5154656767845154,
+              "counterfactual": -0.38339850306510925,
+              "change": 0.13206717371940613
+            },
+            {
+              "feature": "psh_flag_number",
+              "original": 0.02229662612080574,
+              "counterfactual": -0.1083352118730545,
+              "change": -0.13063183426856995
+            },
+            {
+              "feature": "Telnet",
+              "original": -0.015786180272698402,
+              "counterfactual": -0.1547974795103073,
+              "change": -0.13901129364967346
+            },
+            {
+              "feature": "SMTP",
+              "original": -0.01808406226336956,
+              "counterfactual": -0.16339218616485596,
+              "change": -0.14530812203884125
+            },
+            {
+              "feature": "IRC",
+              "original": -0.01747434213757515,
+              "counterfactual": -0.1989748626947403,
+              "change": -0.18150052428245544
+            },
+            {
+              "feature": "DHCP",
+              "original": -0.03538037836551666,
+              "counterfactual": -0.19858840107917786,
+              "change": -0.1632080227136612
+            },
+            {
+              "feature": "LLC",
+              "original": 0.1518552452325821,
+              "counterfactual": 0.2776525616645813,
+              "change": 0.1257973164319992
+            },
+            {
+              "feature": "Tot sum",
+              "original": -0.5540642738342285,
+              "counterfactual": -0.4270824193954468,
+              "change": 0.12698185443878174
+            },
+            {
+              "feature": "Number",
+              "original": -4.357920169830322,
+              "counterfactual": -4.110922813415527,
+              "change": 0.24699735641479492
+            }
+          ]
+        },
+        {
+          "attack_type": "BruteForce",
+          "original_class": 5,
+          "validity": 1.0,
+          "proximity": 1.0682506561279297,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "Time_To_Live",
+              "original": 0.94753497838974,
+              "counterfactual": 1.1124705076217651,
+              "change": 0.16493552923202515
+            },
+            {
+              "feature": "rst_flag_number",
+              "original": -0.3289710581302643,
+              "counterfactual": -0.6189149618148804,
+              "change": -0.2899439036846161
+            },
+            {
+              "feature": "HTTPS",
+              "original": 1.5558186769485474,
+              "counterfactual": 1.8832097053527832,
+              "change": 0.32739102840423584
+            },
+            {
+              "feature": "DNS",
+              "original": -0.11801423132419586,
+              "counterfactual": -0.3277067244052887,
+              "change": -0.20969249308109283
+            },
+            {
+              "feature": "Telnet",
+              "original": -0.015786180272698402,
+              "counterfactual": 0.2063203752040863,
+              "change": 0.22210656106472015
+            },
+            {
+              "feature": "SMTP",
+              "original": -0.01808406226336956,
+              "counterfactual": 0.3538769483566284,
+              "change": 0.37196099758148193
+            },
+            {
+              "feature": "SSH",
+              "original": 43.20152282714844,
+              "counterfactual": 4.9694905281066895,
+              "change": -38.232032775878906
+            },
+            {
+              "feature": "TCP",
+              "original": 0.4650143086910248,
+              "counterfactual": 0.23217155039310455,
+              "change": -0.23284275829792023
+            },
+            {
+              "feature": "UDP",
+              "original": -0.042721912264823914,
+              "counterfactual": 0.11573445796966553,
+              "change": 0.15845637023448944
+            },
+            {
+              "feature": "Min",
+              "original": -0.1871551275253296,
+              "counterfactual": -0.40888121724128723,
+              "change": -0.22172608971595764
+            }
+          ]
+        },
+        {
+          "attack_type": "Spoofing",
+          "original_class": 6,
+          "validity": 1.0,
+          "proximity": 0.5104794800281525,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "Header_Length",
+              "original": 0.533522367477417,
+              "counterfactual": 0.7645260691642761,
+              "change": 0.23100370168685913
+            },
+            {
+              "feature": "fin_flag_number",
+              "original": -0.3124856948852539,
+              "counterfactual": -0.4867051839828491,
+              "change": -0.17421948909759521
+            },
+            {
+              "feature": "syn_flag_number",
+              "original": -0.5154656767845154,
+              "counterfactual": -0.6636829972267151,
+              "change": -0.1482173204421997
+            },
+            {
+              "feature": "TCP",
+              "original": -0.15378673374652863,
+              "counterfactual": 0.07016004621982574,
+              "change": 0.22394677996635437
+            },
+            {
+              "feature": "UDP",
+              "original": 0.20673711597919464,
+              "counterfactual": 0.36782562732696533,
+              "change": 0.1610885113477707
+            },
+            {
+              "feature": "DHCP",
+              "original": -0.03538037836551666,
+              "counterfactual": 0.1071673035621643,
+              "change": 0.14254768192768097
+            },
+            {
+              "feature": "ARP",
+              "original": 10.693717002868652,
+              "counterfactual": 5.0,
+              "change": -5.693717002868652
+            },
+            {
+              "feature": "IPv",
+              "original": -10.693717002868652,
+              "counterfactual": -5.0,
+              "change": 5.693717002868652
+            },
+            {
+              "feature": "LLC",
+              "original": -10.693717002868652,
+              "counterfactual": -5.0,
+              "change": 5.693717002868652
+            },
+            {
+              "feature": "Tot sum",
+              "original": -0.5886536240577698,
+              "counterfactual": -0.42607632279396057,
+              "change": 0.1625773012638092
+            }
+          ]
+        },
+        {
+          "attack_type": "Mirai",
+          "original_class": 7,
+          "validity": 0.6,
+          "proximity": 0.8150063872337341,
+          "sparsity": 10.0,
+          "n_changes": 10,
+          "changes": [
+            {
+              "feature": "Header_Length",
+              "original": -1.5495857000350952,
+              "counterfactual": 2.430497884750366,
+              "change": 3.980083465576172
+            },
+            {
+              "feature": "Time_To_Live",
+              "original": -0.1914198100566864,
+              "counterfactual": -3.115997314453125,
+              "change": -2.924577474594116
+            },
+            {
+              "feature": "rst_flag_number",
+              "original": -0.3289710581302643,
+              "counterfactual": -3.734565496444702,
+              "change": -3.4055943489074707
+            },
+            {
+              "feature": "fin_count",
+              "original": -0.3095390498638153,
+              "counterfactual": -4.145912170410156,
+              "change": -3.8363730907440186
+            },
+            {
+              "feature": "HTTP",
+              "original": -0.2356264442205429,
+              "counterfactual": -1.8832519054412842,
+              "change": -1.64762544631958
+            },
+            {
+              "feature": "SMTP",
+              "original": -0.01808406226336956,
+              "counterfactual": -4.878328800201416,
+              "change": -4.8602447509765625
+            },
+            {
+              "feature": "SSH",
+              "original": -0.028640253469347954,
+              "counterfactual": 5.0,
+              "change": 5.028640270233154
+            },
+            {
+              "feature": "IGMP",
+              "original": -0.015864720568060875,
+              "counterfactual": 1.5348913669586182,
+              "change": 1.5507560968399048
+            },
+            {
+              "feature": "Std",
+              "original": 0.03153100982308388,
+              "counterfactual": 2.5618197917938232,
+              "change": 2.5302886962890625
+            },
+            {
+              "feature": "Variance",
+              "original": -0.08747148513793945,
+              "counterfactual": 3.835935592651367,
+              "change": 3.9234070777893066
+            }
+          ]
+        }
+      ],
+      "top_changed_features": [
+        {
+          "rank": 1,
+          "feature": "SMTP",
+          "change_count": 4,
+          "avg_magnitude": 1.8464611731469631
+        },
+        {
+          "rank": 2,
+          "feature": "fin_flag_number",
+          "change_count": 4,
+          "avg_magnitude": 0.4792255461215973
+        },
+        {
+          "rank": 3,
+          "feature": "HTTP",
+          "change_count": 3,
+          "avg_magnitude": 1.258245547612508
+        },
+        {
+          "rank": 4,
+          "feature": "Tot sum",
+          "change_count": 3,
+          "avg_magnitude": 0.19534040490786234
+        },
+        {
+          "rank": 5,
+          "feature": "UDP",
+          "change_count": 3,
+          "avg_magnitude": 0.31199068824450177
+        },
+        {
+          "rank": 6,
+          "feature": "Header_Length",
+          "change_count": 3,
+          "avg_magnitude": 1.9054261644681294
+        },
+        {
+          "rank": 7,
+          "feature": "Telnet",
+          "change_count": 3,
+          "avg_magnitude": 0.24803054829438528
+        },
+        {
+          "rank": 8,
+          "feature": "Time_To_Live",
+          "change_count": 3,
+          "avg_magnitude": 1.3826468984285991
+        },
+        {
+          "rank": 9,
+          "feature": "psh_flag_number",
+          "change_count": 3,
+          "avg_magnitude": 0.18424277007579803
+        },
+        {
+          "rank": 10,
+          "feature": "rst_flag_number",
+          "change_count": 3,
+          "avg_magnitude": 1.8982149263223012
+        }
+      ],
+      "feature_change_counts": [
+        3.0,
+        1.0,
+        3.0,
+        0.0,
+        4.0,
+        3.0,
+        3.0,
+        3.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        3.0,
+        0.0,
+        3.0,
+        2.0,
+        1.0,
+        3.0,
+        4.0,
+        2.0,
+        1.0,
+        2.0,
+        3.0,
+        3.0,
+        2.0,
+        1.0,
+        1.0,
+        2.0,
+        2.0,
+        3.0,
+        1.0,
+        2.0,
+        1.0,
+        2.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "feature_change_magnitudes": [
+        5.716278493404388,
+        1.2386960983276367,
+        4.147940695285797,
+        0.0,
+        1.9169021844863892,
+        0.7141391336917877,
+        5.694644778966904,
+        0.5527283102273941,
+        1.2172232866287231,
+        0.0,
+        0.0,
+        0.3546687364578247,
+        0.0,
+        4.4630188047885895,
+        0.0,
+        3.7747366428375244,
+        1.1329635381698608,
+        0.20969249308109283,
+        0.7440916448831558,
+        7.3858446925878525,
+        43.26067304611206,
+        0.18150052428245544,
+        0.4567895382642746,
+        0.9359720647335052,
+        0.6599500477313995,
+        5.936360076069832,
+        0.26578494906425476,
+        1.5507560968399048,
+        5.9521912932395935,
+        5.8195143193006516,
+        0.586021214723587,
+        0.22172608971595764,
+        1.7645643055438995,
+        1.2229126691818237,
+        3.143472969532013,
+        0.06524457037448883,
+        1.4930737018585205,
+        0.24699735641479492,
+        3.9234070777893066
+      ]
+    }
+  },
+  "environment": {
+    "python_version": "3.10.12",
+    "pytorch_version": "2.7.1+cu118",
+    "cuda_available": true,
+    "cuda_version": "11.8",
+    "gpu_name": "NVIDIA GeForce RTX 3080 Laptop GPU"
+  },
+  "config": {
+    "max_samples": 500000,
+    "test_size": 0.2,
+    "stratified": true,
+    "batch_size": 64,
+    "epochs": 20,
+    "learning_rate": 0.001,
+    "random_seed": 42,
+    "model_hidden_layers": [
+      256,
+      128,
+      64
+    ],
+    "model_activation": "ReLU",
+    "model_dropout": 0.3,
+    "model_batchnorm": true,
+    "num_cfs": 5,
+    "cf_max_iter": 300,
+    "cf_proximity_weight": 0.5,
+    "cf_diversity_weight": 0.1,
+    "cf_feasibility_weight": 1.0,
+    "cf_learning_rate": 0.01,
+    "dp_epsilon_values": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "dp_delta": 1e-05,
+    "dp_clip_norm": 1.0,
+    "dp_noise_multiplier_base": 0.5,
+    "fl_rounds": 30,
+    "local_epochs": 5,
+    "fl_default_clients": 10,
+    "fl_proximal_mu": 0.01,
+    "client_counts": [
+      5,
+      10,
+      20,
+      50
+    ],
+    "dirichlet_alphas": [
+      0.1,
+      0.5,
+      1.0,
+      10.0
+    ]
+  },
+  "constraints": {
+    "type": "generic",
+    "description": "Dataset-agnostic constraints for fair comparison (StandardScaler compatible)",
+    "list": [
+      {
+        "name": "reasonable_range",
+        "rule": "feature in [-5, 5]"
+      },
+      {
+        "name": "sparsity",
+        "rule": "max_changes=10, threshold=0.01"
+      }
+    ]
+  },
+  "dataset_info": {
+    "total_samples": 500000,
+    "train_samples": 400000,
+    "test_samples": 100000,
+    "num_features": 39,
+    "num_classes": 8,
+    "class_distribution": {
+      "0": 11727,
+      "1": 361175,
+      "2": 86214,
+      "3": 7329,
+      "4": 283,
+      "5": 133,
+      "6": 5259,
+      "7": 27880
+    }
+  },
+  "duration": 49991.473962
+}

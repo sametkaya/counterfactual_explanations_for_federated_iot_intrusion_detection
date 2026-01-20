@@ -1,0 +1,526 @@
+[13:34:53] ============================================================
+Experiment: FedCF_Comprehensive
+Dataset: edge-iiot
+============================================================
+[13:34:53] 
+Device: cuda
+[13:34:53] 
+============================================================
+DATA LOADING
+============================================================
+[13:35:09]   Train: 400000, Test: 100000, Features: 56
+[13:35:09]   Classes: 15
+[13:35:09] 
+============================================================
+EXPERIMENT 1: MODEL TRAINING (FAIR COMPARISON)
+============================================================
+[13:35:09] 
+  Class weights applied for imbalanced data:
+[13:35:09]     DDoS_ICMP: 0.0916
+[13:35:09]     DDoS_UDP: 1.2139
+[13:35:09]     Vulnerability_scanner: 1.2712
+[13:35:09]     Normal: 2.9240
+[13:35:09]     Password: 2.9320
+[13:35:09]     DDoS_HTTP: 2.9259
+[13:35:09]     DDoS_TCP: 2.9715
+[13:35:09]     Port_Scanning: 2.9633
+[13:35:09]     Ransomware: 3.8575
+[13:35:09]     Uploading: 6.0359
+[13:35:09]     Backdoor: 6.5168
+[13:35:09]     SQL_injection: 9.3077
+[13:35:09]     XSS: 13.8313
+[13:35:09]     MITM: 161.6162
+[13:35:09]     Fingerprinting: 112.9943
+[13:35:09] 
+  Training PyTorch MLP with hyperparameter tuning (same as baselines)...
+[13:35:09]     Tuning on 360,000 samples, validating on 40,000 samples
+[13:35:09]     Testing 12 configurations...
+[13:46:39]     Tuning completed in 689.9s
+[13:46:39]     Best config: {'hidden_dims': (128, 64), 'learning_rate': 0.001, 'dropout': 0.3} (val F1-macro: 0.9297)
+[13:46:39] 
+  Training final PyTorch MLP with best hyperparameters...
+[13:46:39]     - Architecture: (128, 64)
+[13:46:39]     - Learning rate: 0.001
+[13:46:39]     - Dropout: 0.3
+[13:46:39]     - Weighted CrossEntropyLoss (class balanced)
+[13:46:39]     - Early stopping (patience=10)
+[13:46:39]     - Max epochs: 20
+[13:47:13]   Epoch 5: Acc=0.9895, F1-macro=0.9071, Loss=0.1858, LR=0.001000
+[13:47:46]   Epoch 10: Acc=0.9912, F1-macro=0.9169, Loss=0.1573, LR=0.001000
+[13:48:20]   Epoch 15: Acc=0.9902, F1-macro=0.9139, Loss=0.1478, LR=0.000500
+[13:48:56]   Epoch 20: Acc=0.9933, F1-macro=0.9285, Loss=0.1253, LR=0.000500
+[13:48:56]   Loaded best model (F1-macro: 0.9321)
+[13:48:56] 
+  Computing detailed classification metrics...
+[13:48:56] 
+  PyTorch MLP Results:
+[13:48:56]     Accuracy:      0.9938
+[13:48:56]     F1 (macro):    0.9321
+[13:48:56]     F1 (weighted): 0.9941
+[13:48:56]     ROC-AUC:       1.0000
+[13:48:56]     Training time: 136.5s
+[13:48:56] 
+  Per-Class F1 Scores:
+[13:48:56]     DDoS_ICMP: F1=1.0000, Precision=1.0000, Recall=1.0000, Support=72784
+[13:48:56]     DDoS_UDP: F1=0.9989, Precision=1.0000, Recall=0.9978, Support=5492
+[13:48:56]     Vulnerability_scanner: F1=0.9913, Precision=1.0000, Recall=0.9828, Support=5244
+[13:48:56]     Normal: F1=0.9830, Precision=0.9750, Recall=0.9912, Support=2280
+[13:48:56]     Password: F1=0.9657, Precision=0.9981, Recall=0.9354, Support=2274
+[13:48:56]     DDoS_HTTP: F1=0.9785, Precision=0.9580, Recall=1.0000, Support=2279
+[13:48:56]     DDoS_TCP: F1=0.9860, Precision=0.9995, Recall=0.9728, Support=2243
+[13:48:56]     Port_Scanning: F1=0.9626, Precision=0.9957, Recall=0.9316, Support=2250
+[13:48:56]     Ransomware: F1=0.9791, Precision=0.9667, Recall=0.9919, Support=1728
+[13:48:56]     Uploading: F1=0.9740, Precision=1.0000, Recall=0.9493, Support=1105
+[13:48:56]     Backdoor: F1=0.8849, Precision=0.7936, Recall=1.0000, Support=1023
+[13:48:56]     SQL_injection: F1=0.9794, Precision=0.9648, Recall=0.9944, Support=716
+[13:48:56]     XSS: F1=0.9395, Precision=0.9797, Recall=0.9025, Support=482
+[13:48:56]     MITM: F1=0.3590, Precision=0.2435, Recall=0.6829, Support=41
+[13:48:56]     Fingerprinting: F1=1.0000, Precision=1.0000, Recall=1.0000, Support=59
+[13:48:56] 
+============================================================
+[13:48:56]   FAIR BASELINE COMPARISON
+[13:48:56] ============================================================
+[13:48:56]   All models trained with:
+[13:48:56]     - Same train/test split
+[13:48:56]     - Class weights for imbalanced data
+[13:48:56]     - Hyperparameter tuning (GridSearchCV)
+[13:48:56]     - Same evaluation metrics
+[13:48:56] 
+  Fair Comparison Settings:
+[13:48:56]     - Cross-validation folds: 5
+[13:48:56]     - Class weights: Applied (balanced)
+[13:48:56]     - Hyperparameter tuning: GridSearchCV
+[13:48:56]     - Train samples: 400,000
+[13:48:56]     - Test samples: 100,000
+[13:48:56] 
+  [1/6] Majority Class Baseline...
+[13:48:56]     Accuracy: 0.7278, F1-macro: 0.0562
+[13:48:56] 
+  [2/6] Logistic Regression (with hyperparameter tuning)...
+[13:51:22]     Best params: {'C': 10.0, 'max_iter': 500, 'solver': 'lbfgs'}
+[13:51:22]     Accuracy: 0.9862, F1-macro: 0.9103
+[13:51:22]     Training time: 145.5s
+[13:51:22] 
+  [3/6] Random Forest (with hyperparameter tuning)...
+[13:51:40]     Best params: {'max_depth': 20, 'min_samples_split': 2, 'n_estimators': 100}
+[13:51:40]     Accuracy: 0.9991, F1-macro: 0.9698
+[13:51:40]     Training time: 18.0s
+[13:51:40] 
+  [4/6] XGBoost (with hyperparameter tuning)...
+[13:52:37]     Best params: {'learning_rate': 0.01, 'max_depth': 6, 'n_estimators': 100, 'subsample': 1.0}
+[13:52:37]     Accuracy: 0.9986, F1-macro: 0.9495
+[13:52:37]     Training time: 57.5s
+[13:52:37] 
+  [5/6] Sklearn MLP (fair NN baseline with sample weights)...
+[13:54:33]     Resampled training size: 539,649 (from 400,000)
+[14:58:02]     Best params: {'alpha': 0.001, 'hidden_layer_sizes': (256, 128), 'learning_rate_init': 0.01}
+[14:58:02]     Accuracy: 0.9960, F1-macro: 0.9383
+[14:58:02]     Training time: 3925.0s
+[14:58:02] 
+  [6/6] Computing statistical comparison...
+[14:58:02] 
+================================================================================
+[14:58:02]   FINAL MODEL COMPARISON (FAIR - ALL WITH CLASS WEIGHTS & TUNING)
+[14:58:02] ================================================================================
+[14:58:02]   Model                  Accuracy   F1-macro     F1-wtd       Prec     Recall    Time(s)
+[14:58:02]   --------------------------------------------------------------------------------
+[14:58:02]   RandomForest             0.9991     0.9698     0.9992     0.9598     0.9881       18.0 *
+[14:58:02]   XGBoost                  0.9986     0.9495     0.9985     0.9919     0.9408       57.5
+[14:58:02]   SklearnMLP               0.9960     0.9383     0.9960     0.9820     0.9294     3925.0
+[14:58:02]   PyTorchMLP               0.9938     0.9321     0.9941     0.9250     0.9555      136.5
+[14:58:02]   LogisticRegression       0.9862     0.9103     0.9863     0.8989     0.9364      145.5
+[14:58:02]   MajorityClass            0.7278     0.0562     0.6132     0.0485     0.0667        0.0
+[14:58:02]   --------------------------------------------------------------------------------
+[14:58:02]   * Best model by F1-macro
+[14:58:02] 
+  Discussion:
+[14:58:02]     RandomForest achieves the best F1-macro score.
+[14:58:02]     PyTorch MLP ranks #4 in this comparison.
+[14:58:02]     However, PyTorch MLP is chosen for the following reasons:
+[14:58:02]       1. Gradient-based counterfactual generation requires neural networks
+[14:58:02]       2. Federated learning aggregation (FedAvg) works with neural network weights
+[14:58:02]       3. Differential privacy (DP-SGD) is designed for gradient descent
+[14:58:02]       4. The performance gap is acceptable given these advantages
+[14:58:03] 
+Saved to: experiments/exp_04_edge-iiot
+[14:58:03]   [Checkpoint saved]
+[14:58:03] 
+============================================================
+EXPERIMENT 2: CF METHODS COMPARISON
+============================================================
+[14:58:03]   100 attack samples
+[14:58:03] 
+  [1/7] DiCE Baseline...
+[14:58:06]     Validity: 100.00%
+[14:58:06] 
+  [2/7] DiCE + Constraints...
+[15:01:27]     Validity: 95.20%
+[15:01:27] 
+  [3/7] FedCF-IoT (No DP)...
+[15:05:07]     Validity: 93.20%
+[15:05:07] 
+  [4/7] FedCF-IoT (DP eps=2.0)...
+[15:07:25]     Validity: 98.80%
+[15:07:25] 
+  [5/7] Wachter (2017) [with constraints]...
+[15:08:28]     Validity: 56.00%
+[15:08:28] 
+  [6/7] Growing Spheres (2018) [with constraints]...
+[15:08:57]     Validity: 100.00%
+[15:08:57] 
+  [7/7] FACE (2020) [with constraints]...
+[15:08:59]     Validity: 58.80%
+[15:08:59] 
+  Statistical Analysis:
+[15:08:59] --------------------------------------------------
+[15:09:05]   Kruskal-Wallis p-value: 5.9959e-46
+[15:09:05]   Effect size: 0.641 (large)
+[15:09:05] 
+  Pairwise vs FedCF_DP:
+[15:09:06]     vs DiCE_Baseline: p=8.2184e-02, d=0.174
+[15:09:06]     vs DiCE_Constraints: p=1.0129e-01, d=0.164
+[15:09:06]     vs FedCF_NoDP: p=1.0394e-02*, d=0.256
+[15:09:06]     vs Wachter: p=3.0350e-12*, d=0.698
+[15:09:07]     vs GrowingSpheres: p=8.2184e-02, d=0.174
+[15:09:07]     vs FACE: p=8.0371e-20*, d=0.911
+[15:09:07] 
+Saved to: experiments/exp_04_edge-iiot
+[15:09:07]   [Checkpoint saved]
+[15:09:07] 
+============================================================
+EXPERIMENT 3: PRIVACY-UTILITY TRADEOFF
+============================================================
+[15:09:07] 
+  eps = 0.5...
+[15:10:45]     Validity: 98.67%, CI: (0.9685090088772251, 1.0)
+[15:10:45] 
+  eps = 1.0...
+[15:12:06]     Validity: 99.33%, CI: (0.9802666666666667, 1.0)
+[15:12:06] 
+  eps = 2.0...
+[15:13:30]     Validity: 98.67%, CI: (0.9605333333333334, 1.0)
+[15:13:30] 
+  eps = 5.0...
+[15:14:50]     Validity: 98.00%, CI: (0.9511878697320952, 1.0)
+[15:14:50] 
+  eps = 10.0...
+[15:16:40]     Validity: 96.67%, CI: (0.9336637990332223, 0.9996695343001111)
+[15:16:40] 
+Saved to: experiments/exp_04_edge-iiot
+[15:16:40]   [Checkpoint saved]
+[15:16:40] 
+============================================================
+EXPERIMENT 4: FL AGGREGATION METHODS (FAIR COMPARISON)
+============================================================
+[15:16:40] 
+  Class weights applied for imbalanced data (same as Exp 1)
+[15:16:40] 
+  [1/4] Centralized (with class weights)...
+[15:20:13]     Accuracy: 0.9940, F1-macro: 0.9313
+[15:20:13] 
+  [2/4] FedAvg (with class weights)...
+[15:35:32]     Accuracy: 0.9923, F1-macro: 0.9184
+[15:35:32] 
+  [3/4] FedProx (with class weights)...
+[16:01:42]     Accuracy: 0.9929, F1-macro: 0.9211
+[16:01:42] 
+  [4/4] FedNova (with class weights)...
+[16:16:57]     Accuracy: 0.9926, F1-macro: 0.9213
+[16:16:57] 
+  ======================================================================
+[16:16:57]   FL AGGREGATION COMPARISON (FAIR - ALL WITH CLASS WEIGHTS)
+[16:16:57]   ======================================================================
+[16:16:57]   Method              Accuracy     F1-macro  F1-weighted          Gap
+[16:16:57]   -----------------------------------------------------------------
+[16:16:57]   Centralized           0.9940       0.9313       0.9943            -
+[16:16:57]   FedAvg                0.9923       0.9184       0.9933      +0.0017
+[16:16:57]   FedProx               0.9929       0.9211       0.9938      +0.0011
+[16:16:57]   FedNova               0.9926       0.9213       0.9933      +0.0014
+[16:16:57] 
+Saved to: experiments/exp_04_edge-iiot
+[16:16:57]   [Checkpoint saved]
+[16:16:57] 
+============================================================
+EXPERIMENT 5: SCALABILITY (CLIENT COUNT) - FAIR COMPARISON
+============================================================
+[16:16:57] 
+  Class weights applied for fair comparison
+[16:16:57] 
+  Clients = 5...
+[16:31:49]     Accuracy: 0.9931, F1-macro: 0.9231, Time: 892.2s
+[16:31:49] 
+  Clients = 10...
+[16:47:05]     Accuracy: 0.9927, F1-macro: 0.9215, Time: 914.8s
+[16:47:05] 
+  Clients = 20...
+[17:02:25]     Accuracy: 0.9917, F1-macro: 0.9167, Time: 919.7s
+[17:02:25] 
+  Clients = 50...
+[17:18:02]     Accuracy: 0.9893, F1-macro: 0.9067, Time: 936.2s
+[17:18:02] 
+Saved to: experiments/exp_04_edge-iiot
+[17:18:02]   [Checkpoint saved]
+[17:18:02] 
+============================================================
+EXPERIMENT 6: NON-IID HETEROGENEITY (FAIR COMPARISON)
+============================================================
+[17:18:02] 
+  Class weights applied for fair comparison
+[17:18:02] 
+  Dirichlet alpha = 0.1 (very non-IID)...
+[17:18:02]     Active clients: 10/10
+[17:33:03]     Final Accuracy: 0.9573, F1-macro: 0.6987
+[17:33:03] 
+  Dirichlet alpha = 0.5 (moderate)...
+[17:33:03]     Active clients: 10/10
+[17:47:59]     Final Accuracy: 0.9924, F1-macro: 0.9207
+[17:47:59] 
+  Dirichlet alpha = 1.0 (moderate)...
+[17:47:59]     Active clients: 10/10
+[18:03:28]     Final Accuracy: 0.9929, F1-macro: 0.9232
+[18:03:28] 
+  Dirichlet alpha = 10.0 (near IID)...
+[18:03:28]     Active clients: 10/10
+[18:19:00]     Final Accuracy: 0.9925, F1-macro: 0.9186
+[18:19:00] 
+Saved to: experiments/exp_04_edge-iiot
+[18:19:00]   [Checkpoint saved]
+[18:19:00] 
+============================================================
+EXPERIMENT 7: MULTI-CLASS ANALYSIS
+============================================================
+[18:19:00] 
+  DDoS_UDP (30 samples)...
+[18:19:41]     Validity: 100.00%
+[18:19:41] 
+  Vulnerability_scanner (30 samples)...
+[18:20:21]     Validity: 100.00%
+[18:20:21] 
+  Normal (30 samples)...
+[18:21:36]     Validity: 97.00%
+[18:21:36] 
+  Password (30 samples)...
+[18:22:09]     Validity: 100.00%
+[18:22:09] 
+  DDoS_HTTP (30 samples)...
+[18:23:10]     Validity: 100.00%
+[18:23:10] 
+  DDoS_TCP (30 samples)...
+[18:24:56]     Validity: 92.00%
+[18:24:56] 
+  Port_Scanning (30 samples)...
+[18:25:45]     Validity: 100.00%
+[18:25:45] 
+  Ransomware (30 samples)...
+[18:26:41]     Validity: 100.00%
+[18:26:41] 
+  Uploading (30 samples)...
+[18:27:10]     Validity: 100.00%
+[18:27:10] 
+  Backdoor (30 samples)...
+[18:27:45]     Validity: 100.00%
+[18:27:45] 
+  SQL_injection (30 samples)...
+[18:29:30]     Validity: 95.00%
+[18:29:30] 
+  XSS (30 samples)...
+[18:30:07]     Validity: 100.00%
+[18:30:07] 
+  MITM (30 samples)...
+[18:30:35]     Validity: 100.00%
+[18:30:35] 
+  Fingerprinting (30 samples)...
+[18:31:44]     Validity: 98.00%
+[18:31:44] 
+Saved to: experiments/exp_04_edge-iiot
+[18:31:44]   [Checkpoint saved]
+[18:31:44] 
+============================================================
+EXPERIMENT 8: ABLATION STUDY
+============================================================
+[18:31:44] 
+  Full...
+[18:32:47]     Validity: 99.20%
+[18:32:47] 
+  No_Constraints...
+[18:32:48]     Validity: 100.00%
+[18:32:48] 
+  No_DP...
+[18:34:21]     Validity: 98.40%
+[18:34:21] 
+  No_Diversity...
+[18:35:21]     Validity: 99.20%
+[18:35:21] 
+  Contributions: constraints=-0.8%, dp=+0.8%, diversity=+0.0%
+[18:35:21] 
+Saved to: experiments/exp_04_edge-iiot
+[18:35:21]   [Checkpoint saved]
+[18:35:21] 
+============================================================
+EXPERIMENT 9: LATENCY ANALYSIS
+============================================================
+[18:35:21] 
+  max_iter = 50...
+[18:35:49]     Time: 1380.4ms (p95: 1432.0ms), Validity: 67.00%
+[18:35:49] 
+  max_iter = 100...
+[18:36:32]     Time: 2140.8ms (p95: 2854.1ms), Validity: 94.00%
+[18:36:32] 
+  max_iter = 200...
+[18:37:25]     Time: 2668.7ms (p95: 5270.6ms), Validity: 99.00%
+[18:37:25] 
+  max_iter = 300...
+[18:38:19]     Time: 2714.3ms (p95: 6371.6ms), Validity: 99.00%
+[18:38:19] 
+  max_iter = 500...
+[18:39:10]     Time: 2543.1ms (p95: 6265.4ms), Validity: 100.00%
+[18:39:10] 
+Saved to: experiments/exp_04_edge-iiot
+[18:39:10]   [Checkpoint saved]
+[18:39:10] 
+============================================================
+EXPERIMENT 10: PRIVACY ATTACK EVALUATION
+============================================================
+[18:39:10]   Samples per attack: 500
+[18:39:10] 
+  [1/3] MIA on Base Model (No DP)...
+[18:39:10]     Threshold MIA Accuracy: 50.20%
+[18:39:10]     Loss MIA Accuracy: 50.20%
+[18:39:10]     Privacy Leakage: 0.20%
+[18:39:10]     Vulnerability: LOW
+[18:39:10] 
+  [2/3] Training DP Model (eps=2.0)...
+[18:40:48]     DP Model trained
+[18:40:48] 
+  [3/3] MIA on DP Model...
+[18:40:48]     Threshold MIA Accuracy: 50.20%
+[18:40:48]     Loss MIA Accuracy: 50.40%
+[18:40:48]     Privacy Leakage: 0.40%
+[18:40:48]     Vulnerability: LOW
+[18:40:48] 
+  ==================================================
+[18:40:48]   PRIVACY COMPARISON:
+[18:40:48]   ==================================================
+[18:40:48]   No DP Leakage:   0.20%
+[18:40:48]   With DP Leakage: 0.40%
+[18:40:48]   Reduction:       -100.0%
+[18:40:48]   DP Effective:    NO
+[18:40:48] 
+Saved to: experiments/exp_04_edge-iiot
+[18:40:48]   [Checkpoint saved]
+[18:40:48] 
+============================================================
+EXPERIMENT 11: CF CASE STUDY
+============================================================
+[18:40:48]   Generating case studies for attack types...
+[18:41:04] 
+  Case 1: DDoS_UDP → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.2871
+[18:41:04]     Changes: 10 features
+[18:41:04]       • http.file_data: -0.083 → 0.949 (↑)
+[18:41:04]       • tcp.connection.rst: -0.318 → 1.673 (↑)
+[18:41:04]       • tcp.connection.syn: -0.274 → -1.116 (↓)
+[18:41:04]       • udp.port: -0.024 → 2.590 (↑)
+[18:41:04]       • dns.qry.name.len: 1.566 → -1.221 (↓)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 2: Vulnerability_scanner → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.2497
+[18:41:04]     Changes: 10 features
+[18:41:04]       • arp.opcode: -0.049 → -0.966 (↓)
+[18:41:04]       • icmp.seq_le: 2.646 → 0.885 (↓)
+[18:41:04]       • icmp.transmit_timestamp: -0.006 → -0.824 (↓)
+[18:41:04]       • http.request.method: 0.250 → -0.846 (↓)
+[18:41:04]       • http.request.version: 0.127 → -0.261 (↓)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 3: Normal → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.4101
+[18:41:04]     Changes: 10 features
+[18:41:04]       • icmp.seq_le: -0.214 → -1.394 (↓)
+[18:41:04]       • tcp.flags.ack: 0.593 → -0.581 (↓)
+[18:41:04]       • tcp.payload: 1.743 → 3.098 (↑)
+[18:41:04]       • tcp.srcport: 0.017 → -3.343 (↓)
+[18:41:04]       • udp.stream: -0.197 → -2.952 (↓)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 4: Password → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.1131
+[18:41:04]     Changes: 10 features
+[18:41:04]       • icmp.transmit_timestamp: -0.006 → -0.206 (↓)
+[18:41:04]       • http.tls_port: 0.000 → 0.118 (↑)
+[18:41:04]       • tcp.checksum: 1.494 → 1.806 (↑)
+[18:41:04]       • tcp.connection.rst: 3.146 → 4.134 (↑)
+[18:41:04]       • tcp.connection.synack: -0.218 → -1.252 (↓)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 5: DDoS_HTTP → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.3090
+[18:41:04]     Changes: 10 features
+[18:41:04]       • http.request.method: -2.697 → -1.888 (↑)
+[18:41:04]       • http.request.full_uri: -0.108 → -2.187 (↓)
+[18:41:04]       • tcp.dstport: 0.613 → -0.256 (↓)
+[18:41:04]       • tcp.flags: 0.439 → 2.527 (↑)
+[18:41:04]       • tcp.flags.ack: 0.593 → -1.151 (↓)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 6: DDoS_TCP → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.5801
+[18:41:04]     Changes: 10 features
+[18:41:04]       • http.file_data: 12.502 → 4.820 (↓)
+[18:41:04]       • http.content_length: 0.131 → -3.275 (↓)
+[18:41:04]       • http.request.full_uri: -0.029 → -2.307 (↓)
+[18:41:04]       • http.request.version: 6.532 → 0.443 (↓)
+[18:41:04]       • tcp.ack: -0.138 → 1.067 (↑)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Case 7: Port_Scanning → Benign
+[18:41:04]     Validity: ✓
+[18:41:04]     Proximity: 0.2428
+[18:41:04]     Changes: 10 features
+[18:41:04]       • arp.hw.size: -0.052 → -0.229 (↓)
+[18:41:04]       • icmp.checksum: -0.203 → 0.864 (↑)
+[18:41:04]       • http.request.method: -2.697 → -1.558 (↑)
+[18:41:04]       • tcp.checksum: -0.679 → -2.148 (↓)
+[18:41:04]       • tcp.dstport: -0.952 → -0.483 (↑)
+[18:41:04]       ... and 5 more changes
+[18:41:04] 
+  Analyzing feature importance from CFs...
+[18:41:04] 
+  Top 10 Most Changed Features in CFs:
+[18:41:04]   Rank   Feature                           Count   Avg Magnitude
+[18:41:04]   ------------------------------------------------------------
+[18:41:04]   1      dns.qry.name.len                      4          1.8502
+[18:41:04]   2      mqtt.len                              4          2.6936
+[18:41:04]   3      mqtt.topic                            3          0.7749
+[18:41:04]   4      udp.stream                            3          1.5349
+[18:41:04]   5      http.request.method                   3          1.0144
+[18:41:04]   6      tcp.dstport                           2          0.6693
+[18:41:04]   7      dns.qry.type                          2          1.1883
+[18:41:04]   8      mbtcp.trans_id                        2          1.3449
+[18:41:04]   9      tcp.checksum                          2          0.8902
+[18:41:04]   10     tcp.flags                             2          2.9600
+[18:41:04] 
+Saved to: experiments/exp_04_edge-iiot
+[18:41:04]   [Checkpoint saved]
+[18:41:04] 
+============================================================
+SUMMARY
+============================================================
+[18:41:04] Model Accuracy: 0.9938
+[18:41:04] F1-Score (macro): 0.9321
+[18:41:04] F1-Score (weighted): 0.9941
+[18:41:04] All experiments completed (check log for any errors)
+[18:41:04] 
+============================================================
+GENERATING FIGURES
+============================================================
+[18:41:07] Error generating figures: unhashable type: 'dict'
+[18:41:07] 
+Saved to: experiments/exp_04_edge-iiot

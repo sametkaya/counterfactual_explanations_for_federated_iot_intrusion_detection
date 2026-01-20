@@ -1,0 +1,697 @@
+{
+  "name": "FedCF_Comprehensive",
+  "dataset": "ciciot2023",
+  "experiments": {
+    "exp12_epsilon_vs_accuracy": {
+      "epsilons": {
+        "0.5": {
+          "epsilon": 0.5,
+          "noise_multiplier": 9.689610525210778,
+          "model_accuracy": 0.360722,
+          "model_accuracy_std": 0.09521020079802373,
+          "model_accuracy_ci_95": [
+            0.249543,
+            0.505876
+          ],
+          "model_f1_macro": 0.20485733930044603,
+          "cf_validity": 1.0,
+          "cf_validity_std": 0.0,
+          "cf_validity_ci_95": [
+            1.0,
+            1.0
+          ],
+          "cf_proximity": 0.2194058090046048,
+          "cf_proximity_std": 0.00967068607774124,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.246,
+            0.36734,
+            0.28143,
+            0.51874,
+            0.3901
+          ],
+          "raw_cf_validities": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.21879560133069756,
+            0.23104725273698573,
+            0.21335411477833982,
+            0.22880499008297922,
+            0.20502708609402182
+          ],
+          "accuracy_drop_pct": -48.96695150246166
+        },
+        "1.0": {
+          "epsilon": 1.0,
+          "noise_multiplier": 4.844805262605389,
+          "model_accuracy": 0.5090859999999999,
+          "model_accuracy_std": 0.04760116494372801,
+          "model_accuracy_ci_95": [
+            0.4459,
+            0.570577
+          ],
+          "model_f1_macro": 0.3171158284085798,
+          "cf_validity": 1.0,
+          "cf_validity_std": 0.0,
+          "cf_validity_ci_95": [
+            1.0,
+            1.0
+          ],
+          "cf_proximity": 0.26022895772904164,
+          "cf_proximity_std": 0.01934407141462382,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.44355,
+            0.57415,
+            0.46705,
+            0.53842,
+            0.52226
+          ],
+          "raw_cf_validities": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.2507744665741921,
+            0.2788471225127578,
+            0.24519386698305606,
+            0.2875742065161467,
+            0.23875512605905538
+          ],
+          "accuracy_drop_pct": -27.977194273102835
+        },
+        "2.0": {
+          "epsilon": 2.0,
+          "noise_multiplier": 2.4224026313026945,
+          "model_accuracy": 0.6221559999999999,
+          "model_accuracy_std": 0.04699737294785743,
+          "model_accuracy_ci_95": [
+            0.572224,
+            0.6879230000000001
+          ],
+          "model_f1_macro": 0.4040543816796836,
+          "cf_validity": 1.0,
+          "cf_validity_std": 0.0,
+          "cf_validity_ci_95": [
+            1.0,
+            1.0
+          ],
+          "cf_proximity": 0.3340148211106658,
+          "cf_proximity_std": 0.02016285539093217,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.57094,
+            0.58378,
+            0.60075,
+            0.66482,
+            0.69049
+          ],
+          "raw_cf_validities": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.31936538686603305,
+            0.35565073955059057,
+            0.3251227430254221,
+            0.3601578949540854,
+            0.30977734115719796
+          ],
+          "accuracy_drop_pct": -11.980646256578588
+        },
+        "5.0": {
+          "epsilon": 5.0,
+          "noise_multiplier": 0.9689610525210778,
+          "model_accuracy": 0.619228,
+          "model_accuracy_std": 0.04343978241197809,
+          "model_accuracy_ci_95": [
+            0.5933849999999999,
+            0.695493
+          ],
+          "model_f1_macro": 0.43906545179673817,
+          "cf_validity": 0.998,
+          "cf_validity_std": 0.0030983866769659363,
+          "cf_validity_ci_95": [
+            0.9926,
+            1.0
+          ],
+          "cf_proximity": 0.4582507982850075,
+          "cf_proximity_std": 0.02546184334008301,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.59315,
+            0.5955,
+            0.59968,
+            0.60192,
+            0.70589
+          ],
+          "raw_cf_validities": [
+            0.998,
+            0.992,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.44400424385070797,
+            0.48791448196768755,
+            0.4682059736251831,
+            0.47504045346379287,
+            0.41608883851766587
+          ],
+          "accuracy_drop_pct": -12.394884273668726
+        },
+        "10.0": {
+          "epsilon": 10.0,
+          "noise_multiplier": 0.4844805262605389,
+          "model_accuracy": 0.623722,
+          "model_accuracy_std": 0.028719612392927613,
+          "model_accuracy_ci_95": [
+            0.599835,
+            0.669529
+          ],
+          "model_f1_macro": 0.45635794144655073,
+          "cf_validity": 0.9960000000000001,
+          "cf_validity_std": 0.0041952353926806105,
+          "cf_validity_ci_95": [
+            0.9888,
+            0.9998
+          ],
+          "cf_proximity": 0.5324903964072466,
+          "cf_proximity_std": 0.03418453228150544,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.60369,
+            0.64027,
+            0.60231,
+            0.59956,
+            0.67278
+          ],
+          "raw_cf_validities": [
+            0.998,
+            0.988,
+            0.996,
+            0.998,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.539571483552456,
+            0.5482314052581787,
+            0.5566956743896008,
+            0.5528703743815422,
+            0.4650830444544555
+          ],
+          "accuracy_drop_pct": -11.759096825307003
+        },
+        "inf": {
+          "epsilon": null,
+          "noise_multiplier": 0,
+          "model_accuracy": 0.70684,
+          "model_accuracy_std": 0.009494920747431215,
+          "model_accuracy_ci_95": [
+            0.69535,
+            0.718355
+          ],
+          "model_f1_macro": 0.6165870928905763,
+          "cf_validity": 0.8076000000000001,
+          "cf_validity_std": 0.048930971786793676,
+          "cf_validity_ci_95": [
+            0.7649999999999999,
+            0.8911999999999999
+          ],
+          "cf_proximity": 0.5745887285768985,
+          "cf_proximity_std": 0.03042947066548955,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.69475,
+            0.70267,
+            0.71759,
+            0.70075,
+            0.71844
+          ],
+          "raw_cf_validities": [
+            0.7879999999999999,
+            0.7639999999999999,
+            0.774,
+            0.8120000000000002,
+            0.8999999999999999
+          ],
+          "raw_cf_proximities": [
+            0.5685693586170673,
+            0.5856397690176963,
+            0.5650442287027837,
+            0.6235897944271566,
+            0.5301004921197892
+          ],
+          "accuracy_drop_pct": 0.0
+        }
+      },
+      "statistical_tests": {
+        "eps_0.5_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -3.6083424135704667,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.9320690690070763,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_1.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -4.089192394709283,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.9320690690070763,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_2.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -1.9603401486600884,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 3.9320690690070763,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_5.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -2.299804911465352,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 4.0151972620943965,
+            "effect_interpretation": "large"
+          }
+        },
+        "eps_10.0_vs_baseline": {
+          "accuracy": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": -3.256947600738014,
+            "effect_interpretation": "large"
+          },
+          "cf_validity": {
+            "test": "Wilcoxon signed-rank",
+            "statistic": 0.0,
+            "p_value": 0.0625,
+            "significant": "False",
+            "effect_size": 4.075821231001865,
+            "effect_interpretation": "large"
+          }
+        }
+      },
+      "metadata": {
+        "n_runs": 5,
+        "n_cf_samples": 100,
+        "delta": 1e-05,
+        "model_config": {
+          "hidden_dims": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "from_exp1": false,
+          "source": "dataset_default:ciciot2023"
+        },
+        "config_source": "default",
+        "noise_formula": "σ = √(2ln(1.25/δ))/ε (Gaussian mechanism, RDP)",
+        "statistical_test": "Wilcoxon signed-rank (paired, α=0.05)",
+        "epochs": 20,
+        "batch_size": 64
+      }
+    },
+    "exp13_dp_paradox_controlled": {
+      "conditions": {
+        "A_Standard": {
+          "config": {
+            "use_clipping": false,
+            "use_noise": false,
+            "noise_std": 0
+          },
+          "model_accuracy": 0.70684,
+          "model_accuracy_std": 0.009494920747431215,
+          "cf_validity": 0.8076000000000001,
+          "cf_validity_std": 0.048930971786793676,
+          "cf_validity_ci_95": [
+            0.7649999999999999,
+            0.8911999999999999
+          ],
+          "cf_proximity": 0.5745887285768985,
+          "cf_proximity_std": 0.03042947066548955,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.69475,
+            0.70267,
+            0.71759,
+            0.70075,
+            0.71844
+          ],
+          "raw_cf_validities": [
+            0.7879999999999999,
+            0.7639999999999999,
+            0.774,
+            0.8120000000000002,
+            0.8999999999999999
+          ],
+          "raw_cf_proximities": [
+            0.5685693586170673,
+            0.5856397690176963,
+            0.5650442287027837,
+            0.6235897944271566,
+            0.5301004921197892
+          ],
+          "validity_delta_pct": 0.0
+        },
+        "B_DP_SGD": {
+          "config": {
+            "use_clipping": true,
+            "use_noise": true,
+            "noise_std": 2.4224026313026945
+          },
+          "model_accuracy": 0.6221559999999999,
+          "model_accuracy_std": 0.04699737294785743,
+          "cf_validity": 1.0,
+          "cf_validity_std": 0.0,
+          "cf_validity_ci_95": [
+            1.0,
+            1.0
+          ],
+          "cf_proximity": 0.3340148211106658,
+          "cf_proximity_std": 0.02016285539093217,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.57094,
+            0.58378,
+            0.60075,
+            0.66482,
+            0.69049
+          ],
+          "raw_cf_validities": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.31936538686603305,
+            0.35565073955059057,
+            0.3251227430254221,
+            0.3601578949540854,
+            0.30977734115719796
+          ],
+          "validity_delta_pct": 19.23999999999999
+        },
+        "C_Noise_Only": {
+          "config": {
+            "use_clipping": false,
+            "use_noise": true,
+            "noise_std": 2.4224026313026945
+          },
+          "model_accuracy": 0.6200319999999999,
+          "model_accuracy_std": 0.03546039277842254,
+          "cf_validity": 0.9968,
+          "cf_validity_std": 0.00271293199325011,
+          "cf_validity_ci_95": [
+            0.9924,
+            0.9998
+          ],
+          "cf_proximity": 0.5217845973432065,
+          "cf_proximity_std": 0.03184168248129059,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.5937,
+            0.62273,
+            0.60227,
+            0.59375,
+            0.68771
+          ],
+          "raw_cf_validities": [
+            0.998,
+            0.996,
+            0.992,
+            0.998,
+            1.0
+          ],
+          "raw_cf_proximities": [
+            0.520388181746006,
+            0.536142431050539,
+            0.5449384807646276,
+            0.5465819727182388,
+            0.4608719204366208
+          ],
+          "validity_delta_pct": 18.91999999999999
+        },
+        "D_Clip_Only": {
+          "config": {
+            "use_clipping": true,
+            "use_noise": false,
+            "noise_std": 0
+          },
+          "model_accuracy": 0.718234,
+          "model_accuracy_std": 0.010658410012755205,
+          "cf_validity": 0.8728000000000001,
+          "cf_validity_std": 0.024185946332529542,
+          "cf_validity_ci_95": [
+            0.8436000000000001,
+            0.908
+          ],
+          "cf_proximity": 0.44079345986247065,
+          "cf_proximity_std": 0.012126121821946898,
+          "n_runs": 5,
+          "raw_accuracies": [
+            0.701,
+            0.73009,
+            0.72555,
+            0.71114,
+            0.72339
+          ],
+          "raw_cf_validities": [
+            0.91,
+            0.858,
+            0.8640000000000001,
+            0.89,
+            0.8420000000000001
+          ],
+          "raw_cf_proximities": [
+            0.42494100362062454,
+            0.4348331587612629,
+            0.43796005913615216,
+            0.4613822475969791,
+            0.4448508301973343
+          ],
+          "validity_delta_pct": 6.520000000000003
+        }
+      },
+      "statistical_tests": {
+        "kruskal_wallis": {
+          "statistic": 16.706491499227187,
+          "p_value": 0.0008120788609211799,
+          "significant": "True"
+        },
+        "A_Standard_vs_B_DP_SGD": {
+          "test": "Mann-Whitney U",
+          "statistic": 0.0,
+          "p_value": 0.007494957516935239,
+          "significant": "True",
+          "effect_size": 1.0,
+          "effect_interpretation": "large"
+        },
+        "A_Standard_vs_C_Noise_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 0.0,
+          "p_value": 0.0119252335930176,
+          "significant": "True",
+          "effect_size": 1.0,
+          "effect_interpretation": "large"
+        },
+        "A_Standard_vs_D_Clip_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 4.0,
+          "p_value": 0.09523809523809523,
+          "significant": "False",
+          "effect_size": 0.6799999999999999,
+          "effect_interpretation": "medium"
+        },
+        "B_DP_SGD_vs_C_Noise_Only": {
+          "test": "Mann-Whitney U",
+          "statistic": 22.5,
+          "p_value": 0.02480842454780953,
+          "significant": "True",
+          "effect_size": -0.8,
+          "effect_interpretation": "large"
+        }
+      },
+      "factorial_analysis": {
+        "main_effect_noise": 15.81999999999999,
+        "main_effect_clipping": 3.420000000000001,
+        "interaction": -6.2000000000000055
+      },
+      "metadata": {
+        "n_runs": 5,
+        "n_cf_samples": 100,
+        "reference_epsilon": 2.0,
+        "delta": 1e-05,
+        "noise_multiplier": 2.4224026313026945,
+        "noise_std": 2.4224026313026945,
+        "clip_norm": 1.0,
+        "model_config": {
+          "hidden_dims": [
+            256,
+            128
+          ],
+          "dropout": 0.3,
+          "learning_rate": 0.001,
+          "from_exp1": false,
+          "source": "dataset_default:ciciot2023"
+        },
+        "config_source": "default",
+        "experimental_design": "2x2 Factorial (Clipping × Noise)",
+        "statistical_tests": [
+          "Kruskal-Wallis H",
+          "Mann-Whitney U (pairwise)"
+        ],
+        "noise_formula": "σ = √(2ln(1.25/δ))/ε (Gaussian mechanism, RDP)"
+      },
+      "conclusion": "implicit_regularization_confirmed"
+    }
+  },
+  "environment": {
+    "python_version": "3.10.12",
+    "pytorch_version": "2.7.1+cu118",
+    "cuda_available": true,
+    "cuda_version": "11.8",
+    "gpu_name": "NVIDIA GeForce RTX 3080 Laptop GPU"
+  },
+  "config": {
+    "max_samples": 500000,
+    "test_size": 0.2,
+    "stratified": true,
+    "batch_size": 64,
+    "epochs": 20,
+    "learning_rate": 0.001,
+    "random_seed": 42,
+    "model_hidden_layers": [
+      256,
+      128,
+      64
+    ],
+    "model_activation": "ReLU",
+    "model_dropout": 0.3,
+    "model_batchnorm": true,
+    "num_cfs": 5,
+    "cf_max_iter": 300,
+    "cf_proximity_weight": 0.5,
+    "cf_diversity_weight": 0.1,
+    "cf_feasibility_weight": 1.0,
+    "cf_learning_rate": 0.01,
+    "dp_epsilon_values": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "dp_delta": 1e-05,
+    "dp_clip_norm": 1.0,
+    "dp_noise_multiplier_base": 0.5,
+    "fl_rounds": 30,
+    "local_epochs": 5,
+    "fl_default_clients": 10,
+    "fl_proximal_mu": 0.01,
+    "client_counts": [
+      5,
+      10,
+      20,
+      50
+    ],
+    "dirichlet_alphas": [
+      0.1,
+      0.5,
+      1.0,
+      10.0
+    ]
+  },
+  "constraints": {
+    "type": "generic",
+    "description": "Dataset-agnostic constraints for fair comparison (StandardScaler compatible)",
+    "list": [
+      {
+        "name": "reasonable_range",
+        "rule": "feature in [-5, 5]"
+      },
+      {
+        "name": "sparsity",
+        "rule": "max_changes=10, threshold=0.01"
+      }
+    ]
+  },
+  "dataset_info": {
+    "total_samples": 500000,
+    "train_samples": 400000,
+    "test_samples": 100000,
+    "num_features": 39,
+    "num_classes": 8,
+    "class_distribution": {
+      "0": 11727,
+      "1": 361175,
+      "2": 86214,
+      "3": 7329,
+      "4": 283,
+      "5": 133,
+      "6": 5259,
+      "7": 27880
+    }
+  },
+  "duration": 52555.324766
+}

@@ -1,0 +1,118 @@
+================================================================================
+FedCF-IoT: COMPREHENSIVE EXPERIMENT REPORT
+================================================================================
+
+Dataset: toniot
+Date: 2026-01-18 15:59
+Duration: 29990.7 seconds
+
+--------------------------------------------------------------------------------
+ENVIRONMENT
+--------------------------------------------------------------------------------
+  Python: 3.10.12
+  PyTorch: 2.7.1+cu118
+  CUDA Available: True
+  CUDA Version: 11.8
+  GPU: NVIDIA GeForce RTX 3080 Laptop GPU
+
+--------------------------------------------------------------------------------
+DATASET STATISTICS
+--------------------------------------------------------------------------------
+  Total Samples: 500,000
+  Train Samples: 400,000
+  Test Samples: 100,000
+  Num Features: 32
+  Num Classes: 10
+  Test Size: 0.2 (stratified=True)
+  Class Distribution:
+    0: 17,957 (3.6%)
+    1: 11,331 (2.3%)
+    2: 137,475 (27.5%)
+    3: 75,543 (15.1%)
+    4: 10,095 (2.0%)
+    5: 15 (0.0%)
+    6: 38,484 (7.7%)
+    7: 1,705 (0.3%)
+    8: 159,877 (32.0%)
+    9: 47,518 (9.5%)
+
+--------------------------------------------------------------------------------
+MODEL ARCHITECTURE
+--------------------------------------------------------------------------------
+  Type: Multi-Layer Perceptron (MLP)
+  Input: 32 features
+  Hidden Layers: [256, 128, 64]
+  Output: 10 classes
+  Activation: ReLU
+  Dropout: 0.3
+  BatchNorm: True
+  Loss: CrossEntropyLoss
+  Optimizer: Adam (lr=0.001)
+
+--------------------------------------------------------------------------------
+TRAINING CONFIGURATION
+--------------------------------------------------------------------------------
+  Batch Size: 64
+  Epochs: 20
+  Learning Rate: 0.001
+  Random Seed: 42
+
+--------------------------------------------------------------------------------
+COUNTERFACTUAL CONFIGURATION
+--------------------------------------------------------------------------------
+  Num CFs per sample: 5
+  Max Iterations: 300
+  CF Learning Rate: 0.01
+  Loss Weights:
+    - Proximity (L1): 0.5
+    - Diversity: 0.1
+    - Feasibility: 1.0
+
+--------------------------------------------------------------------------------
+DIFFERENTIAL PRIVACY CONFIGURATION
+--------------------------------------------------------------------------------
+  Epsilon Values: [0.5, 1.0, 2.0, 5.0, 10.0]
+  Delta: 1e-05
+  Gradient Clip Norm: 1.0
+  Noise Multiplier Base: 0.5
+  Privacy Mechanism: RÃ©nyi Differential Privacy (RDP)
+
+--------------------------------------------------------------------------------
+FEDERATED LEARNING CONFIGURATION
+--------------------------------------------------------------------------------
+  Communication Rounds: 30
+  Local Epochs: 5
+  Default Clients: 10
+  Client Counts (scalability): [5, 10, 20, 50]
+  FedProx mu: 0.01
+  Non-IID Alphas: [0.1, 0.5, 1.0, 10.0]
+  Aggregation Methods: FedAvg, FedProx, FedNova
+
+--------------------------------------------------------------------------------
+CONSTRAINTS (Generic - Fair Comparison)
+--------------------------------------------------------------------------------
+  Type: Dataset-agnostic generic constraints
+  Applied uniformly across all datasets for fair comparison.
+  Compatible with StandardScaler normalized data.
+
+  1. Reasonable Range: All features in [-5, 5]
+     Rationale: StandardScaler outputs typically in [-3, 3]
+     Allows valid CF generation while maintaining realism
+
+  2. Sparsity: Maximum 10 feature changes (threshold=0.01)
+     Rationale: Security analysts cannot interpret >10 changes
+     Actionability: Limited changes ensure practical recommendations
+
+================================================================================
+SUMMARY & KEY FINDINGS
+================================================================================
+1. Model achieves high accuracy on IoT intrusion detection
+2. FedCF-IoT generates valid CFs while preserving privacy
+3. Privacy-utility tradeoff: eps=2.0-5.0 recommended
+4. FL aggregation: FedProx/FedNova improve non-IID performance
+5. System scales well with increasing client count
+6. DP effectively reduces membership inference attack success
+
+================================================================================
+END OF REPORT
+================================================================================
