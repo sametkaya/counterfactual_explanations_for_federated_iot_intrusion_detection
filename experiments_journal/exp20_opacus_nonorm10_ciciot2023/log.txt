@@ -1,0 +1,100 @@
+[01:10:54] === exp20_opacus_nonorm10 | ciciot2023 | 2026-10-21 01:10 ===
+[01:10:54] device=cpu arch=nonorm sigma_arms=True (sigma=2.4224) n_runs=10 epochs=20 batch=256 target_eps=[2.0, 8.0] delta=1e-05 C=1.0 cf_samples=100 cf_max_iter=300
+[01:10:54] train=160000 test=40000 F=39 C=8
+[01:10:54] 
+=== run 1/10 (seed 42) ===
+[01:24:06]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.689 F1=0.571 val=0.734 |dm/dx|=4.941 TrH=0.687 m=6.407 d_lin=1.297 ECE=0.119
+[01:31:11]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.716 F1=0.438 val=0.972 |dm/dx|=0.800 TrH=0.400 m=0.446 d_lin=0.558 ECE=0.284
+[01:33:33]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.304 F1=0.218 val=1.000 |dm/dx|=0.987 TrH=0.513 m=0.225 d_lin=0.228 ECE=0.178
+[01:33:33]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[01:47:26]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.833 F1=0.484 val=0.926 |dm/dx|=3.755 TrH=0.525 m=5.513 d_lin=1.468 ECE=0.110
+[01:47:27]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[02:02:28]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.834 F1=0.496 val=0.908 |dm/dx|=4.113 TrH=0.558 m=5.944 d_lin=1.445 ECE=0.111
+[02:02:28] 
+=== run 2/10 (seed 43) ===
+[02:13:07]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.695 F1=0.578 val=0.858 |dm/dx|=6.400 TrH=1.089 m=8.878 d_lin=1.387 ECE=0.126
+[02:17:42]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.660 F1=0.384 val=0.994 |dm/dx|=0.952 TrH=0.555 m=0.383 d_lin=0.402 ECE=0.367
+[02:20:13]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.225 F1=0.105 val=1.000 |dm/dx|=0.939 TrH=0.488 m=0.362 d_lin=0.385 ECE=0.048
+[02:20:13]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[02:34:04]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.450 val=0.948 |dm/dx|=4.216 TrH=0.666 m=6.297 d_lin=1.494 ECE=0.120
+[02:34:05]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[02:47:00]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.484 val=0.956 |dm/dx|=4.896 TrH=1.031 m=6.593 d_lin=1.347 ECE=0.119
+[02:47:00] 
+=== run 3/10 (seed 44) ===
+[03:01:17]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.738 F1=0.598 val=0.548 |dm/dx|=5.861 TrH=1.261 m=7.505 d_lin=1.280 ECE=0.062
+[03:06:30]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.702 F1=0.410 val=0.998 |dm/dx|=1.003 TrH=0.451 m=0.662 d_lin=0.660 ECE=0.280
+[03:08:59]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.447 F1=0.179 val=1.000 |dm/dx|=1.085 TrH=0.502 m=0.282 d_lin=0.260 ECE=0.196
+[03:09:00]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[03:24:57]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.463 val=0.910 |dm/dx|=4.026 TrH=0.939 m=5.988 d_lin=1.487 ECE=0.121
+[03:24:57]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[03:39:57]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.834 F1=0.491 val=0.894 |dm/dx|=4.342 TrH=1.036 m=6.249 d_lin=1.439 ECE=0.117
+[03:39:57] 
+=== run 4/10 (seed 45) ===
+[03:52:00]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.688 F1=0.598 val=0.774 |dm/dx|=5.951 TrH=0.828 m=8.658 d_lin=1.455 ECE=0.123
+[03:56:39]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.646 F1=0.426 val=0.994 |dm/dx|=1.042 TrH=0.622 m=0.626 d_lin=0.600 ECE=0.222
+[03:59:09]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.261 F1=0.189 val=1.000 |dm/dx|=1.265 TrH=0.669 m=0.322 d_lin=0.255 ECE=0.065
+[03:59:09]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[04:11:44]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.465 val=0.976 |dm/dx|=3.699 TrH=0.487 m=5.616 d_lin=1.518 ECE=0.100
+[04:11:44]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[04:23:27]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.490 val=0.982 |dm/dx|=4.027 TrH=0.617 m=5.861 d_lin=1.456 ECE=0.095
+[04:23:27] 
+=== run 5/10 (seed 46) ===
+[04:35:54]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.692 F1=0.561 val=0.756 |dm/dx|=5.341 TrH=1.279 m=8.387 d_lin=1.570 ECE=0.122
+[04:40:29]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.635 F1=0.422 val=0.996 |dm/dx|=1.098 TrH=0.655 m=0.592 d_lin=0.539 ECE=0.272
+[04:43:14]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.085 F1=0.096 val=1.000 |dm/dx|=1.051 TrH=0.489 m=0.239 d_lin=0.227 ECE=0.192
+[04:43:14]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[04:56:41]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.830 F1=0.446 val=0.944 |dm/dx|=3.801 TrH=0.510 m=5.834 d_lin=1.535 ECE=0.114
+[04:56:41]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[05:10:43]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.832 F1=0.482 val=0.928 |dm/dx|=4.270 TrH=0.397 m=6.188 d_lin=1.449 ECE=0.113
+[05:10:43] 
+=== run 6/10 (seed 47) ===
+[05:22:47]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.694 F1=0.577 val=0.764 |dm/dx|=5.553 TrH=1.044 m=7.376 d_lin=1.328 ECE=0.120
+[05:27:37]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.770 F1=0.370 val=0.994 |dm/dx|=0.903 TrH=0.540 m=0.749 d_lin=0.829 ECE=0.359
+[05:29:35]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.080 F1=0.076 val=1.000 |dm/dx|=1.113 TrH=0.555 m=0.202 d_lin=0.181 ECE=0.196
+[05:29:36]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[05:44:08]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.448 val=0.934 |dm/dx|=4.085 TrH=0.931 m=5.738 d_lin=1.405 ECE=0.109
+[05:44:09]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[05:58:31]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.479 val=0.938 |dm/dx|=4.641 TrH=0.825 m=6.097 d_lin=1.314 ECE=0.111
+[05:58:31] 
+=== run 7/10 (seed 48) ===
+[06:09:57]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.690 F1=0.555 val=0.752 |dm/dx|=6.895 TrH=0.960 m=10.393 d_lin=1.507 ECE=0.131
+[06:15:31]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.683 F1=0.447 val=0.996 |dm/dx|=1.008 TrH=0.446 m=0.538 d_lin=0.534 ECE=0.320
+[06:18:21]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.222 F1=0.229 val=0.998 |dm/dx|=1.014 TrH=0.535 m=0.257 d_lin=0.253 ECE=0.146
+[06:18:22]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[06:32:27]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.439 val=0.940 |dm/dx|=3.873 TrH=0.905 m=5.760 d_lin=1.487 ECE=0.109
+[06:32:27]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[06:46:38]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.483 val=0.936 |dm/dx|=4.425 TrH=1.056 m=6.092 d_lin=1.377 ECE=0.106
+[06:46:38] 
+=== run 8/10 (seed 49) ===
+[06:58:52]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.671 F1=0.535 val=0.772 |dm/dx|=5.922 TrH=0.528 m=9.023 d_lin=1.524 ECE=0.152
+[07:03:28]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.565 F1=0.433 val=1.000 |dm/dx|=0.769 TrH=0.487 m=0.394 d_lin=0.512 ECE=0.252
+[07:06:03]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.109 F1=0.169 val=1.000 |dm/dx|=0.981 TrH=0.423 m=0.247 d_lin=0.252 ECE=0.176
+[07:06:03]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[07:20:46]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.465 val=0.936 |dm/dx|=4.170 TrH=1.240 m=5.542 d_lin=1.329 ECE=0.105
+[07:20:47]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[07:36:31]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.834 F1=0.489 val=0.930 |dm/dx|=4.671 TrH=1.796 m=5.840 d_lin=1.250 ECE=0.102
+[07:36:31] 
+=== run 9/10 (seed 50) ===
+[07:51:28]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.704 F1=0.556 val=0.616 |dm/dx|=6.021 TrH=1.379 m=9.804 d_lin=1.628 ECE=0.097
+[07:59:44]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.574 F1=0.424 val=0.968 |dm/dx|=0.808 TrH=0.428 m=0.355 d_lin=0.439 ECE=0.252
+[08:02:39]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.115 F1=0.128 val=1.000 |dm/dx|=0.908 TrH=0.494 m=0.192 d_lin=0.211 ECE=0.177
+[08:02:39]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[08:18:12]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.831 F1=0.462 val=0.908 |dm/dx|=4.158 TrH=0.522 m=5.718 d_lin=1.375 ECE=0.110
+[08:18:12]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[08:32:49]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.487 val=0.910 |dm/dx|=4.547 TrH=0.693 m=6.112 d_lin=1.344 ECE=0.109
+[08:32:49] 
+=== run 10/10 (seed 51) ===
+[08:47:06]   NN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.682 F1=0.568 val=0.506 |dm/dx|=6.830 TrH=1.089 m=10.060 d_lin=1.473 ECE=0.134
+[08:54:36]   SIG_C_noise_only: eps_spent=inf sigma_mult=2.422 acc=0.579 F1=0.428 val=0.980 |dm/dx|=1.001 TrH=0.616 m=0.676 d_lin=0.676 ECE=0.233
+[08:57:43]   SIG_B_clip_noise: eps_spent=inf sigma_mult=2.422 acc=0.371 F1=0.239 val=1.000 |dm/dx|=0.948 TrH=0.546 m=0.384 d_lin=0.405 ECE=0.117
+[08:57:43]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[09:12:20]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.830 F1=0.444 val=0.944 |dm/dx|=3.943 TrH=0.705 m=5.781 d_lin=1.466 ECE=0.107
+[09:12:20]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[09:26:27]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.833 F1=0.484 val=0.950 |dm/dx|=4.489 TrH=0.605 m=6.114 d_lin=1.362 ECE=0.107
+[09:26:27] 
+=== contrasts vs NN_baseline (mean deltas) ===
+[09:26:27]   SIG_C_noise_only_minus_NN_baseline: accuracy=-0.041, f1_macro=-0.152, cf_validity=+0.281, ece=+0.166, margin_grad_norm=-5.033, margin_logit=-8.107, d_lin=-0.870
+[09:26:27]   SIG_B_clip_noise_minus_NN_baseline: accuracy=-0.472, f1_macro=-0.407, cf_validity=+0.292, ece=+0.031, margin_grad_norm=-4.943, margin_logit=-8.378, d_lin=-1.179
+[09:26:27]   DP_eps2_minus_NN_baseline: accuracy=+0.137, f1_macro=-0.113, cf_validity=+0.229, ece=-0.008, margin_grad_norm=-1.999, margin_logit=-2.870, d_lin=+0.011
+[09:26:27]   DP_eps8_minus_NN_baseline: accuracy=+0.139, f1_macro=-0.083, cf_validity=+0.225, ece=-0.010, margin_grad_norm=-1.529, margin_logit=-2.540, d_lin=-0.067
+[09:26:27] saved -> experiments_journal/exp20_opacus_nonorm10_ciciot2023/results.json

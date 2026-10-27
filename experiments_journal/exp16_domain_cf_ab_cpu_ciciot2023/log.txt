@@ -1,0 +1,52 @@
+[14:38:53] === exp16_domain_cf_ab_cpu | ciciot2023 | 2026-10-23 14:38 ===
+[14:38:54] semantics[data]: binary=0 categorical=1 count=8 continuous=30 immutable=0 onehot_groups={} cf_max_iter=300 n_samples=100 snap_every=10 n_runs=5
+[14:38:54]    continuous : ['Header_Length', 'Time_To_Live', 'Rate', 'fin_flag_number', 'syn_flag_number', 'rst_flag_number', 'psh_flag_number', 'ack_flag_number', 'ece_flag_number', 'cwr_flag_number', 'HTTP', 'HTTPS', 'DNS', 'Telnet', 'SMTP', 'SSH', 'IRC', 'TCP', 'UDP', 'DHCP', 'ARP', 'ICMP', 'IGMP', 'IPv', 'LLC', 'AVG', 'Std', 'Tot size', 'IAT', 'Variance']
+[14:38:54]    categorical: ['Protocol Type']
+[14:38:54]    count      : ['ack_count', 'syn_count', 'fin_count', 'rst_count', 'Tot sum', 'Min', 'Max', 'Number']
+[14:38:54] 
+=== run 1/5 (seed 42) ===
+[14:40:22] 
+--- detector A_Standard (clip=False, noise=False, seed=42) ---
+[15:01:12] [A_Standard] acc=0.729  GENERIC: validity=0.910 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.760 feasibility=1.000 actionability=0.760 sparsity=9.7  (n=100)
+[15:02:53] 
+--- detector B_DP_SGD (clip=True, noise=True, seed=42) ---
+[15:15:06] [B_DP_SGD] acc=0.209  GENERIC: validity=1.000 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.970 feasibility=1.000 actionability=0.970 sparsity=9.5  (n=100)
+[15:15:06] 
+=== run 2/5 (seed 43) ===
+[15:16:33] 
+--- detector A_Standard (clip=False, noise=False, seed=43) ---
+[15:36:43] [A_Standard] acc=0.699  GENERIC: validity=0.890 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.820 feasibility=1.000 actionability=0.820 sparsity=9.8  (n=100)
+[15:38:24] 
+--- detector B_DP_SGD (clip=True, noise=True, seed=43) ---
+[15:45:31] [B_DP_SGD] acc=0.622  GENERIC: validity=1.000 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=0.940 feasibility=1.000 actionability=0.940 sparsity=9.6  (n=100)
+[15:45:31] 
+=== run 3/5 (seed 44) ===
+[15:46:59] 
+--- detector A_Standard (clip=False, noise=False, seed=44) ---
+[16:05:43] [A_Standard] acc=0.694  GENERIC: validity=0.910 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.860 feasibility=1.000 actionability=0.860 sparsity=9.8  (n=100)
+[16:07:24] 
+--- detector B_DP_SGD (clip=True, noise=True, seed=44) ---
+[16:17:29] [B_DP_SGD] acc=0.384  GENERIC: validity=1.000 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.980 feasibility=1.000 actionability=0.980 sparsity=9.7  (n=100)
+[16:17:29] 
+=== run 4/5 (seed 45) ===
+[16:18:57] 
+--- detector A_Standard (clip=False, noise=False, seed=45) ---
+[16:38:22] [A_Standard] acc=0.691  GENERIC: validity=0.880 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.790 feasibility=1.000 actionability=0.790 sparsity=9.8  (n=100)
+[16:39:59] 
+--- detector B_DP_SGD (clip=True, noise=True, seed=45) ---
+[16:48:26] [B_DP_SGD] acc=0.255  GENERIC: validity=0.980 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=0.960 feasibility=1.000 actionability=0.960 sparsity=9.6  (n=100)
+[16:48:26] 
+=== run 5/5 (seed 46) ===
+[16:49:51] 
+--- detector A_Standard (clip=False, noise=False, seed=46) ---
+[17:12:04] [A_Standard] acc=0.709  GENERIC: validity=0.800 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.810 feasibility=1.000 actionability=0.810 sparsity=9.8  (n=100)
+[17:13:42] 
+--- detector B_DP_SGD (clip=True, noise=True, seed=46) ---
+[17:16:23] [B_DP_SGD] acc=0.164  GENERIC: validity=1.000 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=1.000 feasibility=1.000 actionability=1.000 sparsity=9.7  (n=100)
+[17:16:23] 
+=== multi-run summary (mean +/- std over runs; pooled = query-level rate) ===
+[17:16:23]   A_Standard generic: validity=0.878+/-0.041 feasibility=0.000+/-0.000 actionability=0.000+/-0.000 (pooled 0.000, n=500) sparsity=10.0
+[17:16:23]   A_Standard domain : validity=0.808+/-0.033 feasibility=1.000+/-0.000 actionability=0.808+/-0.033 (pooled 0.808, n=500) sparsity=9.8
+[17:16:23]   B_DP_SGD   generic: validity=0.996+/-0.008 feasibility=0.006+/-0.005 actionability=0.006+/-0.005 (pooled 0.006, n=500) sparsity=10.0
+[17:16:23]   B_DP_SGD   domain : validity=0.970+/-0.020 feasibility=1.000+/-0.000 actionability=0.970+/-0.020 (pooled 0.970, n=500) sparsity=9.6
+[17:16:24] saved -> experiments_journal/exp16_domain_cf_ab_cpu_ciciot2023/results.json

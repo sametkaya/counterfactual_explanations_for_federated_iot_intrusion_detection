@@ -1,0 +1,74 @@
+[04:02:06] === exp19_controls_k10 | ciciot2023 | 2026-09-08 04:02 ===
+[04:02:06] device=cpu n_runs=10 seed0=42 epochs=20 cf_samples=100 cf_max_iter=300 curve_max_iter=300 batch=256 sigma=2.4224 parts=['hist', 'hist2', 'discrete']
+[04:02:06] train=160000 test=40000 F=39 C=8 true-label class share (test): [0.023, 0.723, 0.172, 0.015, 0.0, 0.0, 0.011, 0.055]
+[04:08:16] 
+=== run 1/10 (seed 42) ===
+[04:15:37]   A_Standard: acc=0.729 F1=0.584 predBenign=0.026 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.285 d_lin_target(med)=1.610 | val=0.954 (any 0.990; true-attack subset 0.954) | discrete val=0.840
+[04:23:02]   D_Clip_Only: acc=0.705 F1=0.603 predBenign=0.029 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.033 d_lin_target(med)=1.420 | val=0.934 (any 0.990; true-attack subset 0.934) | discrete val=0.980
+[04:32:34]   C_Noise_Only: acc=0.512 F1=0.375 predBenign=0.015 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.551 d_lin_target(med)=2.735 | val=0.928 (any 1.000; true-attack subset 0.927) | discrete val=0.340
+[04:35:42]   B_DP_SGD: acc=0.209 F1=0.213 predBenign=0.027 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.263 d_lin_target(med)=0.849 | val=0.986 (any 1.000; true-attack subset 0.986) | discrete val=1.000
+[04:41:58] 
+=== run 2/10 (seed 43) ===
+[04:50:17]   A_Standard: acc=0.699 F1=0.588 predBenign=0.022 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.358 d_lin_target(med)=1.495 | val=0.878 (any 0.990; true-attack subset 0.877) | discrete val=0.880
+[04:56:20]   D_Clip_Only: acc=0.713 F1=0.599 predBenign=0.028 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.151 d_lin_target(med)=1.110 | val=0.930 (any 1.000; true-attack subset 0.930) | discrete val=1.000
+[04:59:54]   C_Noise_Only: acc=0.602 F1=0.392 predBenign=0.006 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.571 d_lin_target(med)=1.602 | val=0.996 (any 1.000; true-attack subset 0.996) | discrete val=1.000
+[05:01:51]   B_DP_SGD: acc=0.622 F1=0.267 predBenign=0.055 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.215 d_lin_target(med)=0.415 | val=0.994 (any 1.000; true-attack subset 0.994) | discrete val=1.000
+[05:08:10] 
+=== run 3/10 (seed 44) ===
+[05:15:49]   A_Standard: acc=0.694 F1=0.598 predBenign=0.024 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.355 d_lin_target(med)=1.866 | val=0.946 (any 1.000; true-attack subset 0.945) | discrete val=0.980
+[05:22:59]   D_Clip_Only: acc=0.717 F1=0.607 predBenign=0.024 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.213 d_lin_target(med)=1.135 | val=0.914 (any 0.990; true-attack subset 0.913) | discrete val=1.000
+[05:27:29]   C_Noise_Only: acc=0.582 F1=0.437 predBenign=0.026 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.691 d_lin_target(med)=2.553 | val=0.996 (any 1.000; true-attack subset 0.996) | discrete val=1.000
+[05:29:43]   B_DP_SGD: acc=0.384 F1=0.316 predBenign=0.037 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.205 d_lin_target(med)=0.983 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[05:36:05] 
+=== run 4/10 (seed 45) ===
+[08:57:22]   A_Standard: acc=0.691 F1=0.599 predBenign=0.025 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.436 d_lin_target(med)=1.207 | val=0.958 (any 1.000; true-attack subset 0.958) | discrete val=0.980
+[09:06:09]   D_Clip_Only: acc=0.705 F1=0.611 predBenign=0.027 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.245 d_lin_target(med)=1.060 | val=0.846 (any 0.980; true-attack subset 0.844) | discrete val=0.980
+[09:11:38]   C_Noise_Only: acc=0.577 F1=0.428 predBenign=0.037 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.667 d_lin_target(med)=2.040 | val=0.992 (any 1.000; true-attack subset 0.992) | discrete val=0.920
+[09:13:35]   B_DP_SGD: acc=0.255 F1=0.191 predBenign=0.045 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.202 d_lin_target(med)=0.477 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[09:20:05] 
+=== run 5/10 (seed 46) ===
+[09:29:53]   A_Standard: acc=0.709 F1=0.572 predBenign=0.022 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.324 d_lin_target(med)=1.572 | val=0.830 (any 0.990; true-attack subset 0.830) | discrete val=0.700
+[09:39:24]   D_Clip_Only: acc=0.731 F1=0.563 predBenign=0.021 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.233 d_lin_target(med)=1.420 | val=0.910 (any 1.000; true-attack subset 0.910) | discrete val=0.940
+[09:42:18]   C_Noise_Only: acc=0.490 F1=0.388 predBenign=0.037 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.727 d_lin_target(med)=1.810 | val=0.998 (any 1.000; true-attack subset 0.998) | discrete val=1.000
+[09:43:18]   B_DP_SGD: acc=0.164 F1=0.221 predBenign=0.639 q@target(it0)=0.00 q_trueAttack=0.96 d_lin=0.228 d_lin_target(med)=0.190 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[09:49:47] 
+=== run 6/10 (seed 47) ===
+[09:56:33]   A_Standard: acc=0.706 F1=0.618 predBenign=0.025 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.403 d_lin_target(med)=1.626 | val=0.964 (any 0.990; true-attack subset 0.964) | discrete val=0.940
+[10:03:23]   D_Clip_Only: acc=0.713 F1=0.601 predBenign=0.026 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.916 d_lin_target(med)=1.400 | val=0.948 (any 0.980; true-attack subset 0.948) | discrete val=1.000
+[10:12:35]   C_Noise_Only: acc=0.671 F1=0.483 predBenign=0.015 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.608 d_lin_target(med)=1.726 | val=0.916 (any 1.000; true-attack subset 0.915) | discrete val=0.500
+[10:16:07]   B_DP_SGD: acc=0.142 F1=0.235 predBenign=0.023 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.278 d_lin_target(med)=0.656 | val=0.994 (any 1.000; true-attack subset 0.994) | discrete val=0.940
+[10:22:36] 
+=== run 7/10 (seed 48) ===
+[10:30:56]   A_Standard: acc=0.695 F1=0.557 predBenign=0.022 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.302 d_lin_target(med)=1.343 | val=0.930 (any 0.980; true-attack subset 0.930) | discrete val=0.920
+[10:40:45]   D_Clip_Only: acc=0.703 F1=0.619 predBenign=0.022 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.115 d_lin_target(med)=1.178 | val=0.890 (any 0.980; true-attack subset 0.889) | discrete val=0.980
+[10:46:43]   C_Noise_Only: acc=0.694 F1=0.488 predBenign=0.026 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.619 d_lin_target(med)=2.031 | val=0.990 (any 1.000; true-attack subset 0.990) | discrete val=0.940
+[10:48:49]   B_DP_SGD: acc=0.596 F1=0.326 predBenign=0.036 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.174 d_lin_target(med)=0.678 | val=0.998 (any 1.000; true-attack subset 0.998) | discrete val=1.000
+[10:55:19] 
+=== run 8/10 (seed 49) ===
+[11:03:15]   A_Standard: acc=0.704 F1=0.596 predBenign=0.023 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.196 d_lin_target(med)=1.477 | val=0.956 (any 1.000; true-attack subset 0.956) | discrete val=0.960
+[11:12:47]   D_Clip_Only: acc=0.717 F1=0.612 predBenign=0.027 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.160 d_lin_target(med)=1.210 | val=0.880 (any 1.000; true-attack subset 0.880) | discrete val=1.000
+[11:16:46]   C_Noise_Only: acc=0.539 F1=0.404 predBenign=0.037 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.677 d_lin_target(med)=1.760 | val=0.996 (any 1.000; true-attack subset 0.996) | discrete val=1.000
+[11:18:17]   B_DP_SGD: acc=0.411 F1=0.248 predBenign=0.118 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.182 d_lin_target(med)=0.396 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[11:24:48] 
+=== run 9/10 (seed 50) ===
+[11:30:54]   A_Standard: acc=0.704 F1=0.580 predBenign=0.023 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.183 d_lin_target(med)=1.395 | val=0.982 (any 1.000; true-attack subset 0.982) | discrete val=0.840
+[11:40:52]   D_Clip_Only: acc=0.708 F1=0.603 predBenign=0.021 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.039 d_lin_target(med)=1.265 | val=0.846 (any 0.980; true-attack subset 0.844) | discrete val=0.720
+[11:45:11]   C_Noise_Only: acc=0.561 F1=0.415 predBenign=0.030 q@target(it0)=0.00 q_trueAttack=0.98 d_lin=0.603 d_lin_target(med)=1.507 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=0.980
+[11:46:54]   B_DP_SGD: acc=0.192 F1=0.132 predBenign=0.153 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.231 d_lin_target(med)=0.594 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[11:54:07] 
+=== run 10/10 (seed 51) ===
+[12:04:22]   A_Standard: acc=0.698 F1=0.574 predBenign=0.021 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.272 d_lin_target(med)=1.493 | val=0.902 (any 0.990; true-attack subset 0.902) | discrete val=0.620
+[12:16:39]   D_Clip_Only: acc=0.701 F1=0.606 predBenign=0.023 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.282 d_lin_target(med)=1.524 | val=0.746 (any 0.970; true-attack subset 0.746) | discrete val=0.680
+[12:21:56]   C_Noise_Only: acc=0.519 F1=0.387 predBenign=0.039 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.734 d_lin_target(med)=1.803 | val=0.996 (any 1.000; true-attack subset 0.996) | discrete val=1.000
+[12:23:32]   B_DP_SGD: acc=0.353 F1=0.281 predBenign=0.032 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.483 d_lin_target(med)=0.600 | val=1.000 (any 1.000; true-attack subset 1.000) | discrete val=1.000
+[12:23:32] 
+d_lin vs validity over 40 (condition,run) points: Spearman rho=-0.724 (p=0.0000)
+[12:23:32] 
+d_lin_target_median vs validity over 40 (condition,run) points: Spearman rho=-0.242 (p=0.1317)
+[12:23:32] 
+=== SUMMARY (means) ===
+[12:23:32]   A_Standard      accuracy=0.703 f1_macro=0.587 cf_validity=0.930 cf_validity_any=0.993 share_pred_target=0.023 d_lin=1.311 d_lin_target_median=1.509 discrete_validity=0.866
+[12:23:32]   D_Clip_Only     accuracy=0.711 f1_macro=0.602 cf_validity=0.884 cf_validity_any=0.987 share_pred_target=0.025 d_lin=1.139 d_lin_target_median=1.272 discrete_validity=0.928
+[12:23:32]   C_Noise_Only    accuracy=0.575 f1_macro=0.420 cf_validity=0.981 cf_validity_any=1.000 share_pred_target=0.027 d_lin=0.645 d_lin_target_median=1.957 discrete_validity=0.868
+[12:23:32]   B_DP_SGD        accuracy=0.333 f1_macro=0.243 cf_validity=0.997 cf_validity_any=1.000 share_pred_target=0.117 d_lin=0.246 d_lin_target_median=0.584 discrete_validity=0.994
+[12:23:32] saved -> experiments_journal/exp19_controls_k10_ciciot2023/results.json

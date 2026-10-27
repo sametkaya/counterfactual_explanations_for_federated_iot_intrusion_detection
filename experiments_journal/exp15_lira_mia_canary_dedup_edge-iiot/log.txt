@@ -1,0 +1,83 @@
+[06:41:25] === exp15_lira_mia_canary_dedup | edge-iiot | 2026-10-24 06:41 ===
+[06:41:25] device=cpu n_shadow=32 n_audit=1000 shadow_train_size=2000 shadow_epochs=300 target_epochs=300 target_train_size=2000 batch=32 canaries=200 dedup=True dropout=0.0
+[06:41:25]   dedup: 265 duplicate rows removed from train, 80 from test (32000->31735, 8000->7920)
+[06:41:25] train=31735 test=7920 noise_std(eps=2.0)=2.4224
+[06:42:14]   [NoDP] target: train=2200 train_acc=0.5886 test_acc=0.4980 gap=+0.0907 steps=20700 (69/epoch x 300, batch 32, dropout 0.0)
+[06:42:14]   [NoDP] canaries: target predicts the wrong label of 0.800 of the 200 member canaries and 0.065 of the 200 non-member canaries
+[06:42:57]   [NoDP] shadow 1/32 trained
+[06:43:40]   [NoDP] shadow 2/32 trained
+[06:44:23]   [NoDP] shadow 3/32 trained
+[06:45:06]   [NoDP] shadow 4/32 trained
+[06:45:49]   [NoDP] shadow 5/32 trained
+[06:46:32]   [NoDP] shadow 6/32 trained
+[06:47:15]   [NoDP] shadow 7/32 trained
+[06:47:59]   [NoDP] shadow 8/32 trained
+[06:48:42]   [NoDP] shadow 9/32 trained
+[06:49:25]   [NoDP] shadow 10/32 trained
+[06:50:07]   [NoDP] shadow 11/32 trained
+[06:50:50]   [NoDP] shadow 12/32 trained
+[06:51:33]   [NoDP] shadow 13/32 trained
+[06:52:17]   [NoDP] shadow 14/32 trained
+[06:53:00]   [NoDP] shadow 15/32 trained
+[06:53:43]   [NoDP] shadow 16/32 trained
+[06:54:26]   [NoDP] shadow 17/32 trained
+[06:55:09]   [NoDP] shadow 18/32 trained
+[06:55:52]   [NoDP] shadow 19/32 trained
+[06:56:35]   [NoDP] shadow 20/32 trained
+[06:57:18]   [NoDP] shadow 21/32 trained
+[06:58:01]   [NoDP] shadow 22/32 trained
+[06:58:44]   [NoDP] shadow 23/32 trained
+[06:59:27]   [NoDP] shadow 24/32 trained
+[07:00:09]   [NoDP] shadow 25/32 trained
+[07:00:53]   [NoDP] shadow 26/32 trained
+[07:01:36]   [NoDP] shadow 27/32 trained
+[07:02:19]   [NoDP] shadow 28/32 trained
+[07:03:02]   [NoDP] shadow 29/32 trained
+[07:03:45]   [NoDP] shadow 30/32 trained
+[07:04:28]   [NoDP] shadow 31/32 trained
+[07:05:11]   [NoDP] shadow 32/32 trained
+[07:05:11]   [NoDP] lira_offline: AUC=0.5306 TPR@0.1%=0.0200 TPR@1%=0.0340
+[07:05:11]   [NoDP] confidence: AUC=0.5313 TPR@0.1%=0.0040 TPR@1%=0.0280
+[07:05:11]   [NoDP] lira_offline_canary (positive control, 400 mislabelled records, half members): AUC=0.8233 TPR@0.1%=0.0000 TPR@1%=0.0000 TPR@5%=0.0000
+[07:05:11]   [NoDP] confidence_canary (positive control, 400 mislabelled records, half members): AUC=0.9664 TPR@0.1%=0.1400 TPR@1%=0.3550 TPR@5%=0.7500
+[07:06:20]   [DP] target: train=2200 train_acc=0.0564 test_acc=0.0485 gap=+0.0079 steps=20700 (69/epoch x 300, batch 32, dropout 0.0)
+[07:06:20]   [DP] canaries: target predicts the wrong label of 0.110 of the 200 member canaries and 0.055 of the 200 non-member canaries
+[07:07:22]   [DP] shadow 1/32 trained
+[07:08:25]   [DP] shadow 2/32 trained
+[07:09:28]   [DP] shadow 3/32 trained
+[07:10:30]   [DP] shadow 4/32 trained
+[07:11:32]   [DP] shadow 5/32 trained
+[07:12:35]   [DP] shadow 6/32 trained
+[07:13:37]   [DP] shadow 7/32 trained
+[07:14:40]   [DP] shadow 8/32 trained
+[07:15:42]   [DP] shadow 9/32 trained
+[07:16:45]   [DP] shadow 10/32 trained
+[07:17:47]   [DP] shadow 11/32 trained
+[07:18:49]   [DP] shadow 12/32 trained
+[07:19:52]   [DP] shadow 13/32 trained
+[07:20:55]   [DP] shadow 14/32 trained
+[07:21:57]   [DP] shadow 15/32 trained
+[07:23:01]   [DP] shadow 16/32 trained
+[07:24:04]   [DP] shadow 17/32 trained
+[07:25:06]   [DP] shadow 18/32 trained
+[07:26:09]   [DP] shadow 19/32 trained
+[07:27:12]   [DP] shadow 20/32 trained
+[07:28:14]   [DP] shadow 21/32 trained
+[07:29:17]   [DP] shadow 22/32 trained
+[07:30:20]   [DP] shadow 23/32 trained
+[07:31:22]   [DP] shadow 24/32 trained
+[07:32:25]   [DP] shadow 25/32 trained
+[07:33:27]   [DP] shadow 26/32 trained
+[07:34:30]   [DP] shadow 27/32 trained
+[07:35:33]   [DP] shadow 28/32 trained
+[07:36:35]   [DP] shadow 29/32 trained
+[07:37:38]   [DP] shadow 30/32 trained
+[07:38:41]   [DP] shadow 31/32 trained
+[07:39:44]   [DP] shadow 32/32 trained
+[07:39:44]   [DP] lira_offline: AUC=0.4931 TPR@0.1%=0.0000 TPR@1%=0.0160
+[07:39:44]   [DP] confidence: AUC=0.4767 TPR@0.1%=0.0020 TPR@1%=0.0100
+[07:39:44]   [DP] lira_offline_canary (positive control, 400 mislabelled records, half members): AUC=0.5074 TPR@0.1%=0.0250 TPR@1%=0.0550 TPR@5%=0.1250
+[07:39:44]   [DP] confidence_canary (positive control, 400 mislabelled records, half members): AUC=0.5066 TPR@0.1%=0.0200 TPR@1%=0.0600 TPR@5%=0.1200
+[07:39:44] 
+DP effectiveness (LiRA): AUC 0.5306 -> 0.4931 (delta=+0.0376)
+[07:39:44] saved -> experiments_journal/exp15_lira_mia_canary_dedup_edge-iiot/results.json

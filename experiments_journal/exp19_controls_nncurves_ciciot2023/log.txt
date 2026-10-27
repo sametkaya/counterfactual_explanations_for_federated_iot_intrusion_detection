@@ -1,0 +1,20 @@
+[05:52:57] === exp19_controls_nncurves | ciciot2023 | 2026-10-23 05:52 ===
+[05:52:57] device=cpu arch=nonorm n_runs=3 seed0=42 epochs=20 cf_samples=100 cf_max_iter=300 curve_max_iter=1000 batch=256 sigma=2.4224 parts=['curves']
+[05:52:58] train=160000 test=40000 F=39 C=8 true-label class share (test): [0.023, 0.723, 0.172, 0.015, 0.0, 0.0, 0.011, 0.055]
+[05:55:37] 
+=== run 1/3 (seed 42) ===
+[06:18:35]   A_Standard: acc=0.689 F1=0.571 predBenign=0.024 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.297 d_lin_target(med)=1.316 | curve 10:0.00 75:0.28 200:0.53 750:0.80
+[06:41:36]   C_Noise_Only: acc=0.716 F1=0.438 predBenign=0.019 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.558 d_lin_target(med)=2.106 | curve 10:0.02 75:0.70 200:0.95 750:1.00
+[06:44:14] 
+=== run 2/3 (seed 43) ===
+[07:07:15]   A_Standard: acc=0.695 F1=0.578 predBenign=0.022 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.387 d_lin_target(med)=1.464 | curve 10:0.00 75:0.58 200:0.81 750:0.92
+[07:30:15]   C_Noise_Only: acc=0.660 F1=0.384 predBenign=0.027 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=0.402 d_lin_target(med)=1.214 | curve 10:0.15 75:0.93 200:1.00 750:1.00
+[07:32:55] 
+=== run 3/3 (seed 44) ===
+[07:55:57]   A_Standard: acc=0.738 F1=0.598 predBenign=0.024 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=1.280 d_lin_target(med)=1.443 | curve 10:0.00 75:0.22 200:0.43 750:0.69
+[08:19:00]   C_Noise_Only: acc=0.702 F1=0.410 predBenign=0.033 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.660 d_lin_target(med)=1.560 | curve 10:0.04 75:0.90 200:1.00 750:1.00
+[08:19:00] 
+=== SUMMARY (means) ===
+[08:19:00]   A_Standard      accuracy=0.707 f1_macro=0.582 share_pred_target=0.024 d_lin=1.321 d_lin_target_median=1.407
+[08:19:00]   C_Noise_Only    accuracy=0.693 f1_macro=0.411 share_pred_target=0.026 d_lin=0.540 d_lin_target_median=1.627
+[08:19:00] saved -> experiments_journal/exp19_controls_nncurves_ciciot2023/results.json

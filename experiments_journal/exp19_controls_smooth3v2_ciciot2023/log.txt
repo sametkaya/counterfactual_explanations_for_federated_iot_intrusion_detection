@@ -1,0 +1,28 @@
+[23:33:52] === exp19_controls_smooth3v2 | ciciot2023 | 2026-10-18 23:33 ===
+[23:33:52] device=cpu n_runs=3 seed0=42 epochs=20 cf_samples=100 cf_max_iter=300 curve_max_iter=300 batch=256 sigma=2.4224 parts=['smooth']
+[23:33:52] train=160000 test=40000 F=39 C=8 true-label class share (test): [0.023, 0.723, 0.172, 0.015, 0.0, 0.0, 0.011, 0.055]
+[23:33:52] 
+=== smoothing arms (M5): ['E_LabelSmooth', 'F_InputNoise', 'G_WeightDecay', 'H_SAM'] | E: per-sample class-weighted label smoothing 0.1, F: input noise std 0.3, G: AdamW wd 1e-2, H: SAM rho 0.05 ===
+[23:40:28]   run 1 E_LabelSmooth: acc=0.710 F1=0.581 val=0.982 |dm/dx|=1.885 m=2.038 d_lin=1.081 ECE=0.110
+[23:54:23]   run 1 F_InputNoise: acc=0.695 F1=0.595 val=0.880 |dm/dx|=2.834 m=6.107 d_lin=2.155 ECE=0.105
+[00:03:46]   run 1 G_WeightDecay: acc=0.730 F1=0.589 val=0.964 |dm/dx|=3.592 m=5.188 d_lin=1.445 ECE=0.081
+[00:17:31]   run 1 H_SAM: acc=0.704 F1=0.591 val=0.934 |dm/dx|=4.247 m=5.446 d_lin=1.282 ECE=0.110
+[00:25:04]   run 2 E_LabelSmooth: acc=0.707 F1=0.603 val=0.986 |dm/dx|=1.903 m=2.012 d_lin=1.057 ECE=0.115
+[00:38:35]   run 2 F_InputNoise: acc=0.684 F1=0.572 val=0.890 |dm/dx|=2.387 m=5.547 d_lin=2.324 ECE=0.112
+[00:47:55]   run 2 G_WeightDecay: acc=0.706 F1=0.584 val=0.898 |dm/dx|=3.352 m=4.811 d_lin=1.435 ECE=0.109
+[00:57:29]   run 2 H_SAM: acc=0.693 F1=0.592 val=0.942 |dm/dx|=3.721 m=5.704 d_lin=1.533 ECE=0.125
+[01:03:51]   run 3 E_LabelSmooth: acc=0.697 F1=0.592 val=0.960 |dm/dx|=1.878 m=2.241 d_lin=1.193 ECE=0.124
+[01:14:22]   run 3 F_InputNoise: acc=0.685 F1=0.608 val=0.900 |dm/dx|=2.494 m=5.113 d_lin=2.051 ECE=0.125
+[01:22:30]   run 3 G_WeightDecay: acc=0.688 F1=0.586 val=0.958 |dm/dx|=3.524 m=4.650 d_lin=1.320 ECE=0.119
+[01:32:11]   run 3 H_SAM: acc=0.709 F1=0.601 val=0.914 |dm/dx|=4.475 m=5.664 d_lin=1.266 ECE=0.108
+[01:32:11] 
+d_lin vs validity over 12 (condition,run) points: Spearman rho=-0.762 (p=0.0040)
+[01:32:11] 
+d_lin_target_median vs validity over 12 (condition,run) points: Spearman rho=-0.245 (p=0.4433)
+[01:32:11] 
+=== SUMMARY (means) ===
+[01:32:11]   E_LabelSmooth   accuracy=0.704 f1_macro=0.592 cf_validity=0.976 d_lin=1.111 d_lin_target_median=2.700
+[01:32:11]   F_InputNoise    accuracy=0.688 f1_macro=0.592 cf_validity=0.890 d_lin=2.176 d_lin_target_median=3.203
+[01:32:11]   G_WeightDecay   accuracy=0.708 f1_macro=0.586 cf_validity=0.940 d_lin=1.400 d_lin_target_median=1.752
+[01:32:11]   H_SAM           accuracy=0.702 f1_macro=0.595 cf_validity=0.930 d_lin=1.360 d_lin_target_median=1.561
+[01:32:12] saved -> experiments_journal/exp19_controls_smooth3v2_ciciot2023/results.json

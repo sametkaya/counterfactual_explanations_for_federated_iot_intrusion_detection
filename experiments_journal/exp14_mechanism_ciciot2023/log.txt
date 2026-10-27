@@ -1,0 +1,111 @@
+[01:04:58] === exp14_mechanism | ciciot2023 | 2026-09-01 01:04 ===
+[01:04:58] device=cuda n_runs=2 epochs=3 cf_samples=25
+[01:10:13] train=32000 test=8000 F=39 C=8
+[01:10:13] reference eps=2.0 -> noise_std=2.4224
+[01:10:13] 
+--- condition A_Standard (clip=False, noise=False) ---
+[01:19:31]   run 1/2: acc=0.682 val=0.912 |dL/dx|=0.184 TrH=0.194 margin=0.651 ECE=0.110
+[01:25:58]   run 2/2: acc=0.656 val=0.936 |dL/dx|=0.154 TrH=0.117 margin=0.692 ECE=0.153
+[01:25:58] 
+--- condition B_DP_SGD (clip=True, noise=True) ---
+[01:27:10]   run 1/2: acc=0.027 val=1.000 |dL/dx|=0.328 TrH=0.123 margin=0.015 ECE=0.141
+[01:28:54]   run 2/2: acc=0.021 val=0.992 |dL/dx|=0.311 TrH=0.115 margin=0.038 ECE=0.148
+[01:28:54] 
+--- condition C_Noise_Only (clip=False, noise=True) ---
+[01:30:56]   run 1/2: acc=0.518 val=1.000 |dL/dx|=0.303 TrH=0.120 margin=0.045 ECE=0.327
+[01:33:10]   run 2/2: acc=0.506 val=1.000 |dL/dx|=0.317 TrH=0.109 margin=0.053 ECE=0.310
+[01:33:10] 
+--- condition D_Clip_Only (clip=True, noise=False) ---
+[01:41:03]   run 1/2: acc=0.667 val=0.920 |dL/dx|=0.171 TrH=0.264 margin=0.720 ECE=0.147
+[01:48:31]   run 2/2: acc=0.663 val=0.960 |dL/dx|=0.173 TrH=0.157 margin=0.696 ECE=0.161
+[01:48:31] 
+=== NOISE MAIN EFFECT (ort B,C  -  ort A,D) ===
+[01:48:31]   accuracy          : -0.3990
+[01:48:31]   cf_validity       : +0.0660
+[01:48:31]   train_grad_norm   : +6.0765
+[01:48:31]   input_grad_norm   : +0.1444
+[01:48:31]   hessian_trace     : -0.0665
+[01:48:31]   margin_prob       : -0.6522
+[01:48:31]   margin_logit      : -3.7701
+[01:48:31]   ece               : +0.0889
+[01:48:31]   weight_norm       : -0.3405
+[01:48:31] hypothesis_check: {'validity_increases_with_noise': True, 'boundary_sharpness_decreases': False, 'curvature_decreases': True, 'margin_decreases': True, 'interpretation': "Gurultu, sinir dikligini/egriligini ve marji dusururken CF validity'yi artiriyorsa 'implicit regularization / boundary smoothing' mekanizmasi desteklenir."}
+[01:48:31] saved -> experiments_journal/exp14_mechanism_ciciot2023/results.json
+[17:07:30] === exp14_mechanism | ciciot2023 | 2026-09-01 17:07 ===
+[17:07:30] device=cuda n_runs=10 epochs=20 cf_samples=100 batch=256
+[17:12:16] train=160000 test=40000 F=39 C=8
+[17:12:17] reference eps=2.0 -> noise_std=2.4224
+[17:12:17] 
+--- condition A_Standard (clip=False, noise=False) ---
+[17:42:54]   run 1/10: acc=0.774 val=0.880 |dMargin/dx|=4.587 TrH=1.911 margin=0.631 ECE=0.054
+[18:19:57]   run 2/10: acc=0.692 val=0.868 |dMargin/dx|=3.485 TrH=1.463 margin=0.627 ECE=0.117
+[18:50:44]   run 3/10: acc=0.696 val=0.892 |dMargin/dx|=4.009 TrH=1.067 margin=0.649 ECE=0.125
+[19:17:27]   run 4/10: acc=0.693 val=0.948 |dMargin/dx|=3.545 TrH=0.714 margin=0.619 ECE=0.122
+[19:43:26]   run 5/10: acc=0.692 val=0.930 |dMargin/dx|=4.022 TrH=0.853 margin=0.613 ECE=0.114
+[20:09:13]   run 6/10: acc=0.707 val=0.926 |dMargin/dx|=4.715 TrH=0.995 margin=0.643 ECE=0.116
+[20:41:50]   run 7/10: acc=0.702 val=0.886 |dMargin/dx|=3.539 TrH=0.759 margin=0.611 ECE=0.106
+[21:13:50]   run 8/10: acc=0.703 val=0.916 |dMargin/dx|=4.185 TrH=0.879 margin=0.638 ECE=0.109
+[21:38:28]   run 9/10: acc=0.698 val=0.968 |dMargin/dx|=3.429 TrH=0.803 margin=0.624 ECE=0.119
+[22:08:02]   run 10/10: acc=0.713 val=0.932 |dMargin/dx|=4.189 TrH=1.208 margin=0.635 ECE=0.105
+[22:08:02] 
+--- condition B_DP_SGD (clip=True, noise=True) ---
+[22:12:52]   run 1/10: acc=0.504 val=1.000 |dMargin/dx|=1.019 TrH=0.458 margin=0.052 ECE=0.277
+[22:22:20]   run 2/10: acc=0.177 val=0.996 |dMargin/dx|=0.883 TrH=0.394 margin=0.048 ECE=0.109
+[22:34:28]   run 3/10: acc=0.498 val=0.992 |dMargin/dx|=0.939 TrH=0.429 margin=0.046 ECE=0.270
+[22:40:36]   run 4/10: acc=0.329 val=1.000 |dMargin/dx|=0.774 TrH=0.299 margin=0.078 ECE=0.140
+[22:48:24]   run 5/10: acc=0.225 val=0.994 |dMargin/dx|=0.990 TrH=0.502 margin=0.042 ECE=0.089
+[22:54:18]   run 6/10: acc=0.204 val=0.996 |dMargin/dx|=0.915 TrH=0.341 margin=0.064 ECE=0.181
+[23:02:37]   run 7/10: acc=0.381 val=1.000 |dMargin/dx|=0.896 TrH=0.413 margin=0.033 ECE=0.169
+[23:15:00]   run 8/10: acc=0.262 val=0.996 |dMargin/dx|=1.016 TrH=0.450 margin=0.057 ECE=0.033
+[23:24:00]   run 9/10: acc=0.369 val=0.998 |dMargin/dx|=0.711 TrH=0.265 margin=0.031 ECE=0.175
+[23:31:46]   run 10/10: acc=0.623 val=0.998 |dMargin/dx|=0.973 TrH=0.394 margin=0.038 ECE=0.418
+[23:31:46] 
+--- condition C_Noise_Only (clip=False, noise=True) ---
+[23:42:26]   run 1/10: acc=0.580 val=1.000 |dMargin/dx|=1.047 TrH=0.439 margin=0.242 ECE=0.203
+[00:00:10]   run 2/10: acc=0.575 val=0.992 |dMargin/dx|=1.024 TrH=0.389 margin=0.258 ECE=0.242
+[00:26:06]   run 3/10: acc=0.599 val=0.960 |dMargin/dx|=0.896 TrH=0.378 margin=0.210 ECE=0.267
+[00:40:48]   run 4/10: acc=0.576 val=0.998 |dMargin/dx|=0.920 TrH=0.342 margin=0.253 ECE=0.210
+[01:04:08]   run 5/10: acc=0.563 val=0.978 |dMargin/dx|=1.014 TrH=0.422 margin=0.291 ECE=0.247
+[01:20:48]   run 6/10: acc=0.514 val=0.992 |dMargin/dx|=0.906 TrH=0.387 margin=0.149 ECE=0.237
+[01:36:14]   run 7/10: acc=0.585 val=0.998 |dMargin/dx|=0.944 TrH=0.375 margin=0.211 ECE=0.231
+[02:05:25]   run 8/10: acc=0.663 val=0.950 |dMargin/dx|=1.131 TrH=0.484 margin=0.248 ECE=0.287
+[02:33:43]   run 9/10: acc=0.586 val=0.940 |dMargin/dx|=0.725 TrH=0.285 margin=0.144 ECE=0.249
+[02:55:02]   run 10/10: acc=0.577 val=0.986 |dMargin/dx|=0.910 TrH=0.328 margin=0.214 ECE=0.100
+[02:55:02] 
+--- condition D_Clip_Only (clip=True, noise=False) ---
+[03:31:57]   run 1/10: acc=0.783 val=0.822 |dMargin/dx|=4.924 TrH=1.955 margin=0.645 ECE=0.046
+[04:07:56]   run 2/10: acc=0.699 val=0.848 |dMargin/dx|=5.531 TrH=1.421 margin=0.640 ECE=0.118
+[04:45:12]   run 3/10: acc=0.709 val=0.776 |dMargin/dx|=5.281 TrH=0.683 margin=0.649 ECE=0.115
+[05:04:33]   run 4/10: acc=0.699 val=0.974 |dMargin/dx|=4.892 TrH=1.302 margin=0.648 ECE=0.127
+[05:39:08]   run 5/10: acc=0.707 val=0.882 |dMargin/dx|=5.071 TrH=0.713 margin=0.635 ECE=0.113
+[06:15:57]   run 6/10: acc=0.703 val=0.822 |dMargin/dx|=5.553 TrH=1.489 margin=0.657 ECE=0.127
+[06:51:05]   run 7/10: acc=0.705 val=0.840 |dMargin/dx|=4.691 TrH=1.549 margin=0.622 ECE=0.113
+[07:16:55]   run 8/10: acc=0.715 val=0.942 |dMargin/dx|=5.906 TrH=0.864 margin=0.638 ECE=0.106
+[07:47:10]   run 9/10: acc=0.719 val=0.904 |dMargin/dx|=4.809 TrH=1.006 margin=0.632 ECE=0.102
+[08:21:27]   run 10/10: acc=0.712 val=0.886 |dMargin/dx|=5.567 TrH=1.509 margin=0.632 ECE=0.112
+[08:21:27] 
+=== NOISE MAIN EFFECT (ort B,C - ort A,D) ===
+[08:21:27]   accuracy          : -0.2417
+[08:21:27]   cf_validity       : +0.0961
+[08:21:27]   train_grad_norm   : +5.1885
+[08:21:27]   input_grad_norm   : +0.0609
+[08:21:27]   margin_grad_norm  : -3.6649
+[08:21:27]   hessian_trace     : -0.7685
+[08:21:27]   margin_prob       : -0.4988
+[08:21:27]   margin_logit      : -5.0834
+[08:21:27]   ece               : +0.0984
+[08:21:27]   weight_norm       : -1.6049
+[08:21:27] === CLEAN CONTRAST (C_Noise_Only - A_Standard) ===
+[08:21:27]   accuracy          : -0.1256
+[08:21:27]   cf_validity       : +0.0648
+[08:21:27]   train_grad_norm   : +3.9018
+[08:21:27]   input_grad_norm   : +0.0001
+[08:21:27]   margin_grad_norm  : -3.0189
+[08:21:27]   hessian_trace     : -0.6824
+[08:21:27]   margin_prob       : -0.4069
+[08:21:27]   margin_logit      : -4.5703
+[08:21:27]   ece               : +0.1187
+[08:21:27]   weight_norm       : -0.4458
+[08:21:27] confound_note: B_DP_SGD accuracy=0.357 vs A_Standard=0.707. B makul accuracy koruyor; 2x2 ana etki guvenilir.
+[08:21:27] hypothesis_check: {'basis': 'C_Noise_Only vs A_Standard (collapse-robust contrast)', 'validity_increases_with_noise': True, 'boundary_sharpness_decreases (margin_grad)': True, 'curvature_decreases (Tr H)': True, 'margin_decreases': True, 'accuracy_preserved_in_C': True, 'interpretation': "Temiz kontrastta (C vs A) validity artarken margin_grad/curvature/margin dusuyorsa 'boundary smoothing' mekanizmasi, accuracy cokmesi OLMADAN desteklenmis olur."}
+[08:21:27] saved -> experiments_journal/exp14_mechanism_ciciot2023/results.json

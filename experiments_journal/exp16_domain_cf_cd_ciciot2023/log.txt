@@ -1,0 +1,52 @@
+[17:08:53] === exp16_domain_cf_cd | ciciot2023 | 2026-10-21 17:08 ===
+[17:08:53] semantics[data]: binary=0 categorical=1 count=8 continuous=30 immutable=0 onehot_groups={} cf_max_iter=300 n_samples=100 snap_every=10 n_runs=5
+[17:08:53]    continuous : ['Header_Length', 'Time_To_Live', 'Rate', 'fin_flag_number', 'syn_flag_number', 'rst_flag_number', 'psh_flag_number', 'ack_flag_number', 'ece_flag_number', 'cwr_flag_number', 'HTTP', 'HTTPS', 'DNS', 'Telnet', 'SMTP', 'SSH', 'IRC', 'TCP', 'UDP', 'DHCP', 'ARP', 'ICMP', 'IGMP', 'IPv', 'LLC', 'AVG', 'Std', 'Tot size', 'IAT', 'Variance']
+[17:08:53]    categorical: ['Protocol Type']
+[17:08:53]    count      : ['ack_count', 'syn_count', 'fin_count', 'rst_count', 'Tot sum', 'Min', 'Max', 'Number']
+[17:08:53] 
+=== run 1/5 (seed 42) ===
+[17:10:31] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=42) ---
+[17:37:06] [C_Noise_Only] acc=0.512  GENERIC: validity=0.920 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.800 feasibility=1.000 actionability=0.800 sparsity=9.7  (n=100)
+[17:38:49] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=42) ---
+[17:59:45] [D_Clip_Only] acc=0.705  GENERIC: validity=0.920 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.900 feasibility=1.000 actionability=0.900 sparsity=9.8  (n=100)
+[17:59:45] 
+=== run 2/5 (seed 43) ===
+[18:01:32] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=43) ---
+[18:18:41] [C_Noise_Only] acc=0.602  GENERIC: validity=1.000 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=0.880 feasibility=1.000 actionability=0.880 sparsity=9.7  (n=100)
+[18:20:23] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=43) ---
+[18:39:16] [D_Clip_Only] acc=0.713  GENERIC: validity=0.970 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.880 feasibility=1.000 actionability=0.880 sparsity=9.7  (n=100)
+[18:39:16] 
+=== run 3/5 (seed 44) ===
+[18:41:04] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=44) ---
+[18:57:12] [C_Noise_Only] acc=0.582  GENERIC: validity=1.000 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.930 feasibility=1.000 actionability=0.930 sparsity=9.7  (n=100)
+[18:58:48] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=44) ---
+[19:20:48] [D_Clip_Only] acc=0.717  GENERIC: validity=0.910 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.820 feasibility=1.000 actionability=0.820 sparsity=9.8  (n=100)
+[19:20:48] 
+=== run 4/5 (seed 45) ===
+[19:22:27] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=45) ---
+[19:37:59] [C_Noise_Only] acc=0.577  GENERIC: validity=0.990 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.890 feasibility=1.000 actionability=0.890 sparsity=9.8  (n=100)
+[19:39:33] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=45) ---
+[20:03:02] [D_Clip_Only] acc=0.705  GENERIC: validity=0.730 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.650 feasibility=1.000 actionability=0.650 sparsity=9.8  (n=100)
+[20:03:02] 
+=== run 5/5 (seed 46) ===
+[20:04:39] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=46) ---
+[20:12:56] [C_Noise_Only] acc=0.490  GENERIC: validity=1.000 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=1.000 feasibility=1.000 actionability=1.000 sparsity=9.5  (n=100)
+[20:14:28] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=46) ---
+[20:36:57] [D_Clip_Only] acc=0.731  GENERIC: validity=0.880 feasibility=0.010 actionability=0.010 sparsity=10.0  |  DOMAIN: validity=0.800 feasibility=1.000 actionability=0.800 sparsity=9.7  (n=100)
+[20:36:57] 
+=== multi-run summary (mean +/- std over runs; pooled = query-level rate) ===
+[20:36:57]   C_Noise_Only generic: validity=0.982+/-0.031 feasibility=0.004+/-0.005 actionability=0.004+/-0.005 (pooled 0.004, n=500) sparsity=10.0
+[20:36:57]   C_Noise_Only domain : validity=0.900+/-0.065 feasibility=1.000+/-0.000 actionability=0.900+/-0.065 (pooled 0.900, n=500) sparsity=9.7
+[20:36:57]   D_Clip_Only generic: validity=0.882+/-0.081 feasibility=0.002+/-0.004 actionability=0.002+/-0.004 (pooled 0.002, n=500) sparsity=10.0
+[20:36:57]   D_Clip_Only domain : validity=0.810+/-0.088 feasibility=1.000+/-0.000 actionability=0.810+/-0.088 (pooled 0.810, n=500) sparsity=9.8
+[20:36:57] saved -> experiments_journal/exp16_domain_cf_cd_ciciot2023/results.json

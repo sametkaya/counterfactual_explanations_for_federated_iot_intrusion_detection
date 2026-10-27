@@ -1,0 +1,4305 @@
+{
+  "version": 2,
+  "reference_epsilon": 2.0,
+  "cf_max_iter": 300,
+  "n_samples": 100,
+  "snap_every": 10,
+  "n_runs": 5,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "semantics": {
+    "mode": "data",
+    "n_binary": 0,
+    "n_categorical": 1,
+    "n_count": 8,
+    "n_continuous": 30,
+    "n_immutable": 0,
+    "onehot_groups": {},
+    "features_by_type": {
+      "continuous": [
+        "Header_Length",
+        "Time_To_Live",
+        "Rate",
+        "fin_flag_number",
+        "syn_flag_number",
+        "rst_flag_number",
+        "psh_flag_number",
+        "ack_flag_number",
+        "ece_flag_number",
+        "cwr_flag_number",
+        "HTTP",
+        "HTTPS",
+        "DNS",
+        "Telnet",
+        "SMTP",
+        "SSH",
+        "IRC",
+        "TCP",
+        "UDP",
+        "DHCP",
+        "ARP",
+        "ICMP",
+        "IGMP",
+        "IPv",
+        "LLC",
+        "AVG",
+        "Std",
+        "Tot size",
+        "IAT",
+        "Variance"
+      ],
+      "categorical": [
+        "Protocol Type"
+      ],
+      "count": [
+        "ack_count",
+        "syn_count",
+        "fin_count",
+        "rst_count",
+        "Tot sum",
+        "Min",
+        "Max",
+        "Number"
+      ]
+    },
+    "reasons": {
+      "Header_Length": "real-valued",
+      "Protocol Type": "integer, 5 values",
+      "Time_To_Live": "real-valued",
+      "Rate": "real-valued",
+      "fin_flag_number": "real-valued",
+      "syn_flag_number": "real-valued",
+      "rst_flag_number": "real-valued",
+      "psh_flag_number": "real-valued",
+      "ack_flag_number": "real-valued",
+      "ece_flag_number": "real-valued",
+      "cwr_flag_number": "real-valued",
+      "ack_count": "integer",
+      "syn_count": "integer",
+      "fin_count": "integer",
+      "rst_count": "integer",
+      "HTTP": "real-valued",
+      "HTTPS": "real-valued",
+      "DNS": "real-valued",
+      "Telnet": "real-valued",
+      "SMTP": "real-valued",
+      "SSH": "real-valued",
+      "IRC": "real-valued",
+      "TCP": "real-valued",
+      "UDP": "real-valued",
+      "DHCP": "real-valued",
+      "ARP": "real-valued",
+      "ICMP": "real-valued",
+      "IGMP": "real-valued",
+      "IPv": "real-valued",
+      "LLC": "real-valued",
+      "Tot sum": "integer",
+      "Min": "integer",
+      "Max": "integer",
+      "AVG": "real-valued",
+      "Std": "real-valued",
+      "Tot size": "real-valued",
+      "IAT": "real-valued",
+      "Number": "integer",
+      "Variance": "real-valued"
+    }
+  },
+  "models": {
+    "A_Standard": {
+      "accuracy": 0.7043050000000001,
+      "accuracy_std": 0.013738071189217223,
+      "f1_macro": 0.5883731563767931,
+      "f1_macro_std": 0.009977108985869145,
+      "n_runs": 5,
+      "runs": [
+        {
+          "accuracy": 0.729025,
+          "f1_macro": 0.5841197045031525,
+          "generic": {
+            "validity": 0.91,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.76,
+            "feasibility_rate": 1.0,
+            "actionability": 0.76,
+            "mean_sparsity": 9.65,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 47.031
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 9.0021
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0104
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 44.0
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0511
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0208
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 1206.0
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1004
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 71.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 38.857
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 94.9508
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 18803.479,
+                "cf": 33766.5529
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.6851
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.2761
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0027
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0379
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 2972.9998
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 0.0315
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 19.8,
+                "cf": 57.4122
+              },
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 6.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "syn_flag_number",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": -0.0
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0327
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.021
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 2828.0001
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 392.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 908.2724
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0217
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 33.8206
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 85.5872
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4693
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.5349
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0011
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0975
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4488
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0093
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0283
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 8.0,
+                "cf": 27.8837
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 43.1548
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 121222.6612,
+                "cf": 7777.2474
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3193
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0397
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 202.122
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 71.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 42
+        },
+        {
+          "accuracy": 0.698675,
+          "f1_macro": 0.5882152911420309,
+          "generic": {
+            "validity": 0.89,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.82,
+            "feasibility_rate": 1.0,
+            "actionability": 0.82,
+            "mean_sparsity": 9.78,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.4,
+                "cf": 46.5413
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 65.91,
+                "cf": 10.342
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 8150.6105,
+                "cf": 81135.99
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0042
+              },
+              {
+                "feature": "HTTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.9511
+              },
+              {
+                "feature": "IRC",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0025
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.008
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 583.52,
+                "cf": 1262.6894
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 98.9084,
+                "cf": 851.5074
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 583.52,
+                "cf": 1262.6894
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 27.2,
+                "cf": 42.3193
+              },
+              {
+                "feature": "ack_count",
+                "type": "count",
+                "original": 8.0,
+                "cf": 14.0
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.8,
+                "cf": 1.0
+              },
+              {
+                "feature": "Telnet",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0019
+              },
+              {
+                "feature": "TCP",
+                "type": "continuous",
+                "original": 0.8,
+                "cf": -0.0
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.2,
+                "cf": 1.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 317.0,
+                "cf": 416.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 93.6,
+                "cf": 629.6342
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 10.0,
+                "cf": 33.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 14.0375
+              },
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 58514.2854,
+                "cf": 14645.1946
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.5818
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0019
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0033
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0157
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.8082
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 361.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 14.8,
+                "cf": 40.1369
+              },
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.1,
+                "cf": 0.0
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0036
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.3,
+                "cf": 1.0
+              },
+              {
+                "feature": "TCP",
+                "type": "continuous",
+                "original": 0.4,
+                "cf": -0.0
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.2,
+                "cf": 0.084
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 0.8,
+                "cf": 0.9077
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 0.8,
+                "cf": 0.9185
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 136.6,
+                "cf": 85.0182
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0646,
+                "cf": 0.001
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 17.0948
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 83.1129
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 30.0
+              },
+              {
+                "feature": "IRC",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0004
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 424.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 378.4786
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 102.5208
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 674.4945
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 614857.2154
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 43
+        },
+        {
+          "accuracy": 0.693825,
+          "f1_macro": 0.5981352066738497,
+          "generic": {
+            "validity": 0.91,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.86,
+            "feasibility_rate": 1.0,
+            "actionability": 0.86,
+            "mean_sparsity": 9.83,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 32.7966
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 93.2147
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 17294.6728,
+                "cf": 24492.7116
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.4773
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 28.0
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0129
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9688
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 377.0
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 73.0
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 126.4311
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.4747
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 18.0
+              },
+              {
+                "feature": "TCP",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "ICMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.4639
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9745
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 271.0
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 77.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 431634.2203
+              }
+            ],
+            [
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3272
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0214
+              },
+              {
+                "feature": "IRC",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0003
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 1279.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 659.3219
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 0.0296
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 52.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 1146205.2772
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.08,
+                "cf": 18.4806
+              },
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0024
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0168
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 89.0,
+                "cf": 673.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.29,
+                "cf": 299.1955
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.29,
+                "cf": 430.1573
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 92.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 8.4103,
+                "cf": 563720.7486
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 15.4018
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 125465.2732,
+                "cf": 50887.6176
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.2488
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4224
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 298.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 526.4734
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0113
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 83.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 629810.7306
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 44
+        },
+        {
+          "accuracy": 0.691225,
+          "f1_macro": 0.5992989651999712,
+          "generic": {
+            "validity": 0.88,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.79,
+            "feasibility_rate": 1.0,
+            "actionability": 0.79,
+            "mean_sparsity": 9.83,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 8.0,
+                "cf": 39.2489
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 7691.736,
+                "cf": 56299.4828
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0048
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 55399.999,
+                "cf": 62640.0015
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 554.0,
+                "cf": 585.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 554.0,
+                "cf": 1292.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 554.0,
+                "cf": 1262.6894
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 380.453
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 77.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 39.2479
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 31.8276
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 8253.5798,
+                "cf": 53625.2361
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.8066
+              },
+              {
+                "feature": "SMTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0011
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0317
+              },
+              {
+                "feature": "IRC",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0017
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 57800.0009,
+                "cf": 13534.9999
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 578.0,
+                "cf": 611.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 389.6849
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 33.5678
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 47667.962,
+                "cf": 0.001
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.5112
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9631
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 310.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 554.5016
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.02
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 81.0
+              }
+            ],
+            [
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 62930.2923,
+                "cf": 0.001
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.5001
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4797
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.5106
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9584
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 1156.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 535.654
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 848306.5124
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 113.5327
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 10757.1086,
+                "cf": 0.001
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0104
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0049
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0226
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9843
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 174.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 1844198.6076
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 45
+        },
+        {
+          "accuracy": 0.708775,
+          "f1_macro": 0.5720966143649611,
+          "generic": {
+            "validity": 0.8,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 9.99,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.81,
+            "feasibility_rate": 1.0,
+            "actionability": 0.81,
+            "mean_sparsity": 9.8,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 45.36
+              },
+              {
+                "feature": "rst_flag_number",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.8154
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0463
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 41.0
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0151
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.8364
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0115
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 2570.9999
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 555.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 154.0619
+              }
+            ],
+            [
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 120.191
+              },
+              {
+                "feature": "ack_count",
+                "type": "count",
+                "original": 1.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.9365
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3798
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6276.0001,
+                "cf": 1467.9995
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 336.0,
+                "cf": 54.0
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0193
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 79.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 761.7598,
+                "cf": 1362245.481
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 38.7822
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 83.9613
+              },
+              {
+                "feature": "syn_flag_number",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0482
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0006
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 81.0
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4335
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0187
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 79.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 8.0,
+                "cf": 10.9097
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 75.196
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0028
+              },
+              {
+                "feature": "ICMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.2223
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 390.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 287.78
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0036
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 79.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 12.2601
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 81.037
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 27496.4206,
+                "cf": 0.001
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.2217
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9957
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 745.0
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0197
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 83.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 424340.1049
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 46
+        }
+      ],
+      "generic": {
+        "validity": 0.8779999999999999,
+        "validity_std": 0.0406939798987516,
+        "validity_raw": [
+          0.91,
+          0.89,
+          0.91,
+          0.88,
+          0.8
+        ],
+        "feasibility_rate": 0.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "actionability": 0.0,
+        "actionability_std": 0.0,
+        "actionability_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_sparsity": 9.998000000000001,
+        "mean_sparsity_std": 0.003999999999999915,
+        "mean_sparsity_raw": [
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          9.99
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.878,
+        "feasibility_rate_pooled": 0.0,
+        "actionability_pooled": 0.0
+      },
+      "domain": {
+        "validity": 0.808,
+        "validity_std": 0.033105890714493685,
+        "validity_raw": [
+          0.76,
+          0.82,
+          0.86,
+          0.79,
+          0.81
+        ],
+        "feasibility_rate": 1.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "actionability": 0.808,
+        "actionability_std": 0.033105890714493685,
+        "actionability_raw": [
+          0.76,
+          0.82,
+          0.86,
+          0.79,
+          0.81
+        ],
+        "mean_sparsity": 9.778,
+        "mean_sparsity_std": 0.06675327707311449,
+        "mean_sparsity_raw": [
+          9.65,
+          9.78,
+          9.83,
+          9.83,
+          9.8
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.808,
+        "feasibility_rate_pooled": 1.0,
+        "actionability_pooled": 0.808
+      },
+      "raw_space_examples": [
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 20.0,
+            "cf": 47.031
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 9.0021
+          },
+          {
+            "feature": "ece_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0104
+          },
+          {
+            "feature": "syn_count",
+            "type": "count",
+            "original": 100.0,
+            "cf": 44.0
+          },
+          {
+            "feature": "DNS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0511
+          },
+          {
+            "feature": "DHCP",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.0208
+          },
+          {
+            "feature": "Min",
+            "type": "count",
+            "original": 60.0,
+            "cf": 42.0
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 60.0,
+            "cf": 1206.0
+          },
+          {
+            "feature": "IAT",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.1004
+          },
+          {
+            "feature": "Number",
+            "type": "count",
+            "original": 100.0,
+            "cf": 71.0
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 20.0,
+            "cf": 38.857
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 94.9508
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 18803.479,
+            "cf": 33766.5529
+          },
+          {
+            "feature": "ack_flag_number",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.6851
+          },
+          {
+            "feature": "HTTPS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.2761
+          },
+          {
+            "feature": "SSH",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.0027
+          },
+          {
+            "feature": "ARP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0379
+          },
+          {
+            "feature": "Tot sum",
+            "type": "count",
+            "original": 6000.0002,
+            "cf": 2972.9998
+          },
+          {
+            "feature": "IAT",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 0.0315
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 19.8,
+            "cf": 57.4122
+          },
+          {
+            "feature": "Protocol Type",
+            "type": "categorical",
+            "original": 6.0,
+            "cf": 0.0
+          },
+          {
+            "feature": "syn_flag_number",
+            "type": "continuous",
+            "original": 0.99,
+            "cf": -0.0
+          },
+          {
+            "feature": "rst_count",
+            "type": "count",
+            "original": 0.0,
+            "cf": 4.0
+          },
+          {
+            "feature": "DNS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0327
+          },
+          {
+            "feature": "DHCP",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.021
+          },
+          {
+            "feature": "Tot sum",
+            "type": "count",
+            "original": 6000.0002,
+            "cf": 2828.0001
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 60.0,
+            "cf": 392.0
+          },
+          {
+            "feature": "Tot size",
+            "type": "continuous",
+            "original": 60.0,
+            "cf": 908.2724
+          },
+          {
+            "feature": "IAT",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0217
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 20.0,
+            "cf": 33.8206
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 85.5872
+          },
+          {
+            "feature": "psh_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.4693
+          },
+          {
+            "feature": "ack_flag_number",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.5349
+          },
+          {
+            "feature": "ece_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0011
+          },
+          {
+            "feature": "HTTPS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0975
+          },
+          {
+            "feature": "UDP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.4488
+          },
+          {
+            "feature": "DHCP",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.0093
+          },
+          {
+            "feature": "ARP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0283
+          },
+          {
+            "feature": "Tot sum",
+            "type": "count",
+            "original": 6000.0002,
+            "cf": 60.0003
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 8.0,
+            "cf": 27.8837
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 43.1548
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 121222.6612,
+            "cf": 7777.2474
+          },
+          {
+            "feature": "psh_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.3193
+          },
+          {
+            "feature": "DNS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0397
+          },
+          {
+            "feature": "Min",
+            "type": "count",
+            "original": 60.0,
+            "cf": 42.0
+          },
+          {
+            "feature": "Tot size",
+            "type": "continuous",
+            "original": 60.0,
+            "cf": 202.122
+          },
+          {
+            "feature": "Number",
+            "type": "count",
+            "original": 100.0,
+            "cf": 71.0
+          }
+        ]
+      ],
+      "constraint_index_counts": {
+        "binary": 0,
+        "categorical": 1,
+        "count": 8,
+        "continuous": 30,
+        "onehot_features": 0,
+        "immutable": 0
+      }
+    },
+    "B_DP_SGD": {
+      "accuracy": 0.32697499999999996,
+      "accuracy_std": 0.16462749466598828,
+      "f1_macro": 0.2414161247965408,
+      "f1_macro_std": 0.04486821986764074,
+      "n_runs": 5,
+      "runs": [
+        {
+          "accuracy": 0.2092,
+          "f1_macro": 0.21266256311419335,
+          "generic": {
+            "validity": 1.0,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.97,
+            "feasibility_rate": 1.0,
+            "actionability": 0.97,
+            "mean_sparsity": 9.51,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.04,
+                "cf": 25.9675
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 29002.2404,
+                "cf": 55792.4741
+              },
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1694
+              },
+              {
+                "feature": "syn_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.2432
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.001
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0017
+              },
+              {
+                "feature": "IRC",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0007
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": 0.9752
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 50.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 78.0,
+                "cf": 218.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 8.0,
+                "cf": 30.474
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 45.2866
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 42388.1152,
+                "cf": 116397.3278
+              },
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0948
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 10.0
+              },
+              {
+                "feature": "SMTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0008
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.5175
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.054
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 200.8033
+              }
+            ],
+            [
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 78.1366
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 53738.6811,
+                "cf": 155029.3532
+              },
+              {
+                "feature": "rst_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.7507
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0068
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0956
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9044
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 929.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 54.0949
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 138.9806
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 32617.6531,
+                "cf": 0.001
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0023
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9675
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 706.0
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 77.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.08,
+                "cf": 16.5827
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0154
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0421
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.0
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": 0.9738
+              },
+              {
+                "feature": "LLC",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": 0.9996
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 1513.9999,
+                "cf": 1579.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 584.1634,
+                "cf": 928.1983
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0007,
+                "cf": 0.0082
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 341246.9181,
+                "cf": 0.0013
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 42
+        },
+        {
+          "accuracy": 0.621525,
+          "f1_macro": 0.266799755974287,
+          "generic": {
+            "validity": 1.0,
+            "feasibility_rate": 0.01,
+            "actionability": 0.01,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.94,
+            "feasibility_rate": 1.0,
+            "actionability": 0.94,
+            "mean_sparsity": 9.56,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 104831.3964,
+                "cf": 135189.7025
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.417
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0033
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0065
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9492
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 157.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 389.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 144.8817
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 564.5046
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 77.0
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 45.4627
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.0001
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0067
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.1922
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 107.0,
+                "cf": 420.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.47,
+                "cf": 52.8
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0253
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 71.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 22.0893,
+                "cf": 320781.3576
+              }
+            ],
+            [
+              {
+                "feature": "Protocol Type",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 75.9847
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1977
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.016
+              },
+              {
+                "feature": "IGMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0009
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9933
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 366.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 300.6952
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 464865.0089
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 57.4122
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 94.0
+              },
+              {
+                "feature": "IGMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0007
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 535.0
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 140.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 235.6652
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 448.3318
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 63.0
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 81.3526
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0023
+              },
+              {
+                "feature": "HTTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0632
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9532
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 720.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 1022.5978
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 67.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 1373933.701
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 43
+        },
+        {
+          "accuracy": 0.38445,
+          "f1_macro": 0.31622483945150703,
+          "generic": {
+            "validity": 1.0,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.98,
+            "feasibility_rate": 1.0,
+            "actionability": 0.98,
+            "mean_sparsity": 9.68,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 123.21,
+                "cf": 125.6148
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 5723.4343,
+                "cf": 888.4027
+              },
+              {
+                "feature": "HTTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.2364
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0618
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0061
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0042
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0051
+              },
+              {
+                "feature": "ICMP",
+                "type": "continuous",
+                "original": 0.31,
+                "cf": -0.0
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6310.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0002,
+                "cf": 0.0213
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 10.8244
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 105.7725
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 45289.9687,
+                "cf": 0.001
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.004
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 88.0
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0051
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 1023.3113
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 52.8
+              }
+            ],
+            [
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.98,
+                "cf": 1.0
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.7838
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.001
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "fin_count",
+                "type": "count",
+                "original": 98.0,
+                "cf": 100.0
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": 0.9486
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 274.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 348.0,
+                "cf": 189.0
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 28.8,
+                "cf": 0.0
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 74.3332
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0049
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 45.0
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 3.0
+              },
+              {
+                "feature": "Telnet",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0007
+              },
+              {
+                "feature": "SSH",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.01
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0041
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 491.5294
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 75.0
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 138.9806
+              },
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.8059
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 64.0
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0181
+              },
+              {
+                "feature": "ICMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.2555
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 60.0003
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 42.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 52.8
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 928.1983
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 44
+        },
+        {
+          "accuracy": 0.25535,
+          "f1_macro": 0.19075357374313423,
+          "generic": {
+            "validity": 0.98,
+            "feasibility_rate": 0.01,
+            "actionability": 0.01,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.96,
+            "feasibility_rate": 1.0,
+            "actionability": 0.96,
+            "mean_sparsity": 9.64,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 85.6558
+              },
+              {
+                "feature": "ack_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.177
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 20.0
+              },
+              {
+                "feature": "HTTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3015
+              },
+              {
+                "feature": "Telnet",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0006
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3083
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0064
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 273.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 478.6192
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 794707.9376
+              }
+            ],
+            [
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 63.82,
+                "cf": 84.5069
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.001
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 99.0,
+                "cf": 69.0
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0335
+              },
+              {
+                "feature": "Telnet",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0007
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 564.1794
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 95.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 398507.0568
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 8.0,
+                "cf": 29.9082
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.64,
+                "cf": 80.1531
+              },
+              {
+                "feature": "syn_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0041
+              },
+              {
+                "feature": "TCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.9061
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 16175.9999,
+                "cf": 30916.9996
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 161.76,
+                "cf": 128.2969
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0537
+              },
+              {
+                "feature": "Number",
+                "type": "count",
+                "original": 100.0,
+                "cf": 96.0
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 5.7589,
+                "cf": 913144.8863
+              }
+            ],
+            [
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.5487
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1689
+              },
+              {
+                "feature": "cwr_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0003
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.2755
+              },
+              {
+                "feature": "Telnet",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0004
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0079
+              },
+              {
+                "feature": "IGMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0002
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 53.0
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 0.0186
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 20.3625
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 40.0
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "HTTP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1553
+              },
+              {
+                "feature": "DNS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0255
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 48.0
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 588.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 52.8
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 0.0013,
+                "cf": 416509.6548
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 45
+        },
+        {
+          "accuracy": 0.16435,
+          "f1_macro": 0.2206398916995822,
+          "generic": {
+            "validity": 1.0,
+            "feasibility_rate": 0.01,
+            "actionability": 0.01,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 1.0,
+            "feasibility_rate": 1.0,
+            "actionability": 1.0,
+            "mean_sparsity": 9.67,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 23.32,
+                "cf": 26.5057
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 72.1306
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 18508.0934,
+                "cf": 0.001
+              },
+              {
+                "feature": "syn_flag_number",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.7496
+              },
+              {
+                "feature": "rst_flag_number",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.1513
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 52.0
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.3673
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 133.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 237.3611
+              }
+            ],
+            [
+              {
+                "feature": "rst_flag_number",
+                "type": "continuous",
+                "original": 0.21,
+                "cf": 0.2824
+              },
+              {
+                "feature": "psh_flag_number",
+                "type": "continuous",
+                "original": 0.26,
+                "cf": 0.0817
+              },
+              {
+                "feature": "ece_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0031
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 24.0,
+                "cf": 69.0
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.01,
+                "cf": 0.0014
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 0.99,
+                "cf": 1.0
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 100411.9961,
+                "cf": 94540.0018
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 1016.5899,
+                "cf": 847.9191
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0006,
+                "cf": 0.0475
+              },
+              {
+                "feature": "Variance",
+                "type": "continuous",
+                "original": 1033455.0179,
+                "cf": 1688315.0035
+              }
+            ],
+            [
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 20116.5659,
+                "cf": 29963.4918
+              },
+              {
+                "feature": "TCP",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9621
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.1103
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0051
+              },
+              {
+                "feature": "ICMP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.1268
+              },
+              {
+                "feature": "IPv",
+                "type": "continuous",
+                "original": 1.0,
+                "cf": 0.9952
+              },
+              {
+                "feature": "Max",
+                "type": "count",
+                "original": 60.0,
+                "cf": 138.0
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 113.313
+              },
+              {
+                "feature": "Std",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 64.7304
+              }
+            ],
+            [
+              {
+                "feature": "Header_Length",
+                "type": "continuous",
+                "original": 20.0,
+                "cf": 31.9837
+              },
+              {
+                "feature": "Time_To_Live",
+                "type": "continuous",
+                "original": 64.0,
+                "cf": 38.7007
+              },
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 11767.2094,
+                "cf": 50367.6494
+              },
+              {
+                "feature": "fin_flag_number",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.24
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 53.0
+              },
+              {
+                "feature": "HTTPS",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.4383
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 1619.0001
+              },
+              {
+                "feature": "AVG",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 449.6465
+              }
+            ],
+            [
+              {
+                "feature": "Rate",
+                "type": "continuous",
+                "original": 42319.6853,
+                "cf": 73324.8821
+              },
+              {
+                "feature": "syn_count",
+                "type": "count",
+                "original": 100.0,
+                "cf": 76.0
+              },
+              {
+                "feature": "rst_count",
+                "type": "count",
+                "original": 0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "UDP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.425
+              },
+              {
+                "feature": "DHCP",
+                "type": "continuous",
+                "original": -0.0,
+                "cf": 0.0044
+              },
+              {
+                "feature": "ARP",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0177
+              },
+              {
+                "feature": "Tot sum",
+                "type": "count",
+                "original": 6000.0002,
+                "cf": 315.0
+              },
+              {
+                "feature": "Min",
+                "type": "count",
+                "original": 60.0,
+                "cf": 45.0
+              },
+              {
+                "feature": "Tot size",
+                "type": "continuous",
+                "original": 60.0,
+                "cf": 208.1488
+              },
+              {
+                "feature": "IAT",
+                "type": "continuous",
+                "original": 0.0,
+                "cf": 0.0069
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 0,
+            "categorical": 1,
+            "count": 8,
+            "continuous": 30,
+            "onehot_features": 0,
+            "immutable": 0
+          },
+          "seed": 46
+        }
+      ],
+      "generic": {
+        "validity": 0.9960000000000001,
+        "validity_std": 0.008000000000000007,
+        "validity_raw": [
+          1.0,
+          1.0,
+          1.0,
+          0.98,
+          1.0
+        ],
+        "feasibility_rate": 0.006,
+        "feasibility_rate_std": 0.004898979485566356,
+        "feasibility_rate_raw": [
+          0.0,
+          0.01,
+          0.0,
+          0.01,
+          0.01
+        ],
+        "actionability": 0.006,
+        "actionability_std": 0.004898979485566356,
+        "actionability_raw": [
+          0.0,
+          0.01,
+          0.0,
+          0.01,
+          0.01
+        ],
+        "mean_sparsity": 10.0,
+        "mean_sparsity_std": 0.0,
+        "mean_sparsity_raw": [
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.996,
+        "feasibility_rate_pooled": 0.006,
+        "actionability_pooled": 0.006
+      },
+      "domain": {
+        "validity": 0.97,
+        "validity_std": 0.020000000000000018,
+        "validity_raw": [
+          0.97,
+          0.94,
+          0.98,
+          0.96,
+          1.0
+        ],
+        "feasibility_rate": 1.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "actionability": 0.97,
+        "actionability_std": 0.020000000000000018,
+        "actionability_raw": [
+          0.97,
+          0.94,
+          0.98,
+          0.96,
+          1.0
+        ],
+        "mean_sparsity": 9.612,
+        "mean_sparsity_std": 0.06615134163416488,
+        "mean_sparsity_raw": [
+          9.51,
+          9.56,
+          9.68,
+          9.64,
+          9.67
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.97,
+        "feasibility_rate_pooled": 1.0,
+        "actionability_pooled": 0.97
+      },
+      "raw_space_examples": [
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 20.04,
+            "cf": 25.9675
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 29002.2404,
+            "cf": 55792.4741
+          },
+          {
+            "feature": "fin_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.1694
+          },
+          {
+            "feature": "syn_flag_number",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.2432
+          },
+          {
+            "feature": "cwr_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.001
+          },
+          {
+            "feature": "DNS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0017
+          },
+          {
+            "feature": "IRC",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.0007
+          },
+          {
+            "feature": "IPv",
+            "type": "continuous",
+            "original": 0.99,
+            "cf": 0.9752
+          },
+          {
+            "feature": "Min",
+            "type": "count",
+            "original": 60.0,
+            "cf": 50.0
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 78.0,
+            "cf": 218.0
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 8.0,
+            "cf": 30.474
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 45.2866
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 42388.1152,
+            "cf": 116397.3278
+          },
+          {
+            "feature": "fin_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0948
+          },
+          {
+            "feature": "rst_count",
+            "type": "count",
+            "original": 0.0,
+            "cf": 10.0
+          },
+          {
+            "feature": "SMTP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0008
+          },
+          {
+            "feature": "UDP",
+            "type": "continuous",
+            "original": 1.0,
+            "cf": 0.5175
+          },
+          {
+            "feature": "ARP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.054
+          },
+          {
+            "feature": "Tot sum",
+            "type": "count",
+            "original": 6000.0002,
+            "cf": 60.0003
+          },
+          {
+            "feature": "Tot size",
+            "type": "continuous",
+            "original": 60.0,
+            "cf": 200.8033
+          }
+        ],
+        [
+          {
+            "feature": "Protocol Type",
+            "type": "categorical",
+            "original": 1.0,
+            "cf": 0.0
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 78.1366
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 53738.6811,
+            "cf": 155029.3532
+          },
+          {
+            "feature": "rst_flag_number",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 0.7507
+          },
+          {
+            "feature": "ece_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0068
+          },
+          {
+            "feature": "ARP",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0956
+          },
+          {
+            "feature": "IPv",
+            "type": "continuous",
+            "original": 1.0,
+            "cf": 0.9044
+          },
+          {
+            "feature": "Tot sum",
+            "type": "count",
+            "original": 6000.0002,
+            "cf": 60.0003
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 60.0,
+            "cf": 929.0
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 20.0,
+            "cf": 54.0949
+          },
+          {
+            "feature": "Time_To_Live",
+            "type": "continuous",
+            "original": 64.0,
+            "cf": 138.9806
+          },
+          {
+            "feature": "Rate",
+            "type": "continuous",
+            "original": 32617.6531,
+            "cf": 0.001
+          },
+          {
+            "feature": "ack_flag_number",
+            "type": "continuous",
+            "original": -0.0,
+            "cf": 1.0
+          },
+          {
+            "feature": "ece_flag_number",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0023
+          },
+          {
+            "feature": "IPv",
+            "type": "continuous",
+            "original": 1.0,
+            "cf": 0.9675
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 60.0,
+            "cf": 706.0
+          },
+          {
+            "feature": "Number",
+            "type": "count",
+            "original": 100.0,
+            "cf": 77.0
+          }
+        ],
+        [
+          {
+            "feature": "Header_Length",
+            "type": "continuous",
+            "original": 0.08,
+            "cf": 16.5827
+          },
+          {
+            "feature": "HTTPS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0154
+          },
+          {
+            "feature": "DNS",
+            "type": "continuous",
+            "original": 0.0,
+            "cf": 0.0421
+          },
+          {
+            "feature": "UDP",
+            "type": "continuous",
+            "original": 0.01,
+            "cf": 0.0
+          },
+          {
+            "feature": "IPv",
+            "type": "continuous",
+            "original": 0.99,
+            "cf": 0.9738
+          },
+          {
+            "feature": "LLC",
+            "type": "continuous",
+            "original": 0.99,
+            "cf": 0.9996
+          },
+          {
+            "feature": "Max",
+            "type": "count",
+            "original": 1513.9999,
+            "cf": 1579.0
+          },
+          {
+            "feature": "Std",
+            "type": "continuous",
+            "original": 584.1634,
+            "cf": 928.1983
+          },
+          {
+            "feature": "IAT",
+            "type": "continuous",
+            "original": 0.0007,
+            "cf": 0.0082
+          },
+          {
+            "feature": "Variance",
+            "type": "continuous",
+            "original": 341246.9181,
+            "cf": 0.0013
+          }
+        ]
+      ],
+      "constraint_index_counts": {
+        "binary": 0,
+        "categorical": 1,
+        "count": 8,
+        "continuous": 30,
+        "onehot_features": 0,
+        "immutable": 0
+      }
+    }
+  },
+  "generic_baseline": {
+    "validity": 0.9960000000000001,
+    "validity_std": 0.008000000000000007,
+    "validity_raw": [
+      1.0,
+      1.0,
+      1.0,
+      0.98,
+      1.0
+    ],
+    "feasibility_rate": 0.006,
+    "feasibility_rate_std": 0.004898979485566356,
+    "feasibility_rate_raw": [
+      0.0,
+      0.01,
+      0.0,
+      0.01,
+      0.01
+    ],
+    "actionability": 0.006,
+    "actionability_std": 0.004898979485566356,
+    "actionability_raw": [
+      0.0,
+      0.01,
+      0.0,
+      0.01,
+      0.01
+    ],
+    "mean_sparsity": 10.0,
+    "mean_sparsity_std": 0.0,
+    "mean_sparsity_raw": [
+      10.0,
+      10.0,
+      10.0,
+      10.0,
+      10.0
+    ],
+    "n": 500,
+    "n_per_run": [
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "validity_pooled": 0.996,
+    "feasibility_rate_pooled": 0.006,
+    "actionability_pooled": 0.006
+  },
+  "domain_constrained": {
+    "validity": 0.97,
+    "validity_std": 0.020000000000000018,
+    "validity_raw": [
+      0.97,
+      0.94,
+      0.98,
+      0.96,
+      1.0
+    ],
+    "feasibility_rate": 1.0,
+    "feasibility_rate_std": 0.0,
+    "feasibility_rate_raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "actionability": 0.97,
+    "actionability_std": 0.020000000000000018,
+    "actionability_raw": [
+      0.97,
+      0.94,
+      0.98,
+      0.96,
+      1.0
+    ],
+    "mean_sparsity": 9.612,
+    "mean_sparsity_std": 0.06615134163416488,
+    "mean_sparsity_raw": [
+      9.51,
+      9.56,
+      9.68,
+      9.64,
+      9.67
+    ],
+    "n": 500,
+    "n_per_run": [
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "validity_pooled": 0.97,
+    "feasibility_rate_pooled": 1.0,
+    "actionability_pooled": 0.97
+  },
+  "_meta": {
+    "exp": "exp16_domain_cf_ab_cpu",
+    "dataset": "ciciot2023",
+    "duration_sec": 9450.3
+  }
+}

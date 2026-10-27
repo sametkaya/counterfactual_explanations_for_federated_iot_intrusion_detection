@@ -1,0 +1,17 @@
+[05:02:41] === exp17_architecture | edge-iiot | 2026-09-04 05:02 ===
+[05:03:18] device=cuda archs=['mlp', 'cnn1d'] n_runs=3 noise_std=2.4224
+[05:03:18] 
+===== architecture: mlp =====
+[06:00:51]   mlp/A_Standard: acc=0.991±0.001 val=0.943±0.014
+[07:00:20]   mlp/B_DP_SGD: acc=0.171±0.038 val=0.884±0.080
+[07:41:37]   mlp/C_Noise_Only: acc=0.319±0.055 val=0.907±0.043
+[08:25:39]   mlp/D_Clip_Only: acc=0.993±0.001 val=0.979±0.008
+[08:25:39]   [mlp] noise main effect on validity = -0.0653 (baseline_val=0.943) paradox=False
+[08:25:39] 
+===== architecture: cnn1d =====
+[08:42:13]   cnn1d/A_Standard: acc=0.991±0.002 val=0.997±0.002
+[10:34:58]   cnn1d/B_DP_SGD: acc=0.672±0.095 val=0.935±0.044
+[11:12:31]   cnn1d/C_Noise_Only: acc=0.905±0.023 val=0.920±0.091
+[11:29:31]   cnn1d/D_Clip_Only: acc=0.995±0.000 val=0.996±0.003
+[11:29:31]   [cnn1d] noise main effect on validity = -0.0693 (baseline_val=0.997) paradox=False
+[11:29:31] saved -> experiments_journal/exp17_architecture_edge-iiot/results.json

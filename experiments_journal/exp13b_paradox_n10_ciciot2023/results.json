@@ -1,0 +1,111 @@
+{
+  "n_runs": 3,
+  "conditions": {
+    "A_Standard": {
+      "acc_mean": 0.6813750000000001,
+      "acc_std": 0.020468217232252207,
+      "val_mean": 0.8746666666666667,
+      "val_std": 0.07045250567265543,
+      "raw_acc": [
+        0.682,
+        0.656,
+        0.706125
+      ],
+      "raw_val": [
+        0.912,
+        0.9359999999999999,
+        0.7760000000000001
+      ]
+    },
+    "B_DP_SGD": {
+      "acc_mean": 0.14029166666666668,
+      "acc_std": 0.16501131063926766,
+      "val_mean": 0.9946666666666667,
+      "val_std": 0.0037712361663282566,
+      "raw_acc": [
+        0.02675,
+        0.0205,
+        0.373625
+      ],
+      "raw_val": [
+        1.0,
+        0.992,
+        0.992
+      ]
+    },
+    "C_Noise_Only": {
+      "acc_mean": 0.5830833333333333,
+      "acc_std": 0.10039424023429945,
+      "val_mean": 1.0,
+      "val_std": 0.0,
+      "raw_acc": [
+        0.5185,
+        0.505875,
+        0.724875
+      ],
+      "raw_val": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "D_Clip_Only": {
+      "acc_mean": 0.6829583333333332,
+      "acc_std": 0.025710798099026176,
+      "val_mean": 0.9253333333333332,
+      "val_std": 0.02639865316429771,
+      "raw_acc": [
+        0.66675,
+        0.662875,
+        0.71925
+      ],
+      "raw_val": [
+        0.92,
+        0.96,
+        0.8960000000000001
+      ]
+    }
+  },
+  "stat_tests": {
+    "kruskal_wallis_validity": {
+      "H": 9.240000000000002,
+      "p_value": 0.02626441798709063,
+      "significant": "True"
+    },
+    "A_Standard_vs_B_DP_SGD": {
+      "test": "Mann-Whitney U",
+      "p_value": 0.07652250047505922,
+      "significant": false,
+      "rank_biserial_r": 1.0
+    },
+    "A_Standard_vs_C_Noise_Only": {
+      "test": "Mann-Whitney U",
+      "p_value": 0.06360256962075367,
+      "significant": false,
+      "rank_biserial_r": 1.0
+    },
+    "A_Standard_vs_D_Clip_Only": {
+      "test": "Mann-Whitney U",
+      "p_value": 0.7,
+      "significant": false,
+      "rank_biserial_r": 0.33333333333333337
+    },
+    "B_DP_SGD_vs_C_Noise_Only": {
+      "test": "Mann-Whitney U",
+      "p_value": 0.18763232999488433,
+      "significant": false,
+      "rank_biserial_r": 0.6666666666666667
+    }
+  },
+  "factorial_analysis": {
+    "noise_main_effect_pp": 9.733333333333348,
+    "clipping_main_effect_pp": 2.2666666666666613,
+    "interaction_pp": -5.599999999999983
+  },
+  "effect_size_convention": "rank-biserial r (Mann-Whitney U)",
+  "_meta": {
+    "exp": "exp13b_paradox_n10",
+    "dataset": "ciciot2023",
+    "duration_sec": 3636.4
+  }
+}

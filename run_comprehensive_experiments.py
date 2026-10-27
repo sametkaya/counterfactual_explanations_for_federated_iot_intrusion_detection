@@ -2869,11 +2869,9 @@ def exp12_epsilon_vs_model_accuracy(X_train, y_train, X_test, y_test, info, devi
     4. ✅ İstatistiksel testler (Wilcoxon signed-rank)
     5. ✅ n_runs=5, n_cf_samples=100
 
-    Addresses Reviewer Major Concern #3:
-    "Model accuracy at different ε values is not reported"
+    Reports model accuracy and CF validity at each privacy budget.
     """
     logger.section("EXPERIMENT 12: PRIVACY BUDGET vs MODEL ACCURACY")
-    logger._log("Addresses Reviewer Concern: 'Model accuracy at different ε not reported'")
 
     # =========================================================================
     # 1. exp1'den best config'i al (ADİL KARŞILAŞTIRMA)
@@ -3293,8 +3291,8 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
     5. ✅ 2x2 Factorial design analizi
     6. ✅ n_runs=5
 
-    Addresses Reviewer Major Concern #1:
-    "DP Paradox hypotheses are speculative - need controlled experiments"
+    Controlled 2x2 factorial that separates the effects of gradient clipping
+    and Gaussian noise on accuracy and CF validity.
 
     2x2 Factorial Design:
     ┌─────────────────┬──────────────────┬──────────────────┐
@@ -3305,7 +3303,6 @@ def exp13_dp_paradox_controlled(X_train, y_train, X_test, y_test, info, device, 
     └─────────────────┴──────────────────┴──────────────────┘
     """
     logger.section("EXPERIMENT 13: DP PARADOX CONTROLLED EXPERIMENT")
-    logger._log("Addresses Reviewer Concern: 'DP Paradox hypotheses are speculative'")
 
     # =========================================================================
     # 1. exp1'den best config'i al
@@ -3777,7 +3774,7 @@ def run_all(dataset_name: str, skip_experiments: list = None):
             logger._log("\n[SKIPPED] Experiment 11: CF Case Study")
 
             # =====================================================================
-            # NEW: Exp 12: Privacy Budget vs Model Accuracy (Reviewer Response)
+            # Exp 12: Privacy Budget vs Model Accuracy
             # =====================================================================
             if 12 not in skip_experiments:
                 try:
@@ -3793,7 +3790,7 @@ def run_all(dataset_name: str, skip_experiments: list = None):
                 logger._log("\\n[SKIPPED] Experiment 12: Privacy Budget vs Accuracy")
 
             # =====================================================================
-            # NEW: Exp 13: DP Paradox Controlled Experiment (Reviewer Response)
+            # Exp 13: DP Paradox Controlled Experiment
             # =====================================================================
             if 13 not in skip_experiments:
                 try:
@@ -3884,9 +3881,9 @@ def main():
     print("  8.  Ablation Study")
     print("  9.  Latency Analysis")
     print("  10. Privacy Attack Evaluation (MIA)")
-    print("  11. CF Case Study (NEW)")
-    print("  12. Privacy Budget vs Model Accuracy (NEW - Reviewer Response)")
-    print("  13. DP Paradox Controlled Experiment (NEW - Reviewer Response)")
+    print("  11. CF Case Study")
+    print("  12. Privacy Budget vs Model Accuracy")
+    print("  13. DP Paradox Controlled Experiment")
     if skip_experiments:
         print(f"\n  [Will SKIP: {skip_experiments}]")
 

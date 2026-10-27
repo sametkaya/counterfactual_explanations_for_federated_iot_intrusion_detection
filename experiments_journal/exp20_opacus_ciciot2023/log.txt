@@ -1,0 +1,29 @@
+[23:40:34] === exp20_opacus | ciciot2023 | 2026-09-04 23:40 ===
+[23:40:34] device=cuda n_runs=3 epochs=20 batch=256 target_eps=[2.0, 8.0] delta=1e-05 C=1.0 cf_samples=100 cf_max_iter=300
+[23:45:12] train=160000 test=40000 F=39 C=8
+[23:45:12] 
+=== run 1/3 (seed 42) ===
+[00:35:43]   GN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.606 F1=0.449 val=0.022 |dm/dx|=0.401 TrH=-33.011 m=2.493 d_lin=6.224 ECE=0.167
+[00:35:43]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[01:28:49]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.813 F1=0.334 val=0.020 |dm/dx|=0.161 TrH=-0.399 m=2.773 d_lin=17.174 ECE=0.118
+[01:28:50]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[02:19:31]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.816 F1=0.345 val=0.016 |dm/dx|=2.055 TrH=-0.034 m=2.811 d_lin=1.368 ECE=0.117
+[02:19:31] 
+=== run 2/3 (seed 43) ===
+[03:09:51]   GN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.683 F1=0.496 val=0.048 |dm/dx|=0.586 TrH=-70.002 m=2.925 d_lin=4.989 ECE=0.185
+[03:09:52]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[04:00:37]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.813 F1=0.334 val=0.024 |dm/dx|=0.100 TrH=5.465 m=2.545 d_lin=25.350 ECE=0.098
+[04:00:38]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[04:52:45]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.814 F1=0.349 val=0.020 |dm/dx|=0.001 TrH=0.000 m=2.569 d_lin=2224.440 ECE=0.098
+[04:52:45] 
+=== run 3/3 (seed 44) ===
+[05:41:20]   GN_baseline : eps_spent=inf sigma_mult=0.000 acc=0.722 F1=0.483 val=0.018 |dm/dx|=0.772 TrH=-25.343 m=2.484 d_lin=3.215 ECE=0.193
+[05:41:20]     Opacus: target eps=2.0 delta=1e-05 -> noise_multiplier=0.7837 (per-example clip C=1.0, Poisson sampling)
+[06:32:06]   DP_eps2     : eps_spent=1.997 sigma_mult=0.784 acc=0.812 F1=0.336 val=0.006 |dm/dx|=0.000 TrH=0.000 m=2.698 d_lin=10364.381 ECE=0.110
+[06:32:06]     Opacus: target eps=8.0 delta=1e-05 -> noise_multiplier=0.5212 (per-example clip C=1.0, Poisson sampling)
+[07:22:20]   DP_eps8     : eps_spent=8.000 sigma_mult=0.521 acc=0.819 F1=0.369 val=0.022 |dm/dx|=0.005 TrH=0.001 m=2.808 d_lin=575.768 ECE=0.107
+[07:22:20] 
+=== contrasts vs GN_baseline (mean deltas) ===
+[07:22:20]   DP_eps2_minus_GN_baseline: accuracy=+0.142, f1_macro=-0.141, cf_validity=-0.013, ece=-0.073, margin_grad_norm=-0.499, margin_logit=+0.038, d_lin=+3464.159
+[07:22:20]   DP_eps8_minus_GN_baseline: accuracy=+0.146, f1_macro=-0.122, cf_validity=-0.010, ece=-0.074, margin_grad_norm=+0.101, margin_logit=+0.095, d_lin=+929.049
+[07:22:20] saved -> experiments_journal/exp20_opacus_ciciot2023/results.json

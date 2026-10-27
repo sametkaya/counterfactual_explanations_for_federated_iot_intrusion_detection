@@ -1,0 +1,2783 @@
+{
+  "version": 2,
+  "reference_epsilon": 2.0,
+  "cf_max_iter": 300,
+  "n_samples": 100,
+  "snap_every": 10,
+  "n_runs": 5,
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "semantics": {
+    "mode": "data",
+    "n_binary": 9,
+    "n_categorical": 21,
+    "n_count": 3,
+    "n_continuous": 3,
+    "n_immutable": 20,
+    "onehot_groups": {},
+    "features_by_type": {
+      "categorical": [
+        "arp.opcode",
+        "arp.hw.size",
+        "http.content_length",
+        "http.request.method",
+        "http.referer",
+        "http.request.version",
+        "tcp.flags",
+        "dns.qry.name.len",
+        "dns.qry.qu",
+        "dns.retransmission",
+        "mqtt.conack.flags",
+        "mqtt.conflags",
+        "mqtt.hdrflags",
+        "mqtt.len",
+        "mqtt.msgtype",
+        "mqtt.proto_len",
+        "mqtt.protoname",
+        "mqtt.topic",
+        "mqtt.topic_len",
+        "mqtt.ver",
+        "mbtcp.len"
+      ],
+      "immutable": [
+        "icmp.checksum",
+        "icmp.seq_le",
+        "icmp.transmit_timestamp",
+        "icmp.unused",
+        "http.file_data",
+        "http.request.uri.query",
+        "http.request.full_uri",
+        "http.tls_port",
+        "tcp.ack_raw",
+        "tcp.checksum",
+        "tcp.options",
+        "tcp.payload",
+        "tcp.seq",
+        "tcp.srcport",
+        "udp.stream",
+        "dns.qry.type",
+        "mqtt.msg_decoded_as",
+        "mqtt.msg",
+        "mbtcp.trans_id",
+        "mbtcp.unit_id"
+      ],
+      "binary": [
+        "http.response",
+        "tcp.connection.fin",
+        "tcp.connection.rst",
+        "tcp.connection.syn",
+        "tcp.connection.synack",
+        "tcp.flags.ack",
+        "dns.retransmit_request",
+        "dns.retransmit_request_in",
+        "mqtt.conflag.cleansess"
+      ],
+      "continuous": [
+        "tcp.ack",
+        "tcp.dstport",
+        "dns.qry.name"
+      ],
+      "count": [
+        "tcp.len",
+        "udp.port",
+        "udp.time_delta"
+      ]
+    },
+    "reasons": {
+      "arp.opcode": "integer, 3 values",
+      "arp.hw.size": "integer, 2 values",
+      "icmp.checksum": "identifier",
+      "icmp.seq_le": "identifier",
+      "icmp.transmit_timestamp": "identifier",
+      "icmp.unused": "constant",
+      "http.file_data": "high-cardinality encoded string",
+      "http.content_length": "integer, 23 values",
+      "http.request.uri.query": "high-cardinality encoded string",
+      "http.request.method": "encoded categorical",
+      "http.referer": "encoded categorical",
+      "http.request.full_uri": "high-cardinality encoded string",
+      "http.request.version": "encoded categorical",
+      "http.response": "integer {0,1}",
+      "http.tls_port": "constant",
+      "tcp.ack": "real-valued",
+      "tcp.ack_raw": "identifier",
+      "tcp.checksum": "identifier",
+      "tcp.connection.fin": "integer {0,1}",
+      "tcp.connection.rst": "integer {0,1}",
+      "tcp.connection.syn": "integer {0,1}",
+      "tcp.connection.synack": "integer {0,1}",
+      "tcp.dstport": "real-valued",
+      "tcp.flags": "integer, 9 values",
+      "tcp.flags.ack": "integer {0,1}",
+      "tcp.len": "integer",
+      "tcp.options": "high-cardinality encoded string",
+      "tcp.payload": "high-cardinality encoded string",
+      "tcp.seq": "identifier",
+      "tcp.srcport": "high-cardinality encoded string",
+      "udp.port": "integer",
+      "udp.stream": "identifier",
+      "udp.time_delta": "integer",
+      "dns.qry.name": "real-valued",
+      "dns.qry.name.len": "encoded categorical",
+      "dns.qry.qu": "integer, 14 values",
+      "dns.qry.type": "constant",
+      "dns.retransmission": "integer, 3 values",
+      "dns.retransmit_request": "integer {0,1}",
+      "dns.retransmit_request_in": "integer {0,1}",
+      "mqtt.conack.flags": "encoded categorical",
+      "mqtt.conflag.cleansess": "integer {0,1}",
+      "mqtt.conflags": "integer, 2 values",
+      "mqtt.hdrflags": "integer, 5 values",
+      "mqtt.len": "integer, 4 values",
+      "mqtt.msg_decoded_as": "constant",
+      "mqtt.msg": "high-cardinality encoded string",
+      "mqtt.msgtype": "integer, 5 values",
+      "mqtt.proto_len": "integer, 2 values",
+      "mqtt.protoname": "encoded categorical",
+      "mqtt.topic": "encoded categorical",
+      "mqtt.topic_len": "integer, 2 values",
+      "mqtt.ver": "integer, 2 values",
+      "mbtcp.len": "integer, 4 values",
+      "mbtcp.trans_id": "identifier",
+      "mbtcp.unit_id": "identifier"
+    }
+  },
+  "models": {
+    "C_Noise_Only": {
+      "accuracy": 0.5664450000000001,
+      "accuracy_std": 0.11204808052795909,
+      "f1_macro": 0.4023504360215103,
+      "f1_macro_std": 0.058133624475621155,
+      "n_runs": 5,
+      "runs": [
+        {
+          "accuracy": 0.546275,
+          "f1_macro": 0.377846694710097,
+          "generic": {
+            "validity": 0.87,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.08,
+            "feasibility_rate": 1.0,
+            "actionability": 0.08,
+            "mean_sparsity": 3.64,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 55506.0007,
+                "cf": 45457.2815
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 209.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 275304.9052
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 59.5399,
+                "cf": 337789957.8844
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 54075.999,
+                "cf": 64725.3603
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 679.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 54452.0,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 209.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 167682.543
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 59.5399,
+                "cf": 211575741.4614
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 173.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 2.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 178874.5956
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 59.5399,
+                "cf": 368681705.8901
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 42
+        },
+        {
+          "accuracy": 0.4735,
+          "f1_macro": 0.3899823330091226,
+          "generic": {
+            "validity": 0.99,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.14,
+            "feasibility_rate": 1.0,
+            "actionability": 0.14,
+            "mean_sparsity": 3.36,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 62302.0016,
+                "cf": 0.0001
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 213.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 56413.9997,
+                "cf": 0.0001
+              }
+            ],
+            [
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 57602.0005,
+                "cf": 49156.92
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 16.0,
+                "cf": 17.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 63141.0008,
+                "cf": 41789.5121
+              },
+              {
+                "feature": "mqtt.hdrflags",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 16.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 64570.9992,
+                "cf": 327.3639
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 369.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 43
+        },
+        {
+          "accuracy": 0.782325,
+          "f1_macro": 0.5165557106393716,
+          "generic": {
+            "validity": 0.96,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.2,
+            "feasibility_rate": 1.0,
+            "actionability": 0.2,
+            "mean_sparsity": 4.01,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 60943.9993,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 1440.0,
+                "cf": 651.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1027.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 159010.5715
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 1440.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 60943.9993,
+                "cf": 797.4447
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 24.0,
+                "cf": 25.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 1440.0,
+                "cf": 1211.0001
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 440206864.5392
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 72.0
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 60943.9993,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 1440.0,
+                "cf": 525.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 44
+        },
+        {
+          "accuracy": 0.545425,
+          "f1_macro": 0.3562300743871311,
+          "generic": {
+            "validity": 0.97,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.08,
+            "feasibility_rate": 1.0,
+            "actionability": 0.08,
+            "mean_sparsity": 3.78,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 179667469.3411
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 1882.9998,
+                "cf": 31280.4496
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 24.0,
+                "cf": 25.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 14.0,
+                "cf": 98.0
+              },
+              {
+                "feature": "mqtt.hdrflags",
+                "type": "categorical",
+                "original": 16.0,
+                "cf": 32.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 58646.9992,
+                "cf": 19621.9979
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 18.0,
+                "cf": 20.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 117.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 229889.492
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 54964.0009,
+                "cf": 61764.1487
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 1882.9998,
+                "cf": 30598.7341
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 64.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 551.0
+              },
+              {
+                "feature": "mqtt.msgtype",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 1.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 291543123.5775
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 1882.9998,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 14.0,
+                "cf": 162.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "mqtt.hdrflags",
+                "type": "categorical",
+                "original": 16.0,
+                "cf": 32.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 45
+        },
+        {
+          "accuracy": 0.4847,
+          "f1_macro": 0.37113736736182895,
+          "generic": {
+            "validity": 0.95,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.13,
+            "feasibility_rate": 1.0,
+            "actionability": 0.13,
+            "mean_sparsity": 3.91,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 60943.9993,
+                "cf": 25389.5637
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": 1440.0,
+                "cf": 661.0
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 458.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 237502.9601
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 5.952,
+                "cf": 78451010.33
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 171.0
+              },
+              {
+                "feature": "mqtt.msgtype",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 1.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 616.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 237964.3497
+              }
+            ],
+            [
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 33658771.746
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 1882.9998,
+                "cf": 7759.0985
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 46
+        }
+      ],
+      "generic": {
+        "validity": 0.9480000000000001,
+        "validity_std": 0.041182520563948,
+        "validity_raw": [
+          0.87,
+          0.99,
+          0.96,
+          0.97,
+          0.95
+        ],
+        "feasibility_rate": 0.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "actionability": 0.0,
+        "actionability_std": 0.0,
+        "actionability_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_sparsity": 10.0,
+        "mean_sparsity_std": 0.0,
+        "mean_sparsity_raw": [
+          10.0,
+          10.0,
+          10.0,
+          10.0,
+          10.0
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.948,
+        "feasibility_rate_pooled": 0.0,
+        "actionability_pooled": 0.0
+      },
+      "domain": {
+        "validity": 0.126,
+        "validity_std": 0.04454211490264018,
+        "validity_raw": [
+          0.08,
+          0.14,
+          0.2,
+          0.08,
+          0.13
+        ],
+        "feasibility_rate": 1.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "actionability": 0.126,
+        "actionability_std": 0.04454211490264018,
+        "actionability_raw": [
+          0.08,
+          0.14,
+          0.2,
+          0.08,
+          0.13
+        ],
+        "mean_sparsity": 3.7399999999999998,
+        "mean_sparsity_std": 0.22706827167175953,
+        "mean_sparsity_raw": [
+          3.64,
+          3.36,
+          4.01,
+          3.78,
+          3.91
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.126,
+        "feasibility_rate_pooled": 1.0,
+        "actionability_pooled": 0.126
+      },
+      "raw_space_examples": [
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 5.0
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 55506.0007,
+            "cf": 45457.2815
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 209.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 275304.9052
+          }
+        ],
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 5.0
+          },
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 59.5399,
+            "cf": 337789957.8844
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 54075.999,
+            "cf": 64725.3603
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 679.0
+          }
+        ],
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 12.0
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 54452.0,
+            "cf": 65534.9998
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 209.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 167682.543
+          }
+        ],
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 6.0
+          },
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 59.5399,
+            "cf": 211575741.4614
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 173.0
+          },
+          {
+            "feature": "udp.time_delta",
+            "type": "count",
+            "original": 0.0,
+            "cf": 2.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 178874.5956
+          },
+          {
+            "feature": "mqtt.len",
+            "type": "categorical",
+            "original": 0.0,
+            "cf": 2.0
+          }
+        ],
+        [
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 59.5399,
+            "cf": 368681705.8901
+          },
+          {
+            "feature": "mqtt.len",
+            "type": "categorical",
+            "original": 0.0,
+            "cf": 2.0
+          }
+        ]
+      ],
+      "constraint_index_counts": {
+        "binary": 9,
+        "categorical": 21,
+        "count": 3,
+        "continuous": 3,
+        "onehot_features": 0,
+        "immutable": 20
+      }
+    },
+    "D_Clip_Only": {
+      "accuracy": 0.9942150000000002,
+      "accuracy_std": 0.00069992856778388,
+      "f1_macro": 0.9347626406129628,
+      "f1_macro_std": 0.00609458327542102,
+      "n_runs": 5,
+      "runs": [
+        {
+          "accuracy": 0.995,
+          "f1_macro": 0.9257041146417193,
+          "generic": {
+            "validity": 0.98,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 9.99,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.14,
+            "feasibility_rate": 1.0,
+            "actionability": 0.14,
+            "mean_sparsity": 5.05,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 22.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1941804037.405,
+                "cf": 839668230.8855
+              },
+              {
+                "feature": "tcp.connection.syn",
+                "type": "binary",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 79.9999,
+                "cf": 19887.1925
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 2.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 5394.0002
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 515560.4698
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 54578.0013,
+                "cf": 39346.4087
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 20.0,
+                "cf": 18.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 1607.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 619451.3698
+              },
+              {
+                "feature": "mqtt.topic",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 839668230.8855
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 79.9999,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 3145.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 43.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 619451.3698
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 20.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 221.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1666.0
+              },
+              {
+                "feature": "mqtt.topic",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 768287935.0341,
+                "cf": 404482615.2016
+              },
+              {
+                "feature": "tcp.connection.syn",
+                "type": "binary",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 2.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 1747.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 2.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 265130.0043
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 42
+        },
+        {
+          "accuracy": 0.99405,
+          "f1_macro": 0.9355722424959235,
+          "generic": {
+            "validity": 0.96,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 9.97,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.11,
+            "feasibility_rate": 1.0,
+            "actionability": 0.11,
+            "mean_sparsity": 5.02,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 144223455.6629
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 20.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 45.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "mqtt.msgtype",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 3.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "http.request.version",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 59114.0001,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 18.0,
+                "cf": 16.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 123.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 3767.9999
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 23.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 411719909.1251,
+                "cf": 1.0803
+              },
+              {
+                "feature": "tcp.connection.syn",
+                "type": "binary",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 2.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 3041.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 57.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "http.request.version",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 669525881.2971
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 55.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 412542746.9635
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 1634.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 22.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 43
+        },
+        {
+          "accuracy": 0.9941,
+          "f1_macro": 0.940251289594075,
+          "generic": {
+            "validity": 0.98,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 10.0,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.13,
+            "feasibility_rate": 1.0,
+            "actionability": 0.13,
+            "mean_sparsity": 5.11,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 477954672.1703
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 17.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 52.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 177888.0457
+              }
+            ],
+            [
+              {
+                "feature": "http.request.method",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 79.9999,
+                "cf": 64174.6831
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 2.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 4749.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 44.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 39003.8762
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 581076951.9146
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 132.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 3379.0001
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 40.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 384741.7281
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 726353643.2174
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 24.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 316.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 40.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 43013.847
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 25.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              },
+              {
+                "feature": "mqtt.protoname",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 44
+        },
+        {
+          "accuracy": 0.99305,
+          "f1_macro": 0.9302660209164515,
+          "generic": {
+            "validity": 0.96,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 9.99,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.14,
+            "feasibility_rate": 1.0,
+            "actionability": 0.14,
+            "mean_sparsity": 4.8,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "http.request.version",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 33827.9997,
+                "cf": 0.0001
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 18.0,
+                "cf": 17.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 4100.0001
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 35.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 132793.8783
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 424000119.8349
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 39077.8855
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 1118.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 31.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 489195.7124
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 5.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 4321.0006,
+                "cf": 0.0001
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 24.0,
+                "cf": 17.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 891.0
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "mqtt.topic",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 278.7633,
+                "cf": 705536192.764
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 33210.0003,
+                "cf": 0.0001
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 1780.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 323191.492
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              },
+              {
+                "feature": "mqtt.protoname",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              }
+            ],
+            [
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 2003648643.1465,
+                "cf": 629716789.4678
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 79.9999,
+                "cf": 54076.9267
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 2.0,
+                "cf": 4.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 223.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 45.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 617830.0883
+              },
+              {
+                "feature": "dns.qry.name.len",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 45
+        },
+        {
+          "accuracy": 0.994875,
+          "f1_macro": 0.9420195354166446,
+          "generic": {
+            "validity": 0.92,
+            "feasibility_rate": 0.0,
+            "actionability": 0.0,
+            "mean_sparsity": 9.97,
+            "n": 100
+          },
+          "domain": {
+            "validity": 0.1,
+            "feasibility_rate": 1.0,
+            "actionability": 0.1,
+            "mean_sparsity": 4.72,
+            "n": 100
+          },
+          "raw_space_examples": [
+            [
+              {
+                "feature": "http.request.version",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.ack",
+                "type": "continuous",
+                "original": 1.0803,
+                "cf": 608593283.7145
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 18.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "udp.port",
+                "type": "count",
+                "original": 0.0,
+                "cf": 2795.0
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 26.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 6.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 65534.9998
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 20.0
+              },
+              {
+                "feature": "tcp.flags.ack",
+                "type": "binary",
+                "original": -0.0,
+                "cf": 1.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 136.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 345018.639
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 25.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 2228.0001
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 48.0
+              }
+            ],
+            [
+              {
+                "feature": "http.content_length",
+                "type": "categorical",
+                "original": -0.0,
+                "cf": 12.0
+              },
+              {
+                "feature": "http.request.version",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              },
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 5690.9996,
+                "cf": 36058.7446
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 20.0,
+                "cf": 16.0
+              },
+              {
+                "feature": "tcp.len",
+                "type": "count",
+                "original": -0.0,
+                "cf": 1592.0001
+              },
+              {
+                "feature": "udp.time_delta",
+                "type": "count",
+                "original": 0.0,
+                "cf": 29.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 619451.3698
+              }
+            ],
+            [
+              {
+                "feature": "tcp.dstport",
+                "type": "continuous",
+                "original": 4321.0006,
+                "cf": 57514.2034
+              },
+              {
+                "feature": "tcp.flags",
+                "type": "categorical",
+                "original": 24.0,
+                "cf": 16.0
+              },
+              {
+                "feature": "dns.qry.name",
+                "type": "continuous",
+                "original": 0.0001,
+                "cf": 145749.763
+              },
+              {
+                "feature": "mqtt.len",
+                "type": "categorical",
+                "original": 0.0,
+                "cf": 2.0
+              },
+              {
+                "feature": "mqtt.protoname",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": 0.0
+              },
+              {
+                "feature": "mqtt.topic",
+                "type": "categorical",
+                "original": 1.0,
+                "cf": -0.0
+              }
+            ]
+          ],
+          "constraint_index_counts": {
+            "binary": 9,
+            "categorical": 21,
+            "count": 3,
+            "continuous": 3,
+            "onehot_features": 0,
+            "immutable": 20
+          },
+          "seed": 46
+        }
+      ],
+      "generic": {
+        "validity": 0.96,
+        "validity_std": 0.021908902300206624,
+        "validity_raw": [
+          0.98,
+          0.96,
+          0.98,
+          0.96,
+          0.92
+        ],
+        "feasibility_rate": 0.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "actionability": 0.0,
+        "actionability_std": 0.0,
+        "actionability_raw": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_sparsity": 9.984,
+        "mean_sparsity_std": 0.011999999999999745,
+        "mean_sparsity_raw": [
+          9.99,
+          9.97,
+          10.0,
+          9.99,
+          9.97
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.96,
+        "feasibility_rate_pooled": 0.0,
+        "actionability_pooled": 0.0
+      },
+      "domain": {
+        "validity": 0.124,
+        "validity_std": 0.016248076809271924,
+        "validity_raw": [
+          0.14,
+          0.11,
+          0.13,
+          0.14,
+          0.1
+        ],
+        "feasibility_rate": 1.0,
+        "feasibility_rate_std": 0.0,
+        "feasibility_rate_raw": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "actionability": 0.124,
+        "actionability_std": 0.016248076809271924,
+        "actionability_raw": [
+          0.14,
+          0.11,
+          0.13,
+          0.14,
+          0.1
+        ],
+        "mean_sparsity": 4.9399999999999995,
+        "mean_sparsity_std": 0.15192103211866365,
+        "mean_sparsity_raw": [
+          5.05,
+          5.02,
+          5.11,
+          4.8,
+          4.72
+        ],
+        "n": 500,
+        "n_per_run": [
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "validity_pooled": 0.124,
+        "feasibility_rate_pooled": 1.0,
+        "actionability_pooled": 0.124
+      },
+      "raw_space_examples": [
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 22.0
+          },
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 1941804037.405,
+            "cf": 839668230.8855
+          },
+          {
+            "feature": "tcp.connection.syn",
+            "type": "binary",
+            "original": 1.0,
+            "cf": -0.0
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 79.9999,
+            "cf": 19887.1925
+          },
+          {
+            "feature": "tcp.flags",
+            "type": "categorical",
+            "original": 2.0,
+            "cf": -0.0
+          },
+          {
+            "feature": "udp.port",
+            "type": "count",
+            "original": 0.0,
+            "cf": 5394.0002
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 515560.4698
+          },
+          {
+            "feature": "dns.qry.name.len",
+            "type": "categorical",
+            "original": 1.0,
+            "cf": -0.0
+          }
+        ],
+        [
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 54578.0013,
+            "cf": 39346.4087
+          },
+          {
+            "feature": "tcp.flags",
+            "type": "categorical",
+            "original": 20.0,
+            "cf": 18.0
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 1607.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 619451.3698
+          },
+          {
+            "feature": "mqtt.topic",
+            "type": "categorical",
+            "original": 1.0,
+            "cf": -0.0
+          }
+        ],
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 5.0
+          },
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 1.0803,
+            "cf": 839668230.8855
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 79.9999,
+            "cf": 65534.9998
+          },
+          {
+            "feature": "udp.port",
+            "type": "count",
+            "original": 0.0,
+            "cf": 3145.0
+          },
+          {
+            "feature": "udp.time_delta",
+            "type": "count",
+            "original": 0.0,
+            "cf": 43.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 619451.3698
+          }
+        ],
+        [
+          {
+            "feature": "http.content_length",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 6.0
+          },
+          {
+            "feature": "tcp.dstport",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 65534.9998
+          },
+          {
+            "feature": "tcp.flags",
+            "type": "categorical",
+            "original": -0.0,
+            "cf": 20.0
+          },
+          {
+            "feature": "tcp.flags.ack",
+            "type": "binary",
+            "original": -0.0,
+            "cf": 1.0
+          },
+          {
+            "feature": "tcp.len",
+            "type": "count",
+            "original": -0.0,
+            "cf": 221.0
+          },
+          {
+            "feature": "udp.port",
+            "type": "count",
+            "original": 0.0,
+            "cf": 1666.0
+          },
+          {
+            "feature": "mqtt.topic",
+            "type": "categorical",
+            "original": 1.0,
+            "cf": -0.0
+          }
+        ],
+        [
+          {
+            "feature": "tcp.ack",
+            "type": "continuous",
+            "original": 768287935.0341,
+            "cf": 404482615.2016
+          },
+          {
+            "feature": "tcp.connection.syn",
+            "type": "binary",
+            "original": 1.0,
+            "cf": -0.0
+          },
+          {
+            "feature": "tcp.flags",
+            "type": "categorical",
+            "original": 2.0,
+            "cf": -0.0
+          },
+          {
+            "feature": "udp.port",
+            "type": "count",
+            "original": 0.0,
+            "cf": 1747.0
+          },
+          {
+            "feature": "udp.time_delta",
+            "type": "count",
+            "original": 0.0,
+            "cf": 2.0
+          },
+          {
+            "feature": "dns.qry.name",
+            "type": "continuous",
+            "original": 0.0001,
+            "cf": 265130.0043
+          },
+          {
+            "feature": "dns.qry.name.len",
+            "type": "categorical",
+            "original": 1.0,
+            "cf": -0.0
+          }
+        ]
+      ],
+      "constraint_index_counts": {
+        "binary": 9,
+        "categorical": 21,
+        "count": 3,
+        "continuous": 3,
+        "onehot_features": 0,
+        "immutable": 20
+      }
+    }
+  },
+  "generic_baseline": {
+    "validity": 0.9480000000000001,
+    "validity_std": 0.041182520563948,
+    "validity_raw": [
+      0.87,
+      0.99,
+      0.96,
+      0.97,
+      0.95
+    ],
+    "feasibility_rate": 0.0,
+    "feasibility_rate_std": 0.0,
+    "feasibility_rate_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "actionability": 0.0,
+    "actionability_std": 0.0,
+    "actionability_raw": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mean_sparsity": 10.0,
+    "mean_sparsity_std": 0.0,
+    "mean_sparsity_raw": [
+      10.0,
+      10.0,
+      10.0,
+      10.0,
+      10.0
+    ],
+    "n": 500,
+    "n_per_run": [
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "validity_pooled": 0.948,
+    "feasibility_rate_pooled": 0.0,
+    "actionability_pooled": 0.0
+  },
+  "domain_constrained": {
+    "validity": 0.126,
+    "validity_std": 0.04454211490264018,
+    "validity_raw": [
+      0.08,
+      0.14,
+      0.2,
+      0.08,
+      0.13
+    ],
+    "feasibility_rate": 1.0,
+    "feasibility_rate_std": 0.0,
+    "feasibility_rate_raw": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "actionability": 0.126,
+    "actionability_std": 0.04454211490264018,
+    "actionability_raw": [
+      0.08,
+      0.14,
+      0.2,
+      0.08,
+      0.13
+    ],
+    "mean_sparsity": 3.7399999999999998,
+    "mean_sparsity_std": 0.22706827167175953,
+    "mean_sparsity_raw": [
+      3.64,
+      3.36,
+      4.01,
+      3.78,
+      3.91
+    ],
+    "n": 500,
+    "n_per_run": [
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "validity_pooled": 0.126,
+    "feasibility_rate_pooled": 1.0,
+    "actionability_pooled": 0.126
+  },
+  "_meta": {
+    "exp": "exp16_domain_cf_cd",
+    "dataset": "edge-iiot",
+    "duration_sec": 20020.0
+  }
+}

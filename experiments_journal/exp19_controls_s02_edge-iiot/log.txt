@@ -1,0 +1,32 @@
+[21:28:36] === exp19_controls_s02 | edge-iiot | 2026-10-19 21:28 ===
+[21:28:36] device=cpu arch=bn n_runs=3 seed0=42 epochs=20 cf_samples=100 cf_max_iter=300 curve_max_iter=300 batch=256 sigma=0.2000 parts=['hist']
+[21:28:36] train=160000 test=40000 F=56 C=15 true-label class share (test): [0.728, 0.055, 0.052, 0.023, 0.022, 0.022, 0.023, 0.023, 0.017, 0.011, 0.01, 0.007, 0.005, 0.0, 0.001]
+[21:36:41] 
+=== run 1/3 (seed 42) ===
+[21:47:46]   A_Standard: acc=0.994 F1=0.930 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.924 d_lin_target(med)=2.214 | val=0.974 (any 1.000; true-attack subset 0.974)
+[21:57:33]   D_Clip_Only: acc=0.995 F1=0.926 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.921 d_lin_target(med)=2.052 | val=0.982 (any 1.000; true-attack subset 0.982)
+[22:07:03]   C_Noise_Only: acc=0.962 F1=0.773 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.320 d_lin_target(med)=2.243 | val=0.972 (any 1.000; true-attack subset 0.972)
+[22:18:22]   B_DP_SGD: acc=0.953 F1=0.741 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.774 d_lin_target(med)=2.589 | val=0.904 (any 1.000; true-attack subset 0.903)
+[22:24:40] 
+=== run 2/3 (seed 43) ===
+[22:33:23]   A_Standard: acc=0.990 F1=0.908 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.875 d_lin_target(med)=2.008 | val=0.954 (any 1.000; true-attack subset 0.954)
+[22:42:17]   D_Clip_Only: acc=0.994 F1=0.936 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.787 d_lin_target(med)=2.120 | val=0.972 (any 1.000; true-attack subset 0.972)
+[22:48:23]   C_Noise_Only: acc=0.960 F1=0.769 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.218 d_lin_target(med)=2.441 | val=0.980 (any 1.000; true-attack subset 0.980)
+[22:55:32]   B_DP_SGD: acc=0.952 F1=0.723 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.370 d_lin_target(med)=2.059 | val=0.952 (any 1.000; true-attack subset 0.952)
+[23:02:51] 
+=== run 3/3 (seed 44) ===
+[23:14:20]   A_Standard: acc=0.993 F1=0.917 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.856 d_lin_target(med)=2.071 | val=0.922 (any 1.000; true-attack subset 0.922)
+[23:22:55]   D_Clip_Only: acc=0.994 F1=0.940 predBenign=0.728 q@target(it0)=0.00 q_trueAttack=1.00 d_lin=0.790 d_lin_target(med)=2.144 | val=0.974 (any 1.000; true-attack subset 0.974)
+[23:30:04]   C_Noise_Only: acc=0.970 F1=0.816 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.230 d_lin_target(med)=2.464 | val=0.952 (any 1.000; true-attack subset 0.952)
+[23:38:43]   B_DP_SGD: acc=0.955 F1=0.718 predBenign=0.726 q@target(it0)=0.00 q_trueAttack=0.99 d_lin=1.428 d_lin_target(med)=2.339 | val=0.912 (any 0.990; true-attack subset 0.911)
+[23:38:43] 
+d_lin vs validity over 12 (condition,run) points: Spearman rho=-0.518 (p=0.0842)
+[23:38:43] 
+d_lin_target_median vs validity over 12 (condition,run) points: Spearman rho=-0.326 (p=0.3015)
+[23:38:43] 
+=== SUMMARY (means) ===
+[23:38:43]   A_Standard      accuracy=0.992 f1_macro=0.918 cf_validity=0.950 cf_validity_any=1.000 share_pred_target=0.728 d_lin=0.885 d_lin_target_median=2.097
+[23:38:43]   D_Clip_Only     accuracy=0.994 f1_macro=0.934 cf_validity=0.976 cf_validity_any=1.000 share_pred_target=0.728 d_lin=0.833 d_lin_target_median=2.105
+[23:38:43]   C_Noise_Only    accuracy=0.964 f1_macro=0.786 cf_validity=0.968 cf_validity_any=1.000 share_pred_target=0.726 d_lin=1.256 d_lin_target_median=2.383
+[23:38:43]   B_DP_SGD        accuracy=0.954 f1_macro=0.727 cf_validity=0.923 cf_validity_any=0.997 share_pred_target=0.726 d_lin=1.524 d_lin_target_median=2.329
+[23:38:43] saved -> experiments_journal/exp19_controls_s02_edge-iiot/results.json

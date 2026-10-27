@@ -1,0 +1,76 @@
+[02:01:53] === exp15_lira_mia_v2 | ciciot2023 | 2026-10-24 02:01 ===
+[02:01:53] device=cpu n_shadow=32 n_audit=2000 shadow_train_size=40000 shadow_epochs=20 target_epochs=20 target_train_size=all batch=256 canaries=0 dedup=False dropout=0.3
+[02:01:53] train=160000 test=40000 noise_std(eps=2.0)=2.4224
+[02:03:20]   [NoDP] target: train=160000 train_acc=0.7319 test_acc=0.7290 gap=+0.0029 steps=12500 (625/epoch x 20, batch 256, dropout 0.3)
+[02:03:41]   [NoDP] shadow 1/32 trained
+[02:04:02]   [NoDP] shadow 2/32 trained
+[02:04:22]   [NoDP] shadow 3/32 trained
+[02:04:43]   [NoDP] shadow 4/32 trained
+[02:05:04]   [NoDP] shadow 5/32 trained
+[02:05:25]   [NoDP] shadow 6/32 trained
+[02:05:46]   [NoDP] shadow 7/32 trained
+[02:06:06]   [NoDP] shadow 8/32 trained
+[02:06:27]   [NoDP] shadow 9/32 trained
+[02:06:48]   [NoDP] shadow 10/32 trained
+[02:07:08]   [NoDP] shadow 11/32 trained
+[02:07:29]   [NoDP] shadow 12/32 trained
+[02:07:50]   [NoDP] shadow 13/32 trained
+[02:08:11]   [NoDP] shadow 14/32 trained
+[02:08:32]   [NoDP] shadow 15/32 trained
+[02:08:52]   [NoDP] shadow 16/32 trained
+[02:09:13]   [NoDP] shadow 17/32 trained
+[02:09:34]   [NoDP] shadow 18/32 trained
+[02:09:54]   [NoDP] shadow 19/32 trained
+[02:10:15]   [NoDP] shadow 20/32 trained
+[02:10:36]   [NoDP] shadow 21/32 trained
+[02:10:57]   [NoDP] shadow 22/32 trained
+[02:11:18]   [NoDP] shadow 23/32 trained
+[02:11:38]   [NoDP] shadow 24/32 trained
+[02:11:59]   [NoDP] shadow 25/32 trained
+[02:12:20]   [NoDP] shadow 26/32 trained
+[02:12:41]   [NoDP] shadow 27/32 trained
+[02:13:02]   [NoDP] shadow 28/32 trained
+[02:13:23]   [NoDP] shadow 29/32 trained
+[02:13:43]   [NoDP] shadow 30/32 trained
+[02:14:04]   [NoDP] shadow 31/32 trained
+[02:14:25]   [NoDP] shadow 32/32 trained
+[02:14:25]   [NoDP] lira_offline: AUC=0.5094 TPR@0.1%=0.0000 TPR@1%=0.0070
+[02:14:25]   [NoDP] confidence: AUC=0.5077 TPR@0.1%=0.0000 TPR@1%=0.0000
+[02:16:03]   [DP] target: train=160000 train_acc=0.2085 test_acc=0.2092 gap=-0.0007 steps=12500 (625/epoch x 20, batch 256, dropout 0.3)
+[02:16:27]   [DP] shadow 1/32 trained
+[02:16:51]   [DP] shadow 2/32 trained
+[02:17:15]   [DP] shadow 3/32 trained
+[02:17:39]   [DP] shadow 4/32 trained
+[02:18:03]   [DP] shadow 5/32 trained
+[02:18:27]   [DP] shadow 6/32 trained
+[02:18:50]   [DP] shadow 7/32 trained
+[02:19:14]   [DP] shadow 8/32 trained
+[02:19:38]   [DP] shadow 9/32 trained
+[02:20:02]   [DP] shadow 10/32 trained
+[02:20:26]   [DP] shadow 11/32 trained
+[02:20:50]   [DP] shadow 12/32 trained
+[02:21:15]   [DP] shadow 13/32 trained
+[02:21:39]   [DP] shadow 14/32 trained
+[02:22:03]   [DP] shadow 15/32 trained
+[02:22:28]   [DP] shadow 16/32 trained
+[02:22:52]   [DP] shadow 17/32 trained
+[02:23:16]   [DP] shadow 18/32 trained
+[02:23:40]   [DP] shadow 19/32 trained
+[02:24:04]   [DP] shadow 20/32 trained
+[02:24:28]   [DP] shadow 21/32 trained
+[02:24:52]   [DP] shadow 22/32 trained
+[02:25:17]   [DP] shadow 23/32 trained
+[02:25:41]   [DP] shadow 24/32 trained
+[02:26:05]   [DP] shadow 25/32 trained
+[02:26:29]   [DP] shadow 26/32 trained
+[02:26:53]   [DP] shadow 27/32 trained
+[02:27:17]   [DP] shadow 28/32 trained
+[02:27:42]   [DP] shadow 29/32 trained
+[02:28:06]   [DP] shadow 30/32 trained
+[02:28:30]   [DP] shadow 31/32 trained
+[02:28:54]   [DP] shadow 32/32 trained
+[02:28:54]   [DP] lira_offline: AUC=0.4978 TPR@0.1%=0.0010 TPR@1%=0.0210
+[02:28:54]   [DP] confidence: AUC=0.5059 TPR@0.1%=0.0010 TPR@1%=0.0090
+[02:28:54] 
+DP effectiveness (LiRA): AUC 0.5094 -> 0.4978 (delta=+0.0116)
+[02:28:54] saved -> experiments_journal/exp15_lira_mia_v2_ciciot2023/results.json

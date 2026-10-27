@@ -1,0 +1,39 @@
+[03:45:01] === exp17_architecture | ciciot2023 | 2026-09-01 03:45 ===
+[03:45:01] device=cuda archs=['mlp', 'cnn1d'] n_runs=2 noise_std=2.4224
+[03:45:01] 
+===== architecture: mlp =====
+[03:59:40]   mlp/A_Standard: acc=0.669±0.013 val=0.924±0.012
+[04:02:28]   mlp/B_DP_SGD: acc=0.024±0.003 val=0.996±0.004
+[04:06:32]   mlp/C_Noise_Only: acc=0.512±0.006 val=1.000±0.000
+[04:21:30]   mlp/D_Clip_Only: acc=0.665±0.002 val=0.940±0.020
+[04:21:30]   [mlp] noise main effect on validity = +0.0660 (baseline_val=0.924) paradox=True
+[04:21:30] 
+===== architecture: cnn1d =====
+[04:41:37]   cnn1d/A_Standard: acc=0.703±0.017 val=0.368±0.032
+[04:45:12]   cnn1d/B_DP_SGD: acc=0.466±0.224 val=0.992±0.008
+[04:50:02]   cnn1d/C_Noise_Only: acc=0.750±0.028 val=0.996±0.004
+[05:08:44]   cnn1d/D_Clip_Only: acc=0.708±0.004 val=0.736±0.048
+[05:08:44]   [cnn1d] noise main effect on validity = +0.4420 (baseline_val=0.368) paradox=True
+[05:08:44] saved -> experiments_journal/exp17_architecture_ciciot2023/results.json
+[09:58:25] === exp17_architecture | ciciot2023 | 2026-09-03 09:58 ===
+[10:03:03] device=cuda archs=['mlp', 'cnn1d'] n_runs=3 noise_std=2.4224
+[10:03:03] 
+===== architecture: mlp =====
+[10:19:08]   mlp/A_Standard: acc=0.721±0.038 val=0.704±0.043
+[12:35:01] === exp17_architecture | ciciot2023 | 2026-09-03 12:35 ===
+[12:39:35] device=cuda archs=['mlp', 'cnn1d'] n_runs=3 noise_std=2.4224
+[12:39:35] 
+===== architecture: mlp =====
+[13:29:31]   mlp/A_Standard: acc=0.721±0.038 val=0.883±0.008
+[13:44:19]   mlp/B_DP_SGD: acc=0.393±0.153 val=0.996±0.006
+[14:12:56]   mlp/C_Noise_Only: acc=0.584±0.010 val=0.983±0.022
+[15:10:13]   mlp/D_Clip_Only: acc=0.730±0.037 val=0.800±0.021
+[15:10:13]   [mlp] noise main effect on validity = +0.1480 (baseline_val=0.883) paradox=True
+[15:10:13] 
+===== architecture: cnn1d =====
+[16:18:19]   cnn1d/A_Standard: acc=0.691±0.013 val=0.428±0.119
+[16:34:40]   cnn1d/B_DP_SGD: acc=0.547±0.092 val=0.989±0.007
+[17:04:58]   cnn1d/C_Noise_Only: acc=0.647±0.035 val=0.964±0.020
+[18:08:39]   cnn1d/D_Clip_Only: acc=0.712±0.020 val=0.669±0.048
+[18:08:39]   [cnn1d] noise main effect on validity = +0.4280 (baseline_val=0.428) paradox=True
+[18:08:39] saved -> experiments_journal/exp17_architecture_ciciot2023/results.json

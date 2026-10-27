@@ -182,3 +182,21 @@ config.local.*
 !src/**/*.py
 !run_comprehensive_experiments.py
 !visualization.py
+
+# ==============================================================================
+# PROJECT: manuscripts and local artefacts stay out of the repository
+# ==============================================================================
+# manuscript sources, submission files and figures (regenerable with journal_paper/*.py)
+journal_paper/*
+!journal_paper/*.py
+# desktop assistant folders and local notes
+Claude outputs/
+Claude/
+# code smoke tests and abandoned runs
+experiments_journal/*smoke*/
+experiments_journal/exp19_controls_smooth_ciciot2023/
+experiments_journal/exp19_controls_smooth3_ciciot2023/
+# archives and caches
+experiments.zip
+dataset/_cache/
+*.lock

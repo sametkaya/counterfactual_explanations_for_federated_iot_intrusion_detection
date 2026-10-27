@@ -7,7 +7,7 @@ IoT-IDS için DiCE tabanlı CF generation with Differential Privacy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.optim import Adam
+from torch.optim import Adam, SGD
 import numpy as np
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
@@ -103,7 +103,12 @@ class CounterfactualGenerator:
         use_dp: bool = True,
         # Constraints
         constraint_manager: Optional[IoTConstraintManager] = None,
-        device: str = "cpu"
+        device: str = "cpu",
+        optimizer: str = "adam",  # "adam" (default, the paper), "sgd" (plain gradient descent) or
+                                  # "signgd" (step = lr * sign(gradient), scale-free like Adam's first step)
+        betas: Tuple[float, float] = (0.9, 0.999),   # Adam moment coefficients (beta1=0 -> no momentum, RMSprop-like)
+        trace: bool = False       # record per-iteration step norms, gradient sign flips and Adam's |m_hat|/sqrt(v_hat)
+                                  # in self.last_trace (optimiser diagnostics; costs a little time)
     ):
         self.model = model
         self.model.eval()
@@ -135,7 +140,11 @@ class CounterfactualGenerator:
         
         self.device = device
         self.model.to(device)
-    
+        self.optimizer_name = optimizer
+        self.betas = tuple(betas)
+        self.trace = trace
+        self.last_trace: Optional[Dict] = None
+
     def generate(
         self,
         query_instance: torch.Tensor,
@@ -168,12 +177,22 @@ class CounterfactualGenerator:
         cfs = self._initialize_cfs(query)
         
         # Optimizer
-        optimizer = Adam(cfs, lr=self.learning_rate)
-        
+        optimizer = (Adam(cfs, lr=self.learning_rate, betas=self.betas) if self.optimizer_name == "adam"
+                     else SGD(cfs, lr=self.learning_rate))
+
         # Optimization loop
         best_cfs = None
         best_validity = 0.0
-        
+
+        # optimiser diagnostics (trace=True): effective step ||x_t - x_{t-1}|| after projection, share of
+        # gradient coordinates whose sign flipped since the previous iteration, Adam's mean |m_hat|/sqrt(v_hat)
+        # (the factor that scales its step; near 0 when the moment average cancels while v_hat stays large),
+        # validity per iteration and the predicted classes the candidates pass through
+        tr = ({"step_norm": [], "sign_flip": [], "adam_ratio": [], "validity": [], "share_third_class": []}
+              if self.trace else None)
+        prev_grad = None
+        visited = [set() for _ in cfs]
+
         for iteration in range(self.max_iter):
             optimizer.zero_grad()
             
@@ -201,28 +220,68 @@ class CounterfactualGenerator:
             if self.use_dp:
                 self._add_dp_noise_to_grads(cfs)
             
+            # sign-GD: replace every gradient by its sign (the SGD step then moves lr per coordinate)
+            if self.optimizer_name == "signgd":
+                for cf in cfs:
+                    if cf.grad is not None:
+                        cf.grad.sign_()
+
+            if tr is not None:
+                with torch.no_grad():
+                    g = torch.stack([cf.grad for cf in cfs]).detach()
+                    if prev_grad is not None:
+                        nz = (g != 0) & (prev_grad != 0)
+                        flips = ((g.sign() != prev_grad.sign()) & nz).float().sum() / nz.float().sum().clamp(min=1.0)
+                        tr["sign_flip"].append(float(flips))
+                    prev_grad = g.clone()
+                    x_before = torch.stack(cfs).detach().clone()
+
             # Update
             optimizer.step()
-            
+
             # Apply constraints
             with torch.no_grad():
                 for i, cf in enumerate(cfs):
                     cfs[i].data = self.constraint_manager.apply_all(query.squeeze(0), cf)
-            
+
             # Check validity
             with torch.no_grad():
                 cf_batch = torch.stack(cfs)
                 preds = self.model.predict(cf_batch)
                 validity = (preds == target_class).float().mean().item()
-                
+
+                if tr is not None:
+                    tr["step_norm"].append(float((cf_batch - x_before).norm(dim=1).mean().item()))
+                    tr["validity"].append(validity)
+                    pl = preds.tolist()
+                    for i, p in enumerate(pl):
+                        visited[i].add(int(p))
+                    tr["share_third_class"].append(float(np.mean([(p != target_class) and (p != original_pred) for p in pl])))
+                    if self.optimizer_name == "adam":
+                        b1, b2 = self.betas; ratios = []
+                        for cf in cfs:
+                            st = optimizer.state.get(cf, {})
+                            if "exp_avg" in st:
+                                t = st["step"]; t = float(t.item()) if torch.is_tensor(t) else float(t)
+                                m_hat = st["exp_avg"] / max(1.0 - b1 ** t, 1e-12)
+                                v_hat = st["exp_avg_sq"] / max(1.0 - b2 ** t, 1e-12)
+                                ratios.append(float((m_hat.abs() / (v_hat.sqrt() + 1e-8)).mean().item()))
+                        tr["adam_ratio"].append(float(np.mean(ratios)) if ratios else float("nan"))
+
                 if validity > best_validity:
                     best_validity = validity
                     best_cfs = [cf.clone() for cf in cfs]
-                
+
                 # Early stopping
                 if validity >= self.early_stop_threshold:
                     break
-        
+
+        if tr is not None:
+            tr["n_iter"] = len(tr["step_norm"])
+            tr["classes_visited"] = float(np.mean([len(v) for v in visited]))
+            tr["best_validity"] = float(best_validity)
+            self.last_trace = tr
+
         # Use best CFs found
         final_cfs = best_cfs if best_cfs is not None else cfs
         

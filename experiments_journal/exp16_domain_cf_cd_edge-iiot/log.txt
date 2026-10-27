@@ -1,0 +1,54 @@
+[20:37:01] === exp16_domain_cf_cd | edge-iiot | 2026-10-21 20:37 ===
+[20:37:02] semantics[data]: binary=9 categorical=21 count=3 continuous=3 immutable=20 onehot_groups={} cf_max_iter=300 n_samples=100 snap_every=10 n_runs=5
+[20:37:02]    categorical: ['arp.opcode', 'arp.hw.size', 'http.content_length', 'http.request.method', 'http.referer', 'http.request.version', 'tcp.flags', 'dns.qry.name.len', 'dns.qry.qu', 'dns.retransmission', 'mqtt.conack.flags', 'mqtt.conflags', 'mqtt.hdrflags', 'mqtt.len', 'mqtt.msgtype', 'mqtt.proto_len', 'mqtt.protoname', 'mqtt.topic', 'mqtt.topic_len', 'mqtt.ver', 'mbtcp.len']
+[20:37:02]    immutable  : ['icmp.checksum', 'icmp.seq_le', 'icmp.transmit_timestamp', 'icmp.unused', 'http.file_data', 'http.request.uri.query', 'http.request.full_uri', 'http.tls_port', 'tcp.ack_raw', 'tcp.checksum', 'tcp.options', 'tcp.payload', 'tcp.seq', 'tcp.srcport', 'udp.stream', 'dns.qry.type', 'mqtt.msg_decoded_as', 'mqtt.msg', 'mbtcp.trans_id', 'mbtcp.unit_id']
+[20:37:02]    binary     : ['http.response', 'tcp.connection.fin', 'tcp.connection.rst', 'tcp.connection.syn', 'tcp.connection.synack', 'tcp.flags.ack', 'dns.retransmit_request', 'dns.retransmit_request_in', 'mqtt.conflag.cleansess']
+[20:37:02]    continuous : ['tcp.ack', 'tcp.dstport', 'dns.qry.name']
+[20:37:02]    count      : ['tcp.len', 'udp.port', 'udp.time_delta']
+[20:37:02] 
+=== run 1/5 (seed 42) ===
+[20:38:40] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=42) ---
+[21:11:56] [C_Noise_Only] acc=0.546  GENERIC: validity=0.870 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.080 feasibility=1.000 actionability=0.080 sparsity=3.6  (n=100)
+[21:13:30] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=42) ---
+[21:46:33] [D_Clip_Only] acc=0.995  GENERIC: validity=0.980 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.140 feasibility=1.000 actionability=0.140 sparsity=5.0  (n=100)
+[21:46:33] 
+=== run 2/5 (seed 43) ===
+[21:48:11] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=43) ---
+[22:17:52] [C_Noise_Only] acc=0.473  GENERIC: validity=0.990 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.140 feasibility=1.000 actionability=0.140 sparsity=3.4  (n=100)
+[22:19:25] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=43) ---
+[22:53:29] [D_Clip_Only] acc=0.994  GENERIC: validity=0.960 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.110 feasibility=1.000 actionability=0.110 sparsity=5.0  (n=100)
+[22:53:29] 
+=== run 3/5 (seed 44) ===
+[22:55:08] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=44) ---
+[23:24:20] [C_Noise_Only] acc=0.782  GENERIC: validity=0.960 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.200 feasibility=1.000 actionability=0.200 sparsity=4.0  (n=100)
+[23:25:59] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=44) ---
+[00:00:01] [D_Clip_Only] acc=0.994  GENERIC: validity=0.980 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.130 feasibility=1.000 actionability=0.130 sparsity=5.1  (n=100)
+[00:00:01] 
+=== run 4/5 (seed 45) ===
+[00:01:45] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=45) ---
+[00:31:33] [C_Noise_Only] acc=0.545  GENERIC: validity=0.970 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.080 feasibility=1.000 actionability=0.080 sparsity=3.8  (n=100)
+[00:33:04] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=45) ---
+[01:03:55] [D_Clip_Only] acc=0.993  GENERIC: validity=0.960 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.140 feasibility=1.000 actionability=0.140 sparsity=4.8  (n=100)
+[01:03:55] 
+=== run 5/5 (seed 46) ===
+[01:05:31] 
+--- detector C_Noise_Only (clip=False, noise=True, seed=46) ---
+[01:35:18] [C_Noise_Only] acc=0.485  GENERIC: validity=0.950 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.130 feasibility=1.000 actionability=0.130 sparsity=3.9  (n=100)
+[01:36:49] 
+--- detector D_Clip_Only (clip=True, noise=False, seed=46) ---
+[02:10:41] [D_Clip_Only] acc=0.995  GENERIC: validity=0.920 feasibility=0.000 actionability=0.000 sparsity=10.0  |  DOMAIN: validity=0.100 feasibility=1.000 actionability=0.100 sparsity=4.7  (n=100)
+[02:10:41] 
+=== multi-run summary (mean +/- std over runs; pooled = query-level rate) ===
+[02:10:41]   C_Noise_Only generic: validity=0.948+/-0.041 feasibility=0.000+/-0.000 actionability=0.000+/-0.000 (pooled 0.000, n=500) sparsity=10.0
+[02:10:41]   C_Noise_Only domain : validity=0.126+/-0.045 feasibility=1.000+/-0.000 actionability=0.126+/-0.045 (pooled 0.126, n=500) sparsity=3.7
+[02:10:41]   D_Clip_Only generic: validity=0.960+/-0.022 feasibility=0.000+/-0.000 actionability=0.000+/-0.000 (pooled 0.000, n=500) sparsity=10.0
+[02:10:41]   D_Clip_Only domain : validity=0.124+/-0.016 feasibility=1.000+/-0.000 actionability=0.124+/-0.016 (pooled 0.124, n=500) sparsity=4.9
+[02:10:41] saved -> experiments_journal/exp16_domain_cf_cd_edge-iiot/results.json
